@@ -1,0 +1,295 @@
+// Estilos específicos para Register.vue (paleta alineada con login)
+
+register-green = #13402c
+register-gold = #c9a24d
+register-gold-light = #e8d9a8
+register-green-soft = rgba(19, 64, 44, 0.51)
+
+input[type="checkbox"]:checked
+  accent-color register-green
+
+.register-button
+  background linear-gradient(90deg, #b8893a 0%, register-gold 45%, register-gold-light 100%)
+  box-shadow 0 4px 14px rgba(201, 162, 77, 0.35)
+  width 460px // Ancho del botón
+  height 50px // Altura del botón
+  color white // Color del texto
+  border none // Sin borde
+  cursor pointer // Cambia el cursor al pasar sobre el botón
+  transition background 0.3s ease
+  border-radius 18px
+  margin 8px 0
+  transition all 0.3s ease // Transición suave para el hover
+
+  &:hover
+    opacity 0.95
+    transform translateY(-1px)
+
+.tab-login
+  font-size 15px
+  color rgba(137, 136, 141, 1)
+  text-decoration none
+  padding 10px 20px
+  border-bottom solid 2px rgba(137, 136, 141, 1)
+
+  &.active
+    color register-green
+    border-bottom solid 4px register-green
+    font-weight bold
+
+@media (min-width: 1260px)
+  .tab-login
+    display none
+
+@media (max-width: 1260px)
+  .logos
+    display none
+
+@media (max-width: 1260px)
+  .label-register
+    margin-left 20px
+    // margin-top: 5px;
+    white-space nowrap
+
+@media (max-width: 1024px)
+  .register-button
+    margin-left 0
+    margin-right 0
+    margin 8px auto
+    display block
+
+@media (max-width: 768px)
+  .register-button
+    width 90%
+    max-width 400px
+    margin 8px auto
+
+@media (max-width: 480px)
+  .register-button
+    width 95%
+    max-width 350px
+    margin 8px auto
+
+@media (max-width: 375px)
+  .register-button
+    width 95%
+    max-width 320px
+    margin 8px auto
+
+.alert-message
+  background-color #fee
+  color #c00
+  padding 12px 16px
+  border-radius 8px
+  border 1px solid #fcc
+  margin 12px auto
+  font-size 14px
+  text-align center
+  max-width 280px
+  width 100%
+
+// Contenedor para input con icono
+.input-container
+  position relative
+  display block
+  width 80%
+  max-width 509px
+  margin 0
+  margin-left auto
+  margin-right auto
+  padding 0
+
+// Iconos dentro de los campos
+.input-icon
+  position absolute
+  right 18px
+  top 50%
+  transform translateY(-50%)
+  pointer-events none
+  color register-green-soft
+  font-size 23px
+  z-index 10
+  margin 0
+  padding 0
+  width auto
+  height auto
+  line-height 1
+  display inline-block
+
+.input-icon path,
+.overflow-icon path
+  fill register-green-soft
+
+// Icono de contraseña con cursor pointer
+.password-icon
+  cursor pointer
+  pointer-events auto
+  transition color 0.3s ease
+  
+  &:hover
+    color register-green
+
+// Ocultar icono nativo del input date y dar funcionalidad al icono personalizado
+.date-input
+  &::-webkit-calendar-picker-indicator
+    display none
+    -webkit-appearance none
+  
+  &::-webkit-inner-spin-button
+    display none
+    -webkit-appearance none
+
+// Icono de calendario personalizado
+.calendar-icon
+  cursor pointer
+  pointer-events auto
+  transition color 0.3s ease
+  
+  &:hover
+    color register-green
+
+// Icono de contraseña con cursor pointer
+.show-icon
+  cursor pointer
+  pointer-events auto
+  transition color 0.3s ease
+
+  &:hover
+    color register-green
+
+// Iconos que se desbordan - posicionamiento específico
+.overflow-icon
+  position absolute
+  right 18px
+  top 50%
+  transform translateY(-50%)
+  pointer-events auto
+  color register-green-soft
+  font-size 23px
+  z-index 10
+
+// Ajustar padding de inputs para dar espacio al icono
+.input-container .input-register-new
+  padding-right 40px
+  box-sizing border-box
+  width 100%
+
+// En filas de 2 columnas, el contenedor debe ocupar su columna
+.form-row
+  .input-container
+    width 100%
+    max-width 250px
+
+// Responsive para iconos
+@media (min-width: 1110px) and (max-width: 1199px)
+  .input-icon
+    right 16px
+    font-size 24px
+  
+  .input-container .input-register-new
+    padding-right 43px
+  
+  .input-container
+    width 80%
+    max-width 509px
+  
+  .form-row
+    .input-container
+      width 100%
+      max-width 250px
+
+@media (min-width: 1200px)
+  .input-icon
+    right 18px
+    font-size 23px
+  
+  .input-container .input-register-new
+    padding-right 40px
+  
+  .input-container
+    width 80%
+    max-width 509px
+  
+  .form-row
+    .input-container
+      width 100%
+      max-width 250px
+
+@media (min-width: 769px) and (max-width: 1109px)
+  .input-icon
+    right 14px
+    font-size 23px
+  
+  .input-container .input-register-new
+    padding-right 42px
+  
+  .input-container
+    width 90%
+    max-width 400px
+  
+  .form-row
+    .input-container
+      width 100%
+      max-width 180px
+
+@media (max-width: 768px)
+  .input-icon
+    right 14px
+    font-size 21px
+    top 42% !important
+    transform translateY(-50%) !important
+  
+  .overflow-icon
+    top 42% !important
+    transform translateY(-50%) !important
+    font-size 21px
+    right 14px
+  
+  .input-container .input-register-new
+    padding-right 35px
+  
+  .input-container
+    width 90%
+    max-width 400px
+  
+  .form-row
+    .input-container
+      width 100%
+      max-width 180px
+
+@media (max-width: 480px)
+  .input-icon
+    right 12px
+    font-size 20px
+    top 42% !important
+    transform translateY(-50%) !important
+  
+  .overflow-icon
+    top 42% !important
+    transform translateY(-50%) !important
+    font-size 20px
+    right 12px
+
+@media (max-width: 375px)
+  .input-icon
+    right 10px
+  
+  .overflow-icon
+    right 10px
+  
+  .input-container .input-register-new
+    padding-right 30px
+  
+  .input-container
+    width 95%
+    max-width 350px
+  
+  .form-row
+    .input-container
+      width 100%
+      max-width 100%
+    
+// Ocultar título del formulario en móvil
+@media (max-width: 768px)
+  .register-title-form
+    display none
