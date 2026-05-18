@@ -1,23 +1,6 @@
 <template>
   <Auth>
     <section class="login-panel">
-      <div class="login-tabs-mobile">
-        <router-link
-          to="/login"
-          class="tab-login"
-          :class="{ active: $route.path === '/login' }"
-        >
-          INICIO
-        </router-link>
-        <router-link
-          to="/register"
-          class="tab-login"
-          :class="{ active: $route.path.startsWith('/register') }"
-        >
-          REGISTRO
-        </router-link>
-      </div>
-
       <div class="login-mobile-hero">
         <div class="login-form-logo-wrap">
           <img

@@ -166,37 +166,6 @@ auth-gold-light = #e8d9a8
           margin-top 0 !important
           justify-content flex-start !important
         
-      // Mostrar pestañas solo en registro móvil
-      .auth-tabs
-        display flex !important
-        position absolute !important
-        top 19vh !important
-        left 50% !important
-        transform translateX(-50%) !important
-        z-index 1001 !important
-        background-color transparent !important
-        box-shadow none !important
-        
-        .tab
-          width 120px !important
-          height 40px !important
-          padding 8px 0 !important
-          font-size 14px !important
-          font-weight 600 !important
-          color #666 !important
-          background-color transparent !important
-          border none !important
-          border-bottom 2px solid #ddd !important
-          transition all 0.3s ease !important
-          
-          &.active
-            color auth-green !important
-            border-bottom 4px solid auth-green !important
-            background-color transparent !important
-            
-          &:hover
-            color auth-green !important
-
       // Alinear anchos en móvil: filas dobles y campos simples
       // deben encajar dentro del mismo bloque visual.
       @media (max-width: 480px)
@@ -225,7 +194,7 @@ auth-gold-light = #e8d9a8
   // Login móvil: Frame 2 a pantalla completa, formulario sobre zona crema (sin tarjeta blanca)
   @media (max-width: 768px)
     &.login-page
-      background #f5f2ea !important
+      background #ffffff !important
 
       &::before
         position fixed !important
@@ -234,7 +203,7 @@ auth-gold-light = #e8d9a8
         right 0 !important
         width 100% !important
         height 100% !important
-        background #f5f2ea url('assets/img/logo/Frame 2.svg') no-repeat center top / cover !important
+        background #ffffff url('assets/img/logo/Frame 2.svg') no-repeat center top / cover !important
         z-index 0 !important
 
       &::after
@@ -269,9 +238,6 @@ auth-gold-light = #e8d9a8
           justify-content flex-start !important
           overflow-y auto !important
           -webkit-overflow-scrolling touch
-
-      .login-tabs-mobile
-        display none !important
 
       .login-panel
         max-width 100%

@@ -191,24 +191,6 @@ logo-visible-ratio = 401 / 512
       color login-gold
       text-decoration underline
 
-// Pestañas móvil (ocultas en desktop con auth-tabs)
-.login-tabs-mobile
-  display flex
-  justify-content center
-  margin-bottom 16px
-
-.tab-login
-  font-size 15px
-  color rgba(137, 136, 141, 1)
-  text-decoration none
-  padding 10px 30px
-  border-bottom solid 2px rgba(137, 136, 141, 1)
-
-  &.active
-    color login-green
-    border-bottom solid 4px login-green
-    font-weight bold
-
 .login-form-leaf
   display none
 
@@ -218,9 +200,6 @@ logo-visible-ratio = 401 / 512
   display none !important
 
 @media (min-width: 1261px)
-  .login-tabs-mobile
-    display none
-
   .login-panel
     max-width 520px
     width 100%
@@ -277,9 +256,6 @@ logo-visible-ratio = 401 / 512
     border-radius 12px
 
 @media (max-width: 1260px)
-  .login-tabs-mobile
-    display flex
-
   .login-button
     max-width 100%
 

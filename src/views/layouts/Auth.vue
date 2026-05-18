@@ -1,22 +1,5 @@
 <template>
   <div class="auth" :class="{ 'register-page': $route.path.startsWith('/register'), 'login-page': $route.path.startsWith('/login') }">
-    <div class="auth-tabs" id="tabs">
-      <router-link
-        to="/login"
-        class="tab"
-        :class="{ active: $route.path === '/login' }"
-      >
-        INICIO
-      </router-link>
-      <router-link
-        to="/register"
-        class="tab"
-        :class="{ active: $route.path.startsWith('/register') }"
-      >
-        REGISTRO
-      </router-link>
-    </div>
-   
     <!-- <header>
       <img class="logo" src="@/assets/img/logo-big.svg" style="width: 400px;">
       <p style="color: white; font-size: 14px; margin: 12px 0 8px 0;">Siguenos</p>
@@ -96,75 +79,6 @@ export default {
 };
 </script>
 <style scoped>
-.auth-tabs {
-  position: fixed;
-  top: 0;
-  left: 60%;
-  display: flex;
-  background-color: transparent;
-  border-radius: 0;
-  width: fit-content;
-  z-index: 1000;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Responsive para las pestañas */
-@media (max-width: 1024px) {
-  .auth-tabs {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-}
-
-@media (max-width: 768px) {
-  .auth-tabs {
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    top: calc(30vh + 10px) !important; /* Posicionadas en la nueva línea divisoria */
-    z-index: 1001 !important; /* Por encima del contenido */
-  }
-}
-
-@media (max-width: 480px) {
-  .auth-tabs {
-    left: 50%;
-    transform: translateX(-50%);
-    top: 5px;
-  }
-  
-  .tab {
-    width: 120px;
-    height: 50px;
-    font-size: 12px;
-  }
-}
-
-.tab {
-  width: 170px; /* Ancho fijo */
-  height: 70px; /* Altura fija */
-  padding: 12px 0; /* Espaciado interno */
-  text-decoration: none;
-  color: #111111;
-  font-weight: bold;
-  background-color: #ffffff;
-  display: flex; /* Para centrar el texto */
-  align-items: center; /* Centrar verticalmente */
-  justify-content: center;
-  border: 1px solid #e5e5e5;
-  /* Centrar horizontalmente */
-}
-.tab:first-child.active {
-  border-bottom-left-radius: 0;
-}
-.tab.active {
-  border-bottom-right-radius: 0;
-}
-.tab.active {
-  background-color: #111111;
-  color: #ffffff;
-  border-color: #111111;
-}
-
 .form {
   background: #ffffff;
   border-radius: 0;
@@ -194,7 +108,7 @@ export default {
     min-height: 70vh;
     max-height: 70vh;
     justify-content: flex-start;
-    padding-top: 60px; /* Espacio para las pestañas */
+    padding-top: 16px;
     padding-bottom: 8px;
     overflow: hidden;
     display: flex;
@@ -206,16 +120,11 @@ export default {
 @media (max-width: 480px) {
   .form {
     padding: 10px;
-    padding-top: 15px; /* Menos espacio para pestañas más pequeñas */
+    padding-top: 12px;
   }
 }
 @media (max-width: 1260px) {
   .logo-auth {
-    display: none;
-  }
-}
-@media (max-width: 1260px) {
-  .auth-tabs {
     display: none;
   }
 }
