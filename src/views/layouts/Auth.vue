@@ -1,5 +1,28 @@
 <template>
-  <div class="auth" :class="{ 'register-page': $route.path.startsWith('/register'), 'login-page': $route.path.startsWith('/login') }">
+  <div
+    class="auth"
+    :class="{
+      'register-page': $route.path.startsWith('/register'),
+      'login-page': $route.path === '/login',
+    }"
+  >
+    <nav v-if="showAuthTabs" class="auth-tabs" aria-label="Inicio o registro">
+      <router-link
+        to="/login"
+        class="tab"
+        :class="{ active: $route.path === '/login' }"
+      >
+        INICIO
+      </router-link>
+      <router-link
+        to="/register"
+        class="tab"
+        :class="{ active: $route.path.startsWith('/register') }"
+      >
+        REGISTRO
+      </router-link>
+    </nav>
+
     <!-- <header>
       <img class="logo" src="@/assets/img/logo-big.svg" style="width: 400px;">
       <p style="color: white; font-size: 14px; margin: 12px 0 8px 0;">Siguenos</p>
@@ -53,6 +76,10 @@
 <script>
 export default {
   computed: {
+    showAuthTabs() {
+      const path = this.$route.path;
+      return path === "/login" || path.startsWith("/register");
+    },
     // msn()  { return this.$store.state.msn },
     // wsp()  { return this.$store.state.wsp_bo },
     wsp() {
@@ -79,6 +106,56 @@ export default {
 };
 </script>
 <style scoped>
+.auth-tabs {
+  display: none;
+}
+
+@media (min-width: 1261px) {
+  .auth-tabs {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: calc(50% + 550px);
+    z-index: 10;
+    width: fit-content;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .auth-tabs .tab {
+    width: 160px;
+    height: 64px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-family: "Open Sans", sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #13402c;
+    background-color: #ffffff;
+    border: 2px solid #13402c;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .auth-tabs .tab.active {
+    background: linear-gradient(90deg, #b8893a 0%, #c9a24d 45%, #e8d9a8 100%);
+    color: #ffffff;
+    border-color: #c9a24d;
+  }
+
+  .auth-tabs .tab:hover:not(.active) {
+    background-color: #f3f3f3;
+    border-color: #c9a24d;
+    color: #13402c;
+  }
+}
+
 .form {
   background: #ffffff;
   border-radius: 0;
