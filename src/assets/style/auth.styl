@@ -156,45 +156,47 @@ auth-gold-light = #e8d9a8
         top 0
         left 0
         right 0
-        height 18vh
-        max-height 175px
+        height auto
+        max-height none
         display flex
         flex-direction column
         align-items center
-        justify-content center
+        justify-content flex-start
         z-index 3
         pointer-events none
         box-sizing border-box
-        padding-top calc(10px + env(safe-area-inset-top, 0px))
+        padding-top calc(5px + env(safe-area-inset-top, 0px))
         padding-left 16px
         padding-right 16px
-        transform translateY(-14px)
+        padding-bottom 0
 
       .register-mobile-hero .register-form-logo-wrap
-        width 96px
-        height (96px * 401 / 512)
-        margin 0 auto 4px
+        width 110px
+        height (110px * 401 / 512)
+        margin 0 auto 2px
         overflow hidden
 
       .register-mobile-hero .register-form-logo
-        width 96px
+        width 110px
         height auto
         display block
         margin 0
-        margin-top (-96px * 55 / 512)
+        margin-top (-110px * 55 / 512)
 
       .register-mobile-hero .register-form-brand
         margin 0
-        font-size 10px
+        padding 0
+        font-size 9px
         font-weight 700
         letter-spacing 0.02em
         color auth-gold
-        line-height 1.15
+        line-height 1.05
         text-align center
 
       .register-mobile-hero .register-form-brand-sub
-        margin 2px 0 0
-        font-size 10px
+        margin 0
+        padding 0
+        font-size 9px
         font-weight 700
         letter-spacing 0.02em
         color auth-gold
@@ -358,6 +360,7 @@ auth-gold-light = #e8d9a8
         padding-top calc(80px + env(safe-area-inset-top, 0px))
         padding-left 16px
         padding-right 16px
+        transform translateY(-30px)
 
       .login-mobile-hero .login-form-logo-wrap
         width 162px
