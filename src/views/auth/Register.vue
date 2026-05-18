@@ -1,6 +1,18 @@
 <template>
   <Auth>
     <section>
+      <div class="register-mobile-hero" aria-hidden="true">
+        <div class="register-form-logo-wrap">
+          <img
+            class="register-form-logo"
+            src="@/assets/img/logo/Logoto.png"
+            alt="Class Natural Moringa"
+          />
+        </div>
+        <p class="register-form-brand">CLASS NATURAL MORINGA</p>
+        <p class="register-form-brand-sub">S.R.L.</p>
+      </div>
+
       <div class="register-title-form">
         <h1>REGÍSTRATE</h1>
       </div>
