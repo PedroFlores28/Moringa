@@ -28,21 +28,14 @@
           alt=""
           class="logo logo-desktop"
         />
-        <!-- Logo SVG para móvil -->
-        <svg
-          class="logo logo-mobile"
-          width="40"
-          height="40"
-          viewBox="0 0 40 40"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M24.2028 0.240206C23.9626 1.43345 23.73 1.94377 23.3022 2.22144C23.1746 2.304 22.8294 2.43908 22.5442 2.50662C21.5536 2.76178 21.3885 2.80681 21.3885 2.85934C21.3885 2.92689 21.7112 3.04696 22.4016 3.23458C23.4823 3.51976 23.745 3.78992 24.0527 4.99818C24.2403 5.70362 24.3378 5.92876 24.4279 5.84621C24.4504 5.8237 24.563 5.43345 24.6756 4.97567C24.9908 3.72989 25.2084 3.50475 26.3416 3.21957C27.0921 3.03946 27.3172 2.9494 27.3172 2.85934C27.3172 2.7843 26.7318 2.58917 26.3041 2.52163C25.5161 2.40906 24.9908 1.96628 24.8031 1.28336C24.4804 0.067598 24.3003 -0.240094 24.2028 0.240206Z" fill="white"/>
-          <path d="M27.9476 4.16516C27.8275 4.64546 27.4523 5.05822 27.002 5.19331C26.6493 5.29837 26.6418 5.37342 26.9645 5.43346C27.3322 5.501 27.7525 5.88374 27.8425 6.23646C27.9026 6.44659 27.9626 6.52914 28.0677 6.52914C28.1727 6.52914 28.2328 6.44659 28.2928 6.23646C28.3829 5.89875 28.7881 5.51601 29.1333 5.44096C29.426 5.37342 29.396 5.29837 29.0433 5.1783C28.6906 5.05822 28.4504 4.81807 28.1953 4.31526L28.0076 3.94002L27.9476 4.16516Z" fill="white"/>
-          <path d="M28.0677 7.70738C28.0677 7.78242 28.0977 8.04509 28.1352 8.29274C28.3604 9.76366 28.4729 11.9175 28.4129 13.8087C28.3904 14.6942 28.3529 15.5198 28.3378 15.6473C28.3228 15.7674 28.2853 16.1051 28.2628 16.3978C27.9476 19.8124 27.0621 23.6398 25.9514 26.4166C23.8275 31.6924 20.6906 35.5123 16.3078 38.1614C15.715 38.5216 15.2347 38.8443 15.2347 38.8894C15.2347 38.9419 15.3322 38.9494 15.4973 38.9269C15.82 38.8744 17.336 38.2064 17.336 38.1164C17.336 38.0789 17.3585 38.0563 17.396 38.0638C17.426 38.0714 17.5311 38.0338 17.6362 37.9738C17.9138 37.8162 18.3266 37.5835 18.7168 37.3809C18.9045 37.2759 19.0621 37.1708 19.0621 37.1333C19.0621 37.1032 19.0996 37.0732 19.1521 37.0732C19.2196 37.0732 19.9326 36.6305 20.3754 36.3078C20.9682 35.8725 22.4542 34.6417 22.8894 34.2139C26.169 31.0019 28.2853 26.8068 29.1108 21.8687C29.5836 19.0545 29.6737 16.0226 29.3735 13.1558C29.2609 12.0301 28.8181 9.39593 28.6305 8.7055C28.4129 7.93252 28.0677 7.30963 28.0677 7.70738Z" fill="white"/>
-          <path d="M24.6155 8.59292C24.563 8.65296 24.5405 8.78054 24.563 8.8706C24.638 9.14827 24.4729 11.2796 24.3078 12.1351C23.6024 15.895 21.4861 18.6117 18.4016 19.7374C17.6211 20.0226 17.0733 20.1426 15.7525 20.3378C14.4542 20.5254 13.9814 20.638 13.2384 20.9456C12.0752 21.4335 11.2647 22.1464 10.8444 23.062C10.5292 23.7524 10.4016 24.3753 10.4617 24.9381C10.6418 26.6792 12.1953 27.4072 14.229 26.7017C14.7769 26.5141 15.2647 26.1764 15.6249 25.7261C16.2253 24.9907 15.9851 24.8481 15.0771 25.4034C14.4467 25.7862 13.7037 26.0038 13.2909 25.9288C12.4129 25.7637 12.0302 25.0057 12.4804 24.3228C12.8932 23.7074 13.7637 23.3096 15.017 23.167C16.1953 23.032 17.336 23.3246 18.199 23.9775C19.2647 24.788 20.0677 26.259 20.1652 27.5873C20.2478 28.7055 19.9251 29.8912 19.0621 31.6323C17.7712 34.2515 15.9026 36.4879 12.9983 38.8744C12.3303 39.4297 11.8125 39.91 11.8425 39.94C11.9251 40.0226 12.6831 39.8575 12.6831 39.7599C12.6831 39.7149 12.7056 39.6999 12.7356 39.7224C12.7581 39.7524 12.8932 39.6999 13.0358 39.6173C13.1709 39.5348 13.2834 39.4822 13.2834 39.5123C13.2834 39.5348 13.4861 39.4522 13.7337 39.3171C13.9814 39.1895 14.184 39.047 14.184 39.0094C14.184 38.9719 14.214 38.9569 14.2515 38.9794C14.2891 39.0019 14.3566 38.9719 14.4091 38.9119C14.4617 38.8518 14.5292 38.8218 14.5667 38.8443C14.6043 38.8668 14.6343 38.8443 14.6343 38.8068C14.6343 38.7618 14.6793 38.7243 14.7318 38.7243C14.7769 38.7243 15.0771 38.5592 15.3923 38.364C15.6999 38.1689 16.1202 37.9062 16.3228 37.7862C16.5255 37.6586 16.7431 37.5085 16.8031 37.4485C16.8707 37.3884 17.0208 37.2909 17.1258 37.2308C17.2384 37.1708 17.426 37.0357 17.5386 36.9306C17.6512 36.8181 17.8838 36.638 18.0489 36.5179C18.5067 36.1877 18.7168 35.9925 19.7375 34.9719C23.0771 31.6248 25.1709 27.167 25.8463 21.9813C26.3641 18.0488 26.1315 13.6661 25.2009 9.64358C24.9382 8.49537 24.8407 8.32276 24.6155 8.59292Z" fill="white"/>
-          <path d="M17.5536 12.5554C17.0133 12.7805 16.7281 12.9907 16.4354 13.3509C15.7375 14.244 15.6474 15.4672 16.2178 16.4879C16.4879 16.9607 16.8632 17.2984 17.411 17.5535C17.7712 17.7186 17.9213 17.7487 18.5742 17.7487C19.2272 17.7487 19.3772 17.7186 19.7375 17.5535C20.2628 17.3059 20.7281 16.8256 21.0283 16.2177C21.2384 15.8049 21.2684 15.6699 21.2684 15.1295C21.2684 14.6792 21.2234 14.4091 21.0958 14.0939C20.8857 13.5535 20.3303 12.9381 19.7975 12.6455C19.4523 12.4578 19.3097 12.4203 18.6868 12.4053C18.0714 12.3828 17.9138 12.4053 17.5536 12.5554Z" fill="white"/>
-        </svg>
+        <!-- Logo Logoto para móvil (mismo recorte que sidebar) -->
+        <div class="header-logo-wrap logo-mobile">
+          <img
+            class="header-logoto-img"
+            src="@/assets/img/logo/Logoto.png"
+            alt="Class Natural Moringa"
+          />
+        </div>
       </div>
       
       <div class="header-center" v-if="office_id == null">
@@ -183,15 +176,22 @@
           <a class="fab fa-youtube"         :href="yt" target="_blank" style="font-size: 18px;color: #ff0050;"></a>
         </div>-->
 
-        <img
-          src="@/assets/img/logo/logo-pink-sidebar.svg"
-          class="photo-logo"
-        />
+        <div class="sidebar-brand">
+          <div class="sidebar-logo-wrap">
+            <img
+              class="sidebar-logo-img"
+              src="@/assets/img/logo/Logoto.png"
+              alt="Class Natural Moringa"
+            />
+          </div>
+          <p class="sidebar-brand-title">CLASS NATURAL MORINGA</p>
+          <p class="sidebar-brand-sub">S.R.L.</p>
+        </div>
 
         <a @click="handleInicioClick" v-if="office_id == null" :class="{ 'router-link-active': $route.path === '/dashboard' }">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 6V0H18V6H10ZM0 10V0H8V10H0ZM10 18V8H18V18H10ZM0 18V12H8V18H0ZM2 8H6V2H2V8ZM12 16H16V10H12V16ZM12 4H16V2H12V4ZM2 16H6V14H2V16Z" fill="white"/>
-          </svg> INICIO
+            <path d="M10 6V0H18V6H10ZM0 10V0H8V10H0ZM10 18V8H18V18H10ZM0 18V12H8V18H0ZM2 8H6V2H2V8ZM12 16H16V10H12V16ZM12 4H16V2H12V4ZM2 16H6V14H2V16Z" fill="currentColor"/>
+          </svg> Dashboard
         </a>
 
 
@@ -204,7 +204,7 @@
             alignItems: 'center'
           }"
         >
-          <span> <i class="fas fa-shopping-cart"></i> PRODUCTOS </span>
+          <span> <i class="fas fa-shopping-bag"></i> Tienda </span>
           <i class="fa fa-angle-down" style="margin-left: 16px"></i>
         </a>
         <div class="sub-menu" :class="{ active: buys }">
@@ -235,7 +235,7 @@
             alignItems: 'center'
           }"
         >
-          <span> <i class="fas fa-users"></i> ORGANIZACIÓN </span>
+          <span> <i class="fas fa-users"></i> Equipo </span>
           <i class="fa fa-angle-down" style="margin-left: 16px"></i>
         </a>
         <div class="sub-menu" :class="{ active: network }">
@@ -263,9 +263,9 @@
         >
           <span>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 12.5C11.0717 12.5 10.1815 12.8687 9.52513 13.5251C8.86875 14.1815 8.5 15.0717 8.5 16C8.5 16.9283 8.86875 17.8185 9.52513 18.4749C10.1815 19.1313 11.0717 19.5 12 19.5C12.9283 19.5 13.8185 19.1313 14.4749 18.4749C15.1313 17.8185 15.5 16.9283 15.5 16C15.5 15.0717 15.1313 14.1815 14.4749 13.5251C13.8185 12.8687 12.9283 12.5 12 12.5ZM10.5 16C10.5 15.6022 10.658 15.2206 10.9393 14.9393C11.2206 14.658 11.6022 14.5 12 14.5C12.3978 14.5 12.7794 14.658 13.0607 14.9393C13.342 15.2206 13.5 15.6022 13.5 16C13.5 16.3978 13.342 16.7794 13.0607 17.0607C12.7794 17.342 12.3978 17.5 12 17.5C11.6022 17.5 11.2206 17.342 10.9393 17.0607C10.658 16.7794 10.5 16.3978 10.5 16Z" fill="white"/>
-              <path d="M17.526 5.11618L14.347 0.65918L2.658 9.99718L2.01 9.99018V10.0002H1.5V22.0002H22.5V10.0002H21.538L19.624 4.40118L17.526 5.11618ZM19.425 10.0002H9.397L16.866 7.45418L18.388 6.96718L19.425 10.0002ZM15.55 5.79018L7.84 8.41818L13.946 3.54018L15.55 5.79018ZM3.5 18.1692V13.8292C3.92218 13.6802 4.30565 13.4386 4.62231 13.1221C4.93896 12.8056 5.18077 12.4223 5.33 12.0002H18.67C18.8191 12.4225 19.0609 12.806 19.3775 13.1227C19.6942 13.4393 20.0777 13.6811 20.5 13.8302V18.1702C20.0777 18.3193 19.6942 18.561 19.3775 18.8777C19.0609 19.1944 18.8191 19.5779 18.67 20.0002H5.332C5.18218 19.5779 4.93996 19.1943 4.62302 18.8775C4.30607 18.5608 3.9224 18.3188 3.5 18.1692Z" fill="white"/>
-            </svg> COMISIONES
+              <path d="M12 12.5C11.0717 12.5 10.1815 12.8687 9.52513 13.5251C8.86875 14.1815 8.5 15.0717 8.5 16C8.5 16.9283 8.86875 17.8185 9.52513 18.4749C10.1815 19.1313 11.0717 19.5 12 19.5C12.9283 19.5 13.8185 19.1313 14.4749 18.4749C15.1313 17.8185 15.5 16.9283 15.5 16C15.5 15.0717 15.1313 14.1815 14.4749 13.5251C13.8185 12.8687 12.9283 12.5 12 12.5ZM10.5 16C10.5 15.6022 10.658 15.2206 10.9393 14.9393C11.2206 14.658 11.6022 14.5 12 14.5C12.3978 14.5 12.7794 14.658 13.0607 14.9393C13.342 15.2206 13.5 15.6022 13.5 16C13.5 16.3978 13.342 16.7794 13.0607 17.0607C12.7794 17.342 12.3978 17.5 12 17.5C11.6022 17.5 11.2206 17.342 10.9393 17.0607C10.658 16.7794 10.5 16.3978 10.5 16Z" fill="currentColor"/>
+              <path d="M17.526 5.11618L14.347 0.65918L2.658 9.99718L2.01 9.99018V10.0002H1.5V22.0002H22.5V10.0002H21.538L19.624 4.40118L17.526 5.11618ZM19.425 10.0002H9.397L16.866 7.45418L18.388 6.96718L19.425 10.0002ZM15.55 5.79018L7.84 8.41818L13.946 3.54018L15.55 5.79018ZM3.5 18.1692V13.8292C3.92218 13.6802 4.30565 13.4386 4.62231 13.1221C4.93896 12.8056 5.18077 12.4223 5.33 12.0002H18.67C18.8191 12.4225 19.0609 12.806 19.3775 13.1227C19.6942 13.4393 20.0777 13.6811 20.5 13.8302V18.1702C20.0777 18.3193 19.6942 18.561 19.3775 18.8777C19.0609 19.1944 18.8191 19.5779 18.67 20.0002H5.332C5.18218 19.5779 4.93996 19.1943 4.62302 18.8775C4.30607 18.5608 3.9224 18.3188 3.5 18.1692Z" fill="currentColor"/>
+            </svg> Comisiones
           </span>
           <i class="fa fa-angle-down" style="margin-left: 16px"></i>
         </a>
@@ -288,7 +288,7 @@
                  <rect width="24" height="24" fill="currentColor"/>
                </clipPath>
              </defs>
-           </svg> RETIROS
+           </svg> Retiros
         </router-link>
 
         <a
@@ -303,14 +303,14 @@
         >
           <span> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_74_983_desktop)">
-<path d="M20 12C20 12.5523 20.4477 13 21 13C21.5523 13 22 12.5523 22 12H20ZM12 22C12.5523 22 13 21.5523 13 21C13 20.4477 12.5523 20 12 20V22ZM19.1247 17.2191C18.6934 16.8741 18.0641 16.944 17.7191 17.3753C17.3741 17.8066 17.444 18.4359 17.8753 18.7809L19.1247 17.2191ZM20.3753 20.7809C20.8066 21.1259 21.4359 21.056 21.7809 20.6247C22.1259 20.1934 22.056 19.5641 21.6247 19.2191L20.3753 20.7809ZM7 7C6.44772 7 6 7.44772 6 8C6 8.55228 6.44772 9 7 9V7ZM17 9C17.5523 9 18 8.55228 18 8C18 7.44772 17.5523 7 17 7V9ZM7 11C6.44772 11 6 11.4477 6 12C6 12.5523 6.44772 13 7 13V11ZM11 13C11.5523 13 12 12.5523 12 12C12 11.4477 11.5523 11 11 11V13ZM22 12V4.5H20V12H22ZM22 4.5C22 3.83696 21.7366 3.20107 21.2678 2.73223L19.8536 4.14645C19.9473 4.24022 20 4.36739 20 4.5H22ZM21.2678 2.73223C20.7989 2.26339 20.163 2 19.5 2V4C19.6326 4 19.7598 4.05268 19.8536 4.14645L21.2678 2.73223ZM19.5 2H4.5V4H19.5V2ZM4.5 2C3.83696 2 3.20107 2.26339 2.73223 2.73223L4.14645 4.14645C4.24021 4.05268 4.36739 4 4.5 4V2ZM2.73223 2.73223C2.26339 3.20107 2 3.83696 2 4.5H4C4 4.36739 4.05268 4.24021 4.14645 4.14645L2.73223 2.73223ZM2 4.5V19.5H4V4.5H2ZM2 19.5C2 20.163 2.26339 20.7989 2.73223 21.2678L4.14645 19.8536C4.05268 19.7598 4 19.6326 4 19.5H2ZM2.73223 21.2678C3.20107 21.7366 3.83696 22 4.5 22V20C4.36739 20 4.24022 19.9473 4.14645 19.8536L2.73223 21.2678ZM4.5 22H12V20H4.5V22ZM18 16C18 17.1046 17.1046 18 16 18V20C18.2091 20 20 18.2091 20 16H18ZM16 18C14.8954 18 14 17.1046 14 16H12C12 18.2091 13.7909 20 16 20V18ZM14 16C14 14.8954 14.8954 14 16 14V12C13.7909 12 12 13.7909 12 16H14ZM16 14C17.1046 14 18 14.8954 18 16H20C20 13.7909 18.2091 12 16 12V14ZM17.8753 18.7809L20.3753 20.7809L21.6247 19.2191L19.1247 17.2191L17.8753 18.7809ZM7 9H17V7H7V9ZM7 13H11V11H7V13Z" fill="white"/>
+<path d="M20 12C20 12.5523 20.4477 13 21 13C21.5523 13 22 12.5523 22 12H20ZM12 22C12.5523 22 13 21.5523 13 21C13 20.4477 12.5523 20 12 20V22ZM19.1247 17.2191C18.6934 16.8741 18.0641 16.944 17.7191 17.3753C17.3741 17.8066 17.444 18.4359 17.8753 18.7809L19.1247 17.2191ZM20.3753 20.7809C20.8066 21.1259 21.4359 21.056 21.7809 20.6247C22.1259 20.1934 22.056 19.5641 21.6247 19.2191L20.3753 20.7809ZM7 7C6.44772 7 6 7.44772 6 8C6 8.55228 6.44772 9 7 9V7ZM17 9C17.5523 9 18 8.55228 18 8C18 7.44772 17.5523 7 17 7V9ZM7 11C6.44772 11 6 11.4477 6 12C6 12.5523 6.44772 13 7 13V11ZM11 13C11.5523 13 12 12.5523 12 12C12 11.4477 11.5523 11 11 11V13ZM22 12V4.5H20V12H22ZM22 4.5C22 3.83696 21.7366 3.20107 21.2678 2.73223L19.8536 4.14645C19.9473 4.24022 20 4.36739 20 4.5H22ZM21.2678 2.73223C20.7989 2.26339 20.163 2 19.5 2V4C19.6326 4 19.7598 4.05268 19.8536 4.14645L21.2678 2.73223ZM19.5 2H4.5V4H19.5V2ZM4.5 2C3.83696 2 3.20107 2.26339 2.73223 2.73223L4.14645 4.14645C4.24021 4.05268 4.36739 4 4.5 4V2ZM2.73223 2.73223C2.26339 3.20107 2 3.83696 2 4.5H4C4 4.36739 4.05268 4.24021 4.14645 4.14645L2.73223 2.73223ZM2 4.5V19.5H4V4.5H2ZM2 19.5C2 20.163 2.26339 20.7989 2.73223 21.2678L4.14645 19.8536C4.05268 19.7598 4 19.6326 4 19.5H2ZM2.73223 21.2678C3.20107 21.7366 3.83696 22 4.5 22V20C4.36739 20 4.24022 19.9473 4.14645 19.8536L2.73223 21.2678ZM4.5 22H12V20H4.5V22ZM18 16C18 17.1046 17.1046 18 16 18V20C18.2091 20 20 18.2091 20 16H18ZM16 18C14.8954 18 14 17.1046 14 16H12C12 18.2091 13.7909 20 16 20V18ZM14 16C14 14.8954 14.8954 14 16 14V12C13.7909 12 12 13.7909 12 16H14ZM16 14C17.1046 14 18 14.8954 18 16H20C20 13.7909 18.2091 12 16 12V14ZM17.8753 18.7809L20.3753 20.7809L21.6247 19.2191L19.1247 17.2191L17.8753 18.7809ZM7 9H17V7H7V9ZM7 13H11V11H7V13Z" fill="currentColor"/>
 </g>
 <defs>
 <clipPath id="clip0_74_983_desktop">
 <rect width="24" height="24" fill="white"/>
 </clipPath>
 </defs>
-</svg> RESUMEN </span>
+</svg> Resumen </span>
           <i class="fa fa-angle-down" style="margin-left: 16px"></i>
         </a>
         <div class="sub-menu" :class="{ active: resume }">
@@ -348,7 +348,7 @@
             alignItems: 'center'
           }"
         >
-          <span> <i class="fas fa-tools"></i> HERRAMIENTAS </span>
+          <span> <i class="fas fa-tools"></i> Herramientas </span>
           <i class="fa fa-angle-down" style="margin-left: 16px"></i>
         </a>
         <div class="sub-menu" :class="{ active: herramientasActive }">
@@ -392,7 +392,7 @@
               <path d="M6.2 18.1C5.76 18.1 5.4 18.46 5.4 18.9V20.2C5.4 20.64 5.76 21 6.2 21H13.4C13.84 21 14.2 20.64 14.2 20.2V18.9C14.2 18.46 13.84 18.1 13.4 18.1H6.2Z" />
               <path d="M15.6 18.35C15.6 17.6 16.2 17 16.95 17C17.7 17 18.3 17.6 18.3 18.35C18.3 19.1 17.7 19.7 16.95 19.7C16.2 19.7 15.6 19.1 15.6 18.35Z" />
             </svg>
-            UNIVERSIDAD CLASSMORINGA
+            Universidad ClassMoringa
           </span>
           <i class="fa fa-angle-down" style="margin-left: 16px"></i>
         </a>
@@ -411,93 +411,89 @@
           </router-link>
         </div>
 
-        <router-link
-          to="/profile"
-          @click.native="closeAllMenus"
-          v-if="office_id == null"
-        >
-          <i class="fas fa-user"></i> PERFIL
-        </router-link>
-
         </div>
-  
-        <a @click="logout" class="logout-button">
-          <i class="fas fa-power-off"></i> CERRAR SESIÓN
-        </a>
+
+        <div v-if="office_id == null" class="sidebar-profile-card">
+          <div class="sidebar-profile-main sidebar-profile-stack">
+            <div class="sidebar-profile-avatar">
+              <img v-if="photoState == 'default'" :src="photo" alt="" />
+              <img v-else :src="newPhoto" alt="" />
+            </div>
+            <div class="sidebar-profile-text">
+              <p class="sidebar-profile-name">{{ name }} {{ lastName }}</p>
+              <p class="sidebar-profile-email">{{ email }}</p>
+            </div>
+          </div>
+          <div class="sidebar-profile-actions">
+            <button type="button" class="sidebar-profile-action" aria-label="Notificaciones">
+              <i class="fas fa-bell"></i>
+            </button>
+            <router-link to="/profile" class="sidebar-profile-action" @click.native="closeAllMenus">
+              <i class="fas fa-cog"></i>
+            </router-link>
+            <button type="button" class="sidebar-profile-action" @click="logout" aria-label="Cerrar sesión">
+              <i class="fas fa-sign-out-alt"></i>
+            </button>
+          </div>
+        </div>
       </div>
 
-      <div class="content">
-        <header v-if="($route.path !== '/audios' && $route.path !== '/libros') || !isMobile">
-          <p style="font-weight: bold; font-size: 20px">{{ $route.path === '/audios' ? 'Audio' : title }}</p>
-          <div
-          style="
-              display: flex;
-              align-items: center;
-              gap: 20px;
-              margin-top: 25px;
-              "
-          >
-          <img class="logo" style="height: 50px" />
-          <button class="share-button" @click="copy_affiliation_link">
-            <i class="fas fa-share-alt" style="margin-right: 8px"></i
-              >Compartir Afiliación
-              <input
-              readonly
-              id="link-global"
-              @click="copy_affiliation_link"
-              v-model="affiliationLink"
-              style="opacity: 0; position: absolute"
-              />
-            </button>
-            <i class="copy" v-if="c_affiliation_link"
-            >link copiado <i class="fas fa-check"></i
-              ></i>
+      <div class="content" :class="{ 'content--dashboard': $route.path === '/dashboard' }">
+        <header
+          v-if="($route.path !== '/audios' && $route.path !== '/libros') || !isMobile"
+          class="page-topbar"
+        >
+          <h1 class="page-topbar__title">
+            {{ $route.path === '/audios' ? 'Audio' : title }}
+          </h1>
 
-            <!-- <img class="logo-text" src="@/assets/img/logo/text.svg" style="margin-left: 12px;"> -->
-            
-            <label v-if="office_id == null">
-              <img
-              v-if="photoState == 'default'"
-              class="photo-header"
-              :src="photo"
-              />
-              <img
-              v-if="photoState == 'changed'"
-              class="photo-header"
-              :src="newPhoto"
-              />
-              
-              <input type="file" @change="changePhoto" />
-            </label>
-            
-            <div v-if="photoState == 'changed'" class="controls">
+          <div class="page-topbar__actions">
+            <button
+              type="button"
+              class="page-topbar__notify"
+              aria-label="Notificaciones"
+            >
+              <i class="fas fa-bell"></i>
+              <span class="page-topbar__notify-dot" aria-hidden="true"></span>
+            </button>
+
+            <router-link
+              v-if="office_id == null"
+              to="/profile"
+              class="page-topbar__user"
+            >
+              <label class="page-topbar__avatar" @click.stop>
+                <img
+                  v-if="photoState == 'default'"
+                  :src="photo"
+                  alt=""
+                />
+                <img
+                  v-else
+                  :src="newPhoto"
+                  alt=""
+                />
+                <input type="file" @change="changePhoto" />
+              </label>
+              <div class="page-topbar__user-text">
+                <p class="page-topbar__name">{{ name }} {{ lastName }}</p>
+                <p class="page-topbar__email">{{ email }}</p>
+              </div>
+              <i class="fas fa-chevron-down page-topbar__chevron" aria-hidden="true"></i>
+            </router-link>
+
+            <div
+              v-if="photoState == 'changed' && office_id == null"
+              class="page-topbar__photo-controls controls"
+            >
               <i @click="cancelNewPhoto" class="fas fa-times"></i>
               <i @click="changeNewPhoto" class="fas fa-check"></i>
             </div>
-            <div>
-              <p style="color: rgba(8, 56, 92, 1); font-size: 18px">
-                {{ name }} {{ lastName }}
-              </p>
-              <p style="color: rgba(8, 56, 92, 1); font-size: 12px">
-                {{ email }}
-              </p>
-            </div>
-            <router-link to="/profile" style="color: black; margin-left: 10px">
-              <i class="fas fa-cog" style="font-size: 20px"></i>
-            </router-link>
           </div>
-
-          <!-- <div class="social">
-            <a class="fab fa-facebook-square" :href="fb" target="_blank" style="color: #4267B2;"></a>
-            <a class="fab fa-instagram"       :href="is" target="_blank" style="color: #e95950;"></a>
-            <a class="fab fa-tiktok"          :href="tk" target="_blank" style="color: #ff0050;"></a>
-            <a class="fab fa-youtube"         :href="yt" target="_blank" style="color: #ff0050;"></a>
-            
-          </div> -->
         </header>
         <section
           :style="getSectionStyle()"
-          :class="{ slide: open }"
+          :class="{ slide: open, 'app-page--dashboard': $route.path === '/dashboard' }"
           @touchstart="startTouch"
           @touchmove="moveTouch"
           @touchend="endTouch"
@@ -543,15 +539,15 @@
           <a @click="handleInicioClickAndClose" v-if="office_id == null" class="mobile-menu-item" :class="{ 'active': $route.path === '/dashboard' }">
             <!-- Mismo ícono SVG que en el sidebar de escritorio -->
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 20px; margin-right: 12px;">
-              <path d="M10 6V0H18V6H10ZM0 10V0H8V10H0ZM10 18V8H18V18H10ZM0 18V12H8V18H0ZM2 8H6V2H2V8ZM12 16H16V10H12V16ZM12 4H16V2H12V4ZM2 16H6V14H2V16Z" fill="white"/>
+              <path d="M10 6V0H18V6H10ZM0 10V0H8V10H0ZM10 18V8H18V18H10ZM0 18V12H8V18H0ZM2 8H6V2H2V8ZM12 16H16V10H12V16ZM12 4H16V2H12V4ZM2 16H6V14H2V16Z" fill="currentColor"/>
             </svg>
-            <span>INICIO</span>
+            <span>Dashboard</span>
           </a>
 
           <a @click.stop="toggleMobileSubmenu(0)" class="mobile-menu-item mobile-menu-item-with-submenu" :class="{ 'active': mobileSubmenus[0] }">
             <span style="display: flex; align-items: center;">
               <i class="fas fa-shopping-cart" style="width: 20px; margin-right: 12px;"></i>
-              PRODUCTOS
+              Tienda
             </span>
             <i class="fa fa-angle-down" :class="{ 'rotated': mobileSubmenus[0] }"></i>
           </a>
@@ -581,7 +577,7 @@
           <a @click.stop="toggleMobileSubmenu(1)" v-if="tree" class="mobile-menu-item mobile-menu-item-with-submenu" :class="{ 'active': mobileSubmenus[1] }">
             <span style="display: flex; align-items: center;">
               <i class="fas fa-users" style="width: 20px; margin-right: 12px;"></i>
-              ORGANIZACIÓN
+              Equipo
             </span>
             <i class="fa fa-angle-down" :class="{ 'rotated': mobileSubmenus[1] }"></i>
           </a>
@@ -604,10 +600,10 @@
             <span style="display: flex; align-items: center;">
               <!-- Mismo ícono SVG de COMISIONES que en escritorio -->
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 20px; margin-right: 12px;">
-                <path d="M12 12.5C11.0717 12.5 10.1815 12.8687 9.52513 13.5251C8.86875 14.1815 8.5 15.0717 8.5 16C8.5 16.9283 8.86875 17.8185 9.52513 18.4749C10.1815 19.1313 11.0717 19.5 12 19.5C12.9283 19.5 13.8185 19.1313 14.4749 18.4749C15.1313 17.8185 15.5 16.9283 15.5 16C15.5 15.0717 15.1313 14.1815 14.4749 13.5251C13.8185 12.8687 12.9283 12.5 12 12.5ZM10.5 16C10.5 15.6022 10.658 15.2206 10.9393 14.9393C11.2206 14.658 11.6022 14.5 12 14.5C12.3978 14.5 12.7794 14.658 13.0607 14.9393C13.342 15.2206 13.5 15.6022 13.5 16C13.5 16.3978 13.342 16.7794 13.0607 17.0607C12.7794 17.342 12.3978 17.5 12 17.5C11.6022 17.5 11.2206 17.342 10.9393 17.0607C10.658 16.7794 10.5 16.3978 10.5 16Z" fill="white"/>
-                <path d="M17.526 5.11618L14.347 0.65918L2.658 9.99718L2.01 9.99018V10.0002H1.5V22.0002H22.5V10.0002H21.538L19.624 4.40118L17.526 5.11618ZM19.425 10.0002H9.397L16.866 7.45418L18.388 6.96718L19.425 10.0002ZM15.55 5.79018L7.84 8.41818L13.946 3.54018L15.55 5.79018ZM3.5 18.1692V13.8292C3.92218 13.6802 4.30565 13.4386 4.62231 13.1221C4.93896 12.8056 5.18077 12.4223 5.33 12.0002H18.67C18.8191 12.4225 19.0609 12.806 19.3775 13.1227C19.6942 13.4393 20.0777 13.6811 20.5 13.8302V18.1702C20.0777 18.3193 19.6942 18.561 19.3775 18.8777C19.0609 19.1944 18.8191 19.5779 18.67 20.0002H5.332C5.18218 19.5779 4.93996 19.1943 4.62302 18.8775C4.30607 18.5608 3.9224 18.3188 3.5 18.1692Z" fill="white"/>
+                <path d="M12 12.5C11.0717 12.5 10.1815 12.8687 9.52513 13.5251C8.86875 14.1815 8.5 15.0717 8.5 16C8.5 16.9283 8.86875 17.8185 9.52513 18.4749C10.1815 19.1313 11.0717 19.5 12 19.5C12.9283 19.5 13.8185 19.1313 14.4749 18.4749C15.1313 17.8185 15.5 16.9283 15.5 16C15.5 15.0717 15.1313 14.1815 14.4749 13.5251C13.8185 12.8687 12.9283 12.5 12 12.5ZM10.5 16C10.5 15.6022 10.658 15.2206 10.9393 14.9393C11.2206 14.658 11.6022 14.5 12 14.5C12.3978 14.5 12.7794 14.658 13.0607 14.9393C13.342 15.2206 13.5 15.6022 13.5 16C13.5 16.3978 13.342 16.7794 13.0607 17.0607C12.7794 17.342 12.3978 17.5 12 17.5C11.6022 17.5 11.2206 17.342 10.9393 17.0607C10.658 16.7794 10.5 16.3978 10.5 16Z" fill="currentColor"/>
+                <path d="M17.526 5.11618L14.347 0.65918L2.658 9.99718L2.01 9.99018V10.0002H1.5V22.0002H22.5V10.0002H21.538L19.624 4.40118L17.526 5.11618ZM19.425 10.0002H9.397L16.866 7.45418L18.388 6.96718L19.425 10.0002ZM15.55 5.79018L7.84 8.41818L13.946 3.54018L15.55 5.79018ZM3.5 18.1692V13.8292C3.92218 13.6802 4.30565 13.4386 4.62231 13.1221C4.93896 12.8056 5.18077 12.4223 5.33 12.0002H18.67C18.8191 12.4225 19.0609 12.806 19.3775 13.1227C19.6942 13.4393 20.0777 13.6811 20.5 13.8302V18.1702C20.0777 18.3193 19.6942 18.561 19.3775 18.8777C19.0609 19.1944 18.8191 19.5779 18.67 20.0002H5.332C5.18218 19.5779 4.93996 19.1943 4.62302 18.8775C4.30607 18.5608 3.9224 18.3188 3.5 18.1692Z" fill="currentColor"/>
               </svg>
-              COMISIONES
+              Comisiones
             </span>
             <i class="fa fa-angle-down" :class="{ 'rotated': mobileSubmenus[2] }"></i>
           </a>
@@ -634,14 +630,14 @@
                 </clipPath>
               </defs>
             </svg>
-            <span>RETIROS</span>
+            <span>Retiros</span>
           </router-link>
 
           <a @click.stop="toggleMobileSubmenu(3)" v-if="tree && office_id == null" class="mobile-menu-item mobile-menu-item-with-submenu" :class="{ 'active': mobileSubmenus[3] }">
             <span style="display: flex; align-items: center;">
           <svg style="width: 20px; margin-right: 12px;" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_74_983_mobile)">
-<path d="M20 12C20 12.5523 20.4477 13 21 13C21.5523 13 22 12.5523 22 12H20ZM12 22C12.5523 22 13 21.5523 13 21C13 20.4477 12.5523 20 12 20V22ZM19.1247 17.2191C18.6934 16.8741 18.0641 16.944 17.7191 17.3753C17.3741 17.8066 17.444 18.4359 17.8753 18.7809L19.1247 17.2191ZM20.3753 20.7809C20.8066 21.1259 21.4359 21.056 21.7809 20.6247C22.1259 20.1934 22.056 19.5641 21.6247 19.2191L20.3753 20.7809ZM7 7C6.44772 7 6 7.44772 6 8C6 8.55228 6.44772 9 7 9V7ZM17 9C17.5523 9 18 8.55228 18 8C18 7.44772 17.5523 7 17 7V9ZM7 11C6.44772 11 6 11.4477 6 12C6 12.5523 6.44772 13 7 13V11ZM11 13C11.5523 13 12 12.5523 12 12C12 11.4477 11.5523 11 11 11V13ZM22 12V4.5H20V12H22ZM22 4.5C22 3.83696 21.7366 3.20107 21.2678 2.73223L19.8536 4.14645C19.9473 4.24022 20 4.36739 20 4.5H22ZM21.2678 2.73223C20.7989 2.26339 20.163 2 19.5 2V4C19.6326 4 19.7598 4.05268 19.8536 4.14645L21.2678 2.73223ZM19.5 2H4.5V4H19.5V2ZM4.5 2C3.83696 2 3.20107 2.26339 2.73223 2.73223L4.14645 4.14645C4.24021 4.05268 4.36739 4 4.5 4V2ZM2.73223 2.73223C2.26339 3.20107 2 3.83696 2 4.5H4C4 4.36739 4.05268 4.24021 4.14645 4.14645L2.73223 2.73223ZM2 4.5V19.5H4V4.5H2ZM2 19.5C2 20.163 2.26339 20.7989 2.73223 21.2678L4.14645 19.8536C4.05268 19.7598 4 19.6326 4 19.5H2ZM2.73223 21.2678C3.20107 21.7366 3.83696 22 4.5 22V20C4.36739 20 4.24022 19.9473 4.14645 19.8536L2.73223 21.2678ZM4.5 22H12V20H4.5V22ZM18 16C18 17.1046 17.1046 18 16 18V20C18.2091 20 20 18.2091 20 16H18ZM16 18C14.8954 18 14 17.1046 14 16H12C12 18.2091 13.7909 20 16 20V18ZM14 16C14 14.8954 14.8954 14 16 14V12C13.7909 12 12 13.7909 12 16H14ZM16 14C17.1046 14 18 14.8954 18 16H20C20 13.7909 18.2091 12 16 12V14ZM17.8753 18.7809L20.3753 20.7809L21.6247 19.2191L19.1247 17.2191L17.8753 18.7809ZM7 9H17V7H7V9ZM7 13H11V11H7V13Z" fill="white"/>
+<path d="M20 12C20 12.5523 20.4477 13 21 13C21.5523 13 22 12.5523 22 12H20ZM12 22C12.5523 22 13 21.5523 13 21C13 20.4477 12.5523 20 12 20V22ZM19.1247 17.2191C18.6934 16.8741 18.0641 16.944 17.7191 17.3753C17.3741 17.8066 17.444 18.4359 17.8753 18.7809L19.1247 17.2191ZM20.3753 20.7809C20.8066 21.1259 21.4359 21.056 21.7809 20.6247C22.1259 20.1934 22.056 19.5641 21.6247 19.2191L20.3753 20.7809ZM7 7C6.44772 7 6 7.44772 6 8C6 8.55228 6.44772 9 7 9V7ZM17 9C17.5523 9 18 8.55228 18 8C18 7.44772 17.5523 7 17 7V9ZM7 11C6.44772 11 6 11.4477 6 12C6 12.5523 6.44772 13 7 13V11ZM11 13C11.5523 13 12 12.5523 12 12C12 11.4477 11.5523 11 11 11V13ZM22 12V4.5H20V12H22ZM22 4.5C22 3.83696 21.7366 3.20107 21.2678 2.73223L19.8536 4.14645C19.9473 4.24022 20 4.36739 20 4.5H22ZM21.2678 2.73223C20.7989 2.26339 20.163 2 19.5 2V4C19.6326 4 19.7598 4.05268 19.8536 4.14645L21.2678 2.73223ZM19.5 2H4.5V4H19.5V2ZM4.5 2C3.83696 2 3.20107 2.26339 2.73223 2.73223L4.14645 4.14645C4.24021 4.05268 4.36739 4 4.5 4V2ZM2.73223 2.73223C2.26339 3.20107 2 3.83696 2 4.5H4C4 4.36739 4.05268 4.24021 4.14645 4.14645L2.73223 2.73223ZM2 4.5V19.5H4V4.5H2ZM2 19.5C2 20.163 2.26339 20.7989 2.73223 21.2678L4.14645 19.8536C4.05268 19.7598 4 19.6326 4 19.5H2ZM2.73223 21.2678C3.20107 21.7366 3.83696 22 4.5 22V20C4.36739 20 4.24022 19.9473 4.14645 19.8536L2.73223 21.2678ZM4.5 22H12V20H4.5V22ZM18 16C18 17.1046 17.1046 18 16 18V20C18.2091 20 20 18.2091 20 16H18ZM16 18C14.8954 18 14 17.1046 14 16H12C12 18.2091 13.7909 20 16 20V18ZM14 16C14 14.8954 14.8954 14 16 14V12C13.7909 12 12 13.7909 12 16H14ZM16 14C17.1046 14 18 14.8954 18 16H20C20 13.7909 18.2091 12 16 12V14ZM17.8753 18.7809L20.3753 20.7809L21.6247 19.2191L19.1247 17.2191L17.8753 18.7809ZM7 9H17V7H7V9ZM7 13H11V11H7V13Z" fill="currentColor"/>
 </g>
 <defs>
 <clipPath id="clip0_74_983_mobile">
@@ -649,7 +645,7 @@
 </clipPath>
 </defs>
 </svg>
-              RESUMEN
+              Resumen
             </span>
             <i class="fa fa-angle-down" :class="{ 'rotated': mobileSubmenus[3] }"></i>
           </a>
@@ -684,7 +680,7 @@
           <a @click.stop="toggleMobileSubmenu(4)" v-if="office_id == null && affiliated" class="mobile-menu-item mobile-menu-item-with-submenu" :class="{ 'active': mobileSubmenus[4] || herramientasRouteActive }">
             <span style="display: flex; align-items: center;">
               <i class="fas fa-tools" style="width: 20px; margin-right: 12px;"></i>
-              HERRAMIENTAS
+              Herramientas
             </span>
             <i class="fa fa-angle-down" :class="{ 'rotated': mobileSubmenus[4] || herramientasRouteActive }"></i>
           </a>
@@ -729,7 +725,7 @@
                 <path d="M6.2 18.1C5.76 18.1 5.4 18.46 5.4 18.9V20.2C5.4 20.64 5.76 21 6.2 21H13.4C13.84 21 14.2 20.64 14.2 20.2V18.9C14.2 18.46 13.84 18.1 13.4 18.1H6.2Z" />
                 <path d="M15.6 18.35C15.6 17.6 16.2 17 16.95 17C17.7 17 18.3 17.6 18.3 18.35C18.3 19.1 17.7 19.7 16.95 19.7C16.2 19.7 15.6 19.1 15.6 18.35Z" />
               </svg>
-              UNIVERSIDAD CLASSMORINGA
+              Universidad ClassMoringa
             </span>
             <i class="fa fa-angle-down" :class="{ 'rotated': mobileSubmenus[5] }"></i>
           </a>
@@ -760,7 +756,7 @@
             :class="{ 'active': $route.path === '/profile' }"
           >
             <i class="fas fa-user" style="width: 20px; margin-right: 12px;"></i>
-            <span>PERFIL</span>
+            <span>Perfil</span>
       </router-link>
 
       <!-- Cerrar sesión (igual que en el sidebar de escritorio) -->
@@ -769,7 +765,7 @@
         class="mobile-menu-item mobile-menu-item-logout"
       >
         <i class="fas fa-power-off" style="width: 20px; margin-right: 12px;"></i>
-        <span>CERRAR SESIÓN</span>
+        <span>Cerrar sesión</span>
       </a>
         </div>
       </div>
@@ -1020,6 +1016,11 @@ export default {
       
       if (this.$route.path === '/audios') {
         styles.padding = '0';
+      }
+
+      if (this.$route.path === '/dashboard') {
+        styles.padding = '14px 20px 72px';
+        styles.boxSizing = 'border-box';
       }
       
       return styles;
@@ -1597,7 +1598,7 @@ export default {
   width: 100%;
   height: 100%;
   /* Usar el mismo fondo oscuro que el sidebar de escritorio */
-  background: #111111;
+  background: linear-gradient(180deg, #0f2a1c 0%, #0a1f14 100%);
   display: flex;
   flex-direction: column;
   animation: slideUp 0.3s ease;
@@ -1614,22 +1615,38 @@ export default {
 
 .mobile-tabs-header {
   display: flex;
-  justify-content: flex-start;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 28px 20px 12px 20px;
-  border-bottom: 1px solid #2c2c2c;
-  /* Mantener la franja superior magenta como en el diseño actual */
-  background: #111111;
+  padding: 28px 20px 20px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.22);
+  background: #0f2a1c;
   position: relative;
 }
 
 .mobile-menu-user-info {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
-  flex: 1;
+  gap: 10px;
   width: 100%;
-  padding-right: 40px;
+  max-width: 280px;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+
+.mobile-menu-user-info > div {
+  width: 100%;
+  text-align: center;
+}
+
+.mobile-photo-label {
+  margin: 0 auto;
+}
+
+.mobile-photo-controls {
+  justify-content: center;
 }
 
 .mobile-menu-photo {
@@ -1671,47 +1688,58 @@ export default {
 
 .mobile-tabs-content {
   flex: 1;
-  padding: 20px;
+  padding: 8px 0 20px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0;
 }
 
 .mobile-menu-item {
   display: flex;
   align-items: center;
-  padding: 16px 24px;
-  /* Estilo similar a los ítems del sidebar desktop */
+  padding: 18px 24px;
   background: transparent;
   border-radius: 0;
-  color: white;
-  font-size: 16px;
-  font-weight: 500;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 15px;
+  font-weight: 400;
   text-decoration: none;
-  transition: all 0.3s ease;
-  border-bottom: 1px solid #1C1C1C;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   margin-bottom: 0;
   cursor: pointer;
+}
+
+.mobile-menu-item i,
+.mobile-menu-item svg {
+  color: #d4af37;
+  opacity: 0.95;
+}
+
+.mobile-menu-item svg path {
+  fill: currentColor;
 }
 
 .mobile-menu-item:hover,
 .mobile-menu-item.router-link-active,
 .mobile-menu-item.active {
-  background: #1C1C1C;
-  border-color: #1C1C1C;
-  color: #E91E63;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  margin: 2px 10px;
+  padding-left: 14px;
+  padding-right: 14px;
+  border-bottom-color: transparent;
+  color: #fff;
 }
 
+.mobile-menu-item:hover i,
 .mobile-menu-item.active i,
 .mobile-menu-item.router-link-active i,
+.mobile-menu-item:hover svg,
 .mobile-menu-item.active svg,
 .mobile-menu-item.router-link-active svg {
-  color: #E91E63;
-}
-
-.mobile-menu-item.active svg path,
-.mobile-menu-item.router-link-active svg path {
-  fill: currentColor;
+  color: #d4af37;
+  opacity: 1;
 }
 
 .mobile-menu-item-with-submenu {
@@ -1720,7 +1748,15 @@ export default {
 
 .mobile-menu-item-with-submenu i.fa-angle-down {
   transition: transform 0.3s ease;
-  font-size: 18px;
+  font-size: 16px;
+  margin-left: auto;
+  margin-right: 0;
+  color: #d4af37;
+}
+
+.mobile-menu-item-with-submenu:hover i.fa-angle-down,
+.mobile-menu-item-with-submenu.active i.fa-angle-down {
+  color: #fff;
 }
 
 .mobile-menu-item-with-submenu i.fa-angle-down.rotated {
@@ -1728,71 +1764,80 @@ export default {
 }
 
 .mobile-menu-item-logout {
-  background: #111111 !important;
+  background: transparent !important;
   margin-top: 8px;
 }
 
+.mobile-menu-item-logout:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
 .mobile-menu-item-logout i {
-  color: #E91E63 !important;
+  color: #d4af37 !important;
+  opacity: 1;
 }
 
 .mobile-submenu {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease;
-  margin-left: 0;
-  margin-bottom: 0;
-  background: #1C1C1C;
+  margin: 0;
+  background: rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .mobile-submenu.active {
   max-height: 500px;
   border-radius: 8px;
-  margin: 5px 15px;
+  margin: 0;
 }
 
 .mobile-submenu-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 32px;
+  padding: 16px 24px 16px 48px;
   background: transparent;
   border-radius: 0;
-  color: white;
-  font-size: 14px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 13px;
+  font-weight: 400;
   text-decoration: none;
-  transition: all 0.3s ease;
-  margin-bottom: 0;
-  border-bottom: 1px solid #1C1C1C;
-}
-
-.mobile-submenu-item:hover {
-  background: #252525;
-}
-
-.mobile-submenu-item.router-link-active {
-  background: linear-gradient(90deg, #f06292 0%, #ec407a 100%);
-  color: white !important;
-  border-radius: 6px;
-  margin: 4px 15px;
-  padding-left: 17px;
-  font-weight: 600;
+  transition: all 0.2s ease;
+  margin-bottom: 2px;
   border-bottom: none;
 }
 
-.mobile-submenu-item.router-link-active i,
-.mobile-submenu-item.router-link-active svg {
-  color: white !important;
+.mobile-submenu-item:hover,
+.mobile-submenu-item.router-link-active {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.92);
+  border-radius: 8px;
+  margin: 4px 12px;
+  padding-left: 36px;
+  padding-right: 16px;
+  font-weight: inherit;
 }
 
-.mobile-submenu-item.router-link-active svg path {
-  fill: white !important;
-}
-
-.mobile-submenu-item i {
+.mobile-submenu-item i,
+.mobile-submenu-item svg {
+  color: rgba(255, 255, 255, 0.92);
   font-size: 16px;
   width: 20px;
   text-align: center;
+  flex-shrink: 0;
+}
+
+.mobile-submenu-item:hover i,
+.mobile-submenu-item:hover svg,
+.mobile-submenu-item.router-link-active i,
+.mobile-submenu-item.router-link-active svg {
+  color: #d4af37;
+}
+
+.mobile-submenu-item:hover svg path,
+.mobile-submenu-item.router-link-active svg path {
+  fill: currentColor;
 }
 
 .mobile-submenu-item img {
@@ -1800,8 +1845,53 @@ export default {
   height: 16px;
 }
 
-.mobile-menu-logo {
-  margin-bottom: 20px;
+.mobile-sidebar-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  padding: 16px 12px 22px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.22);
+  box-sizing: border-box;
+}
+
+.mobile-sidebar-brand .sidebar-logo-wrap {
+  width: 158px;
+  height: calc(158px * (401 / 512));
+  margin: 0 auto 10px;
+  overflow: hidden;
+}
+
+.mobile-sidebar-brand .sidebar-logo-img {
+  width: 158px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  margin-top: calc(-158px * (55 / 512));
+}
+
+.mobile-sidebar-brand .sidebar-brand-title {
+  color: #d4af37;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  margin: 0;
+  line-height: 1.25;
+  width: 100%;
+  text-align: center;
+}
+
+.mobile-sidebar-brand .sidebar-brand-sub {
+  color: #c9a962;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  margin: 6px 0 0;
+  width: 100%;
+  text-align: center;
 }
 
 @keyframes fadeIn {
@@ -1830,8 +1920,20 @@ export default {
 }
 
 /* Logo responsive */
-.logo-mobile {
+.header-logo-wrap.logo-mobile {
   display: none;
+  width: 40px;
+  height: calc(40px * (401 / 512));
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.header-logoto-img {
+  width: 40px;
+  height: auto;
+  display: block;
+  margin: 0;
+  margin-top: calc(-40px * (55 / 512));
 }
 
 .logo-desktop {
@@ -1866,7 +1968,7 @@ export default {
 
 /* Estilos para móvil */
 @media (max-width: 767px) {
-  .logo-mobile {
+  .header-logo-wrap.logo-mobile {
     display: block;
   }
 

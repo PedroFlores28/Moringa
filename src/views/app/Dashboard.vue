@@ -1,42 +1,6 @@
 <template>
   <App :session="session" :title="title">
-    <div v-cloak>
-      <!-- Banner slider (mantener el existente) -->
-      <div v-if="!loading && bannerImages.length > 0" class="banner-slider">
-        <div class="slider-wrapper">
-          <transition name="carousel-3d" mode="out-in">
-            <div class="banner-slide" :key="currentBanner">
-              <img :src="bannerImages[currentBanner]" class="banner-img" />
-            </div>
-          </transition>
-          <button
-            v-if="bannerImages.length > 1"
-            class="nav left"
-            @click="prevBanner"
-          >
-            &#8592;
-          </button>
-          <button
-            v-if="bannerImages.length > 1"
-            class="nav right"
-            @click="nextBanner"
-          >
-            &#8594;
-          </button>
-        </div>
-        <div v-if="bannerImages.length > 1" class="dots">
-          <span
-            v-for="(img, idx) in bannerImages"
-            :key="'dot-' + idx"
-            :class="['dot', { active: currentBanner === idx }]"
-            @click="goToBanner(idx)"
-          ></span>
-        </div>
-      </div>
-      <div v-else-if="!loading" class="no-banners-msg">
-        <p>No hay banners para mostrar.</p>
-      </div>
-
+    <div v-cloak class="dashboard-page-root">
       <div v-if="loading" class="loading-container">
         <div class="loading-spinner-large"></div>
         <p>Cargando dashboard...</p>
@@ -50,466 +14,360 @@
         style="margin: 24px 0"
       />
 
-      <!-- Nuevo Dashboard Design -->
-      <div v-else class="dashboard-container">
-        <!-- Top Row -->
-        <div class="dashboard-row">
-          <!-- Nivel Actual Rediseñado -->
-          <div class="dashboard-section nivel-actual-section">
-            
-            <!-- Shortcuts Row -->
-            <div class="shortcuts-row">
-              <router-link to="/tools" class="shortcut-item">
-                <div class="shortcut-icon"><i class="fas fa-graduation-cap"></i></div>
-                <span>Educación</span>
-              </router-link>
-              <router-link to="/audios" class="shortcut-item">
-                <div class="shortcut-icon"><i class="fas fa-headphones"></i></div>
-                <span>Audios</span>
-              </router-link>
-              <router-link to="/libros" class="shortcut-item">
-                <div class="shortcut-icon"><i class="fas fa-book"></i></div>
-                <span>Libros</span>
-              </router-link>
-              <router-link to="/flyer-editor" class="shortcut-item">
-                <div class="shortcut-icon"><i class="fas fa-bullhorn rotate-icon"></i></div>
-                <span>Flyers</span>
-              </router-link>
-              <a href="https://www.youtube.com/playlist?list=PLWYJViqkAe6HpJyjfc1vw01o5lThSUulM" target="_blank" class="shortcut-item">
-                <div class="shortcut-icon"><i class="fas fa-quote-left"></i></div>
-                <span>Testimonios</span>
-              </a>
-            </div>
+      <!-- Dashboard Moringa -->
 
-            <!-- Max Rank Banner -->
-            <div class="max-rank-banner">
-              <div class="banner-info">
-                <span class="banner-title">Rango Máximo Alcanzado</span>
-                <span class="banner-rank">{{ rank | _rank }}</span>
-              </div>
-              <div class="rank-badge">
-                <i class="fas fa-gem gem-icon"></i>
-                <span class="sparkle s1"></span>
-                <span class="sparkle s2"></span>
-                <span class="sparkle s3"></span>
-                <span class="sparkle s4"></span>
-              </div>
-            </div>
+      <div v-else class="moringa-dashboard">
 
-            <!-- Bottom Stats Row (Keeping for reference as requested, but maybe user wanted to replace them? I will keep them but focus the 8 new cards below) -->
-            <div class="stats-row">
-              <div class="stat-card">
-                <div class="stat-header">
-                  <span class="dash-card-title">Saldo Ganado</span>
+        <div class="md-row md-row-top">
+
+          <div class="md-card md-card-nivel">
+
+            <h3 class="md-card-title nivel-card-title">Nivel Actual</h3>
+
+            <div class="nivel-body">
+
+              <div class="nivel-visual">
+
+                <div class="nivel-diamond-scene" aria-hidden="true">
+                  <nivel-diamond-svg />
                 </div>
-                <span class="dash-card-value-magenta">S/ {{ Number(ins + insVirtual).toLocaleString('es-PE', { minimumFractionDigits: 2 }) }}</span>
-                <div class="stat-icon-premium">
-                  <!-- Money Bag SVG (EXACT Copy from Total Ganado) -->
-                  <svg viewBox="0 0 100 110" class="money-bag-stat-svg">
+
+                <span class="nivel-rank-name">{{ rank | _rank }}</span>
+
+              </div>
+
+              <div class="nivel-stats">
+
+                <div v-for="(s, i) in levelStats" :key="'lv-' + i" class="nivel-stat">
+
+                  <div class="nivel-stat-icon"><i :class="s.icon"></i></div>
+
+                  <div class="nivel-stat-text">
+
+                    <span class="nivel-stat-label">{{ s.label }}</span>
+
+                    <span class="nivel-stat-value">{{ s.value }}</span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="md-card md-card-rango">
+
+            <h3 class="md-card-title rango-card-title">Rango {{ rank | _rank }}</h3>
+
+            <div class="rango-body">
+
+              <div class="rango-gauge-block">
+
+                <div class="gauge-ring">
+
+                  <svg viewBox="0 0 120 120" class="gauge-svg">
+
+                    <circle cx="60" cy="60" r="48" fill="none" stroke="#e5efe8" stroke-width="10" />
+
+                    <circle
+
+                      cx="60" cy="60" r="48" fill="none"
+
+                      stroke="url(#gaugeGradMain)" stroke-width="10" stroke-linecap="round"
+
+                      :stroke-dasharray="gaugeCircumference"
+
+                      :stroke-dashoffset="gaugeOffset"
+
+                      transform="rotate(-90 60 60)"
+
+                    />
+
                     <defs>
-                      <radialGradient id="bagStatGradientFinal" cx="50%" cy="50%" r="50%" fx="35%" fy="35%">
-                        <stop offset="0%" style="stop-color:#689f38;stop-opacity:1" />
-                        <stop offset="70%" style="stop-color:#33691e;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#1b5e20;stop-opacity:1" />
-                      </radialGradient>
-                      <linearGradient id="goldStatGradientFinal" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:#ffee58;stop-opacity:1" />
-                        <stop offset="50%" style="stop-color:#fbc02d;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#f9a825;stop-opacity:1" />
+
+                      <linearGradient id="gaugeGradMain" x1="0%" y1="0%" x2="100%" y2="0%">
+
+                        <stop offset="0%" stop-color="#1b5e3a" />
+
+                        <stop offset="100%" stop-color="#7cb342" />
+
                       </linearGradient>
-                      <linearGradient id="tieStatGradientFinal" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" style="stop-color:#fbc02d;stop-opacity:1" />
-                        <stop offset="50%" style="stop-color:#fdd835;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#fbc02d;stop-opacity:1" />
-                      </linearGradient>
+
                     </defs>
-                    <ellipse cx="50" cy="98" rx="35" ry="8" fill="#000" opacity="0.15" />
-                    <path d="M35 30 Q30 5 45 15 Q50 5 55 15 Q70 5 65 30 Z" fill="#689f38" stroke="#33691e" stroke-width="0.5" />
-                    <path d="M38 28 Q42 18 45 22 Q50 15 55 22 Q58 18 62 28" fill="none" stroke="#33691e" stroke-width="0.5" opacity="0.5" />
-                    <path d="M15 65 C15 95 30 100 50 100 C70 100 85 95 85 65 C85 45 75 30 50 30 C25 30 15 45 15 65 Z" fill="url(#bagStatGradientFinal)" />
-                    <rect x="34" y="28" width="32" height="6" rx="3" fill="url(#tieStatGradientFinal)" stroke="#f9a825" stroke-width="0.5" />
-                    <g transform="translate(50, 70)">
-                      <text x="0" y="0" font-family="Arial Black, Arial" font-size="42" fill="url(#goldStatGradientFinal)" text-anchor="middle" dominant-baseline="middle" font-weight="900" style="filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3))" stroke="#fbc02d" stroke-width="0.5">$</text>
-                    </g>
-                    <path d="M22 60 C22 50 30 40 45 40" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity="0.1" />
+
                   </svg>
+
+                  <div class="gauge-center">
+
+                    <i class="fas fa-crown gauge-crown"></i>
+
+                    <span class="gauge-pct">{{ nextRankPercentage }}%</span>
+
+                    <span class="gauge-caption">Avance actual</span>
+
+                  </div>
+
                 </div>
+
+                <p class="rango-next-text">
+
+                  a {{ remainingRankPct }}% de subir a
+
+                  <strong>{{ nextRankName | _rank }}</strong>
+
+                </p>
+
               </div>
+
+              <div class="rango-mini-grid">
+
+                <div v-for="(s, i) in rankProgressStats" :key="'rp-' + i" class="mini-stat">
+
+                  <span class="mini-stat-icon"><i :class="s.icon"></i></span>
+
+                  <div class="mini-stat-content">
+
+                    <span class="mini-stat-label">{{ s.label }}</span>
+
+                    <span class="mini-stat-value">{{ s.value }}</span>
+
+                    <div class="mini-bar"><span class="mini-bar-fill" :style="{ width: s.progress + '%' }"></span></div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
             </div>
+
           </div>
+
         </div>
 
-        <!-- New Info Cards Grid (8 Cards) -->
-        <div class="new-dashboard-grid">
-          <!-- 1. Próximo Rango -->
-          <div class="info-card next-rank-card">
-            <div class="info-content-horizontal">
-              <div class="info-text-side">
-                <span class="dash-card-title">Próximo Rango</span>
-                <span class="dash-card-value">{{ provisionalRank | _rank }}</span>
-                <span class="dash-card-subtitle">{{ nextRankPercentage }}% de avance hacia {{ nextRankName | _rank }}</span>
-              </div>
-              <div class="gauge-container">
-                <svg viewBox="0 0 100 60" class="gauge-svg">
-                  <defs>
-                    <linearGradient id="needleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" style="stop-color:#4a4a4a;stop-opacity:1" />
-                      <stop offset="50%" style="stop-color:#2a2a2a;stop-opacity:1" />
-                      <stop offset="100%" style="stop-color:#4a4a4a;stop-opacity:1" />
-                    </linearGradient>
-                  </defs>
-                  <!-- Background Arc -->
-                  <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="#f5f5f5" stroke-width="10" />
-                  
-                  <!-- Segments with gaps -->
-                  <!-- Segment 1: Pink -->
-                  <path d="M 12 45 A 38 38 0 0 1 28 18" fill="none" stroke="#f953c6" stroke-width="9" />
-                  <!-- Segment 2: Orange -->
-                  <path d="M 32 16 A 38 38 0 0 1 48 12" fill="none" stroke="#ff9800" stroke-width="9" />
-                  <!-- Segment 3: Bronze/Brown -->
-                  <path d="M 52 12 A 38 38 0 0 1 68 16" fill="none" stroke="#a08c35" stroke-width="9" />
-                  <!-- Segment 4: Dark Gray -->
-                  <path d="M 72 18 A 38 38 0 0 1 88 45" fill="none" stroke="#444" stroke-width="9" />
 
-                  <!-- Center decorative circle -->
-                  <circle cx="50" cy="50" r="2" fill="#ccc" />
 
-                  <!-- Needle -->
-                  <g class="needle" :style="{ transform: `rotate(${(nextRankPercentage / 100) * 180 - 90}deg)` }">
-                    <path d="M 50 50 L 47 50 L 50 10 L 53 50 Z" fill="url(#needleGradient)" />
-                    <circle cx="50" cy="50" r="6" fill="#333" />
-                    <circle cx="50" cy="50" r="2" fill="#666" />
-                  </g>
-                </svg>
+        <div class="md-row md-row-mid">
+
+          <router-link to="/affiliation" class="md-card md-card-registro">
+
+            <div class="registro-content">
+
+              <div class="registro-text">
+
+                <h3>Registro Único</h3>
+
+                <p>Únete y comienza<br />tu camino al exito</p>
+
+                <span class="registro-btn">Más informacion</span>
+
               </div>
+
+              <div class="registro-icon-wrap">
+
+                <i class="fas fa-user-plus"></i>
+
+              </div>
+
             </div>
+
+          </router-link>
+
+
+
+          <div class="md-card md-card-comisiones">
+
+            <h3 class="md-card-title">Comisiones</h3>
+
+            <p class="md-card-sub">Completa los porcentajes y disfruta el viaje!</p>
+
+            <div class="comisiones-row">
+
+              <div class="comision-pill comision-pill--green">
+
+                <div class="comision-circle"><i class="fas fa-star"></i></div>
+
+                <span class="comision-name">Bono Unilevel</span>
+
+                <span class="comision-val">{{ bonusUnilevel }}</span>
+
+              </div>
+
+              <div class="comision-pill comision-pill--blue">
+
+                <div class="comision-circle"><i class="fas fa-star"></i></div>
+
+                <span class="comision-name">Bono Generacional</span>
+
+                <span class="comision-val">{{ bonusGeneracional }}</span>
+
+              </div>
+
+              <div class="comision-pill comision-pill--purple">
+
+                <div class="comision-circle"><i class="fas fa-star"></i></div>
+
+                <span class="comision-name">Bono Rango</span>
+
+                <span class="comision-val">{{ bonusRango }}</span>
+
+              </div>
+
+            </div>
+
           </div>
 
-          <!-- 4. Rango Cerrado -->
-          <!-- 4. Rango Cerrado -->
-          <div class="info-card closed-rank-card">
-            <div class="closed-rank-info-group">
-              <div class="closed-rank-left">
-                <i class="fas fa-trophy trophy-icon-closed"></i>
-              </div>
-              <div class="closed-rank-center">
-                <span class="banner-title">Rango Cerrado</span>
-                <span class="banner-rank">{{ rank | _rank }}</span>
-              </div>
-            </div>
-            <div class="closed-rank-right">
-              <div class="rank-badge static">
-                <i class="fas fa-gem gem-icon-closed"></i>
-              </div>
-            </div>
-          </div>
 
-          <!-- 3. Total Ganado -->
-          <div class="info-card total-ganado-card">
-            <div class="info-content-horizontal">
-              <div class="info-text-side">
-                <span class="dash-card-title">Total Ganado</span>
-                <span class="dash-card-value-magenta">S/ {{ Number(ins + insVirtual).toLocaleString('es-PE', { minimumFractionDigits: 2 }) }}</span>
-                <span class="dash-card-subtitle">Acumulado histórico</span>
-              </div>
-              <div class="money-bag-container">
-                <svg viewBox="0 0 100 110" class="money-bag-svg">
-                  <defs>
-                    <radialGradient id="bagGradient" cx="50%" cy="50%" r="50%" fx="35%" fy="35%">
-                      <stop offset="0%" style="stop-color:#689f38;stop-opacity:1" />
-                      <stop offset="70%" style="stop-color:#33691e;stop-opacity:1" />
-                      <stop offset="100%" style="stop-color:#1b5e20;stop-opacity:1" />
-                    </radialGradient>
-                    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" style="stop-color:#ffee58;stop-opacity:1" />
-                      <stop offset="50%" style="stop-color:#fbc02d;stop-opacity:1" />
-                      <stop offset="100%" style="stop-color:#f9a825;stop-opacity:1" />
-                    </linearGradient>
-                    <linearGradient id="tieGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" style="stop-color:#fbc02d;stop-opacity:1" />
-                      <stop offset="50%" style="stop-color:#fdd835;stop-opacity:1" />
-                      <stop offset="100%" style="stop-color:#fbc02d;stop-opacity:1" />
-                    </linearGradient>
-                  </defs>
-                  
-                  <!-- Shadow -->
-                  <ellipse cx="50" cy="98" rx="35" ry="8" fill="#000" opacity="0.15" />
-                  
-                  <!-- Top Folds (Cloth above tie) -->
-                  <path d="M35 30 Q30 5 45 15 Q50 5 55 15 Q70 5 65 30 Z" fill="#689f38" stroke="#33691e" stroke-width="0.5" />
-                  <path d="M38 28 Q42 18 45 22 Q50 15 55 22 Q58 18 62 28" fill="none" stroke="#33691e" stroke-width="0.5" opacity="0.5" />
 
-                  <!-- Main Bag Body -->
-                  <path d="M15 65 C15 95 30 100 50 100 C70 100 85 95 85 65 C85 45 75 30 50 30 C25 30 15 45 15 65 Z" fill="url(#bagGradient)" />
-                  
-                  <!-- Tie (Gold rope) -->
-                  <rect x="34" y="28" width="32" height="6" rx="3" fill="url(#tieGradient)" stroke="#f9a825" stroke-width="0.5" />
-                  
-                  <!-- Dollar Sign ($) -->
-                  <g transform="translate(50, 70)">
-                    <text x="0" y="0" font-family="Arial Black, Arial" font-size="42" fill="url(#goldGradient)" text-anchor="middle" dominant-baseline="middle" font-weight="900" style="filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3))" stroke="#fbc02d" stroke-width="0.5">$</text>
-                  </g>
+          <div class="md-card md-card-viaje">
 
-                  <!-- Subtle highlights -->
-                  <path d="M22 60 C22 50 30 40 45 40" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity="0.1" />
-                </svg>
-              </div>
-            </div>
-          </div>
+            <h3 class="md-card-title">Bonos de Viaje</h3>
 
-          <!-- 2. Saldo Disponible -->
-          <div class="info-card saldo-disponible-card">
-            <div class="info-content-horizontal">
-              <div class="info-text-side">
-                <span class="dash-card-title">Saldo Disponible</span>
-                <span class="dash-card-value">S/ {{ (balance || 0).toLocaleString('es-PE', { minimumFractionDigits: 2 }) }}</span>
-                <span class="dash-card-subtitle">Disponible para retiro</span>
-              </div>
-              <div class="wallet-container">
-                <svg viewBox="0 0 100 100" class="wallet-svg">
-                  <!-- Coin -->
-                  <circle cx="65" cy="30" r="15" fill="#ffd700" stroke="#fbc02d" stroke-width="1" />
-                  <text x="65" y="36" font-family="Arial Black" font-size="16" fill="#fbc02d" text-anchor="middle" font-weight="900">$</text>
-                  <!-- Wallet body -->
-                  <path d="M15 40 Q15 35 20 35 L80 35 Q85 35 85 40 L85 85 Q85 90 80 90 L20 90 Q15 90 15 85 Z" fill="#2e7d32" />
-                  <path d="M15 45 L85 45" stroke="#1b5e20" stroke-width="2" opacity="0.3" />
-                  <!-- Wallet flap -->
-                  <path d="M50 35 L85 35 L85 65 L50 65 Q45 65 45 50 Q45 35 50 35 Z" fill="#388e3c" />
-                  <circle cx="75" cy="50" r="4" fill="#ffeb3b" />
-                </svg>
-              </div>
-            </div>
-          </div>
+            <p class="md-card-sub">Completa los porcentajes y disfruta el viaje!</p>
 
-          <!-- Merge: Personas en tu Red & Total de Puntos Grupales -->
-          <div class="info-card merged-stats-card">
-            <div class="merged-column">
-              <div class="merged-header">
-                <div class="merged-icon team-icon-merged">
-                  <svg viewBox="0 0 100 80" fill="#E91E63">
-                    <circle cx="50" cy="30" r="15" />
-                    <path d="M20 70c0-15 10-25 30-25s30 10 30 25H20z" />
-                    <circle cx="25" cy="40" r="10" opacity="0.6" />
-                    <path d="M5 70c0-10 5-18 20-18s20 8 20 18H5z" opacity="0.6" />
-                    <circle cx="75" cy="40" r="10" opacity="0.6" />
-                    <path d="M55 70c0-10 5-18 20-18s20 8 20 18H55z" opacity="0.6" />
+            <div class="viaje-gauges">
+
+              <div class="viaje-gauge-item">
+
+                <div class="viaje-ring">
+
+                  <svg viewBox="0 0 80 80">
+
+                    <circle cx="40" cy="40" r="32" fill="none" stroke="#e5efe8" stroke-width="6" />
+
+                    <circle
+
+                      cx="40" cy="40" r="32" fill="none" stroke="#2e7d32" stroke-width="6" stroke-linecap="round"
+
+                      :stroke-dasharray="viajeCircumference"
+
+                      :stroke-dashoffset="viajeOffset(travelInternationalPct)"
+
+                      transform="rotate(-90 40 40)"
+
+                    />
+
                   </svg>
-                </div>
-                <span class="dash-card-title">Personas en tu Red</span>
-              </div>
-              <div class="merged-value-container">
-                <span class="dash-card-value">{{ n_affiliates_total || 0 }}</span>
-                <span class="dash-card-subtitle">Total acumulado</span>
-              </div>
-            </div>
-            <div class="merged-divider"></div>
-            <div class="merged-column">
-              <div class="merged-header">
-                <div class="merged-icon points-icon-merged">
-                  <svg viewBox="0 0 100 80" class="tokens-svg">
-                    <!-- Right/Back Stack (Taller) -->
-                    <!-- Token 4 (Bottom) -->
-                    <ellipse cx="65" cy="55" rx="18" ry="7" fill="#880e4f" />
-                    <rect x="47" y="51" width="36" height="4" fill="#ad1457" />
-                    <ellipse cx="65" cy="51" rx="18" ry="7" fill="#ad1457" stroke="#880e4f" stroke-width="0.5" />
-                    <!-- Token 3 -->
-                    <rect x="47" y="47" width="36" height="4" fill="#c2185b" />
-                    <ellipse cx="65" cy="47" rx="18" ry="7" fill="#c2185b" stroke="#880e4f" stroke-width="0.5" />
-                    <!-- Token 2 -->
-                    <rect x="47" y="43" width="36" height="4" fill="#d81b60" />
-                    <ellipse cx="65" cy="43" rx="18" ry="7" fill="#d81b60" stroke="#880e4f" stroke-width="0.5" />
-                    <!-- Token 1 (Top) -->
-                    <rect x="47" y="39" width="36" height="4" fill="#e91e63" />
-                    <ellipse cx="65" cy="39" rx="18" ry="7" fill="#e91e63" />
-                    <ellipse cx="65" cy="39" rx="15" ry="5" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.3" />
 
-                    <!-- Left/Front Stack (Shorter) -->
-                    <!-- Token 3 (Bottom) -->
-                    <ellipse cx="35" cy="65" rx="18" ry="7" fill="#880e4f" />
-                    <rect x="17" y="61" width="36" height="4" fill="#ad1457" />
-                    <ellipse cx="35" cy="61" rx="18" ry="7" fill="#ad1457" stroke="#880e4f" stroke-width="0.5" />
-                    <!-- Token 2 -->
-                    <rect x="17" y="57" width="36" height="4" fill="#c2185b" />
-                    <ellipse cx="35" cy="57" rx="18" ry="7" fill="#c2185b" stroke="#880e4f" stroke-width="0.5" />
-                    <!-- Token 1 (Top) -->
-                    <rect x="17" y="53" width="36" height="4" fill="#d81b60" />
-                    <ellipse cx="35" cy="53" rx="18" ry="7" fill="#d81b60" />
-                    <ellipse cx="35" cy="53" rx="15" ry="5" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.3" />
-                  </svg>
+                  <span class="viaje-pct">{{ travelInternationalPct }}%</span>
+
                 </div>
-                <span class="dash-card-title">Total de Puntos Grupales</span>
+
+                <span class="viaje-label">Internacional</span>
+
               </div>
-              <div class="merged-value-container">
-                <span class="dash-card-value">{{ total_points || 0 }}</span>
-                <span class="dash-card-subtitle accent">Este mes</span>
+
+              <div class="viaje-gauge-item">
+
+                <div class="viaje-ring">
+
+                  <svg viewBox="0 0 80 80">
+
+                    <circle cx="40" cy="40" r="32" fill="none" stroke="#e5efe8" stroke-width="6" />
+
+                    <circle
+
+                      cx="40" cy="40" r="32" fill="none" stroke="#d4af37" stroke-width="6" stroke-linecap="round"
+
+                      :stroke-dasharray="viajeCircumference"
+
+                      :stroke-dashoffset="viajeOffset(travelNationalPct)"
+
+                      transform="rotate(-90 40 40)"
+
+                    />
+
+                  </svg>
+
+                  <span class="viaje-pct">{{ travelNationalPct }}%</span>
+
+                </div>
+
+                <span class="viaje-label">Nacional</span>
+
               </div>
+
             </div>
+
           </div>
 
-          <!-- 5. Puntos Personales -->
-          <div class="info-card personal-points-card">
-            <div class="personal-top-row">
-              <div class="personal-info-side">
-                <div class="personal-icon-wrapper">
-                  <svg viewBox="0 0 24 24" fill="#E91E63">
-                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                  </svg>
-                </div>
-                <div class="personal-text-block">
-                  <span class="dash-card-title">Puntos Personales</span>
-                  <div class="personal-points-value">
-                    <span class="dash-card-value pts-number">{{ points || 0 }}</span>
-                    <span class="dash-card-subtitle pts-label">PTS</span>
-                  </div>
-                </div>
-              </div>
-              <div class="merged-divider thin"></div>
-              <div class="personal-status-side" :class="{ 'is-active': activated }">
-                <div class="status-icon">
-                  <svg v-if="activated" viewBox="0 0 24 24" fill="#4caf50">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                  </svg>
-                  <svg v-else viewBox="0 0 24 24" fill="#f44336">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M15.59 7L12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17 17 15.59 13.41 12 17 8.41z" fill="#fff" />
-                  </svg>
-                </div>
-                <span class="status-text">{{ activated ? 'Activo' : 'Inactivo' }}</span>
-              </div>
-            </div>
-            <div class="personal-bottom-banner">
-              <div class="banner-icon-side">
-                <svg viewBox="0 0 24 24" class="briefcase-banner-svg">
-                  <path d="M7 6V5c0-1.1.9-2 2-2h6c1.1 0 2 .9 2 2v1h3c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V8c0-1.1.9-2 2-2h3zm2-1v1h6V5H9zm-5 7h5v2h6v-2h5V8H4v4zm5 2v2h6v-2H9z" fill="#E91E63" />
-                </svg>
-              </div>
-              <span>{{ activationLevelLabel }}</span>
-            </div>
-          </div>
-
-          <!-- 6. Saldo no disponible -->
-          <div class="info-card saldo-no-disponible-card">
-            <!-- Glossy Horizontal Line -->
-            <div class="glow-horizontal-line"></div>
-            
-            <!-- Large background lock (Glossy/Glass effect) -->
-            <div class="bg-lock-icon-premium">
-              <svg viewBox="0 0 100 120">
-                <defs>
-                   <linearGradient id="glassGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                     <stop offset="0%" style="stop-color:#fff;stop-opacity:0.2" />
-                     <stop offset="50%" style="stop-color:#fff;stop-opacity:0.05" />
-                     <stop offset="100%" style="stop-color:#fff;stop-opacity:0.1" />
-                   </linearGradient>
-                </defs>
-                <rect x="15" y="45" width="70" height="60" rx="15" fill="url(#glassGradient)" stroke="white" stroke-opacity="0.2" stroke-width="1" />
-                <path d="M30 45 V30 C30 18 38 10 50 10 C62 10 70 18 70 30 V45" fill="none" stroke="white" stroke-opacity="0.3" stroke-width="8" stroke-linecap="round" />
-                <circle cx="50" cy="75" r="8" fill="white" fill-opacity="0.2" />
-                <path d="M50 83 V90" stroke="white" stroke-opacity="0.2" stroke-width="4" stroke-linecap="round" />
-              </svg>
-            </div>
-
-            <div class="info-content-horizontal relative">
-              <div class="info-text-side">
-                <div class="title-with-premium-lock">
-                  <div class="premium-wallet-lock">
-                    <svg viewBox="0 0 40 40">
-                      <defs>
-                        <linearGradient id="walletGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                          <stop offset="0%" style="stop-color:#ff4081;stop-opacity:1" />
-                          <stop offset="100%" style="stop-color:#c2185b;stop-opacity:1" />
-                        </linearGradient>
-                      </defs>
-                      <!-- Shackle (Lock handle) -->
-                      <path d="M12 18 V10 C12 6 15 3 20 3 C25 3 28 6 28 10 V18" fill="none" stroke="#ff80ab" stroke-width="4" stroke-linecap="round" />
-                      <!-- Wallet Body -->
-                      <rect x="6" y="15" width="28" height="20" rx="6" fill="url(#walletGradient)" />
-                      <!-- Stitching or Detail line -->
-                      <rect x="6" y="20" width="28" height="2" fill="#880e4f" opacity="0.2" />
-                      <!-- Keyhole -->
-                      <circle cx="20" cy="24" r="3.5" fill="white" />
-                      <path d="M18 24 L22 24 L24 31 L16 31 Z" fill="white" />
-                    </svg>
-                  </div>
-                  <span class="dash-card-title" style="color: rgba(255,255,255,0.7) !important">Saldo No Disponible</span>
-                </div>
-                <span class="dash-card-value" style="color: #fff !important; font-size: 28px !important">S/ {{ (_balance || 0).toLocaleString('es-PE', { minimumFractionDigits: 2 }) }}</span>
-                <span class="dash-card-subtitle" style="color: rgba(255,255,255,0.6) !important">Activate antes del cierre <br><span class="magenta-text">para liberarlo</span></span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 7. Pack afiliación -->
-          <div class="info-card pack-afiliacion-card">
-            <div class="pack-content-wrapper">
-              <span class="dash-card-title">Pack de Afiliación</span>
-              <div class="pack-banner-box">
-                <div class="banner-icon-side">
-                  <svg viewBox="0 0 24 24" class="briefcase-banner-svg">
-                    <path d="M7 6V5c0-1.1.9-2 2-2h6c1.1 0 2 .9 2 2v1h3c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V8c0-1.1.9-2 2-2h3zm2-1v1h6V5H9zm-5 7h5v2h6v-2h5V8H4v4zm5 2v2h6v-2H9z" fill="#E91E63" />
-                  </svg>
-                </div>
-                <span class="pack-name-text">{{ formattedPlan }}</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 9. Bono Ahorro -->
-          <div class="info-card bono-ahorro-card">
-            <div class="info-content-horizontal">
-              <div class="info-text-side">
-                <span class="dash-card-title">Bono Ahorro</span>
-                <span class="dash-card-value-magenta">S/ {{ (sifrahBalance || 0).toLocaleString('es-PE', { minimumFractionDigits: 2 }) }}</span>
-                <span class="dash-card-subtitle">Canjéalo por productos</span>
-              </div>
-              <div class="piggy-bank-container">
-                <svg viewBox="0 0 120 100" class="piggy-bank-svg">
-                  <defs>
-                    <radialGradient id="piggyBody" cx="50%" cy="50%" r="50%" fx="30%" fy="30%">
-                      <stop offset="0%" style="stop-color:#ff80ab;stop-opacity:1" />
-                      <stop offset="70%" style="stop-color:#f50057;stop-opacity:1" />
-                      <stop offset="100%" style="stop-color:#c51162;stop-opacity:1" />
-                    </radialGradient>
-                    <radialGradient id="piggyHighlight" cx="50%" cy="50%" r="50%">
-                      <stop offset="0%" style="stop-color:#fff;stop-opacity:0.8" />
-                      <stop offset="100%" style="stop-color:#fff;stop-opacity:0" />
-                    </radialGradient>
-                  </defs>
-                  
-                  <!-- Shadow -->
-                  <ellipse cx="65" cy="92" rx="40" ry="8" fill="#000" opacity="0.12" />
-                  
-                  <!-- Piggy Body (Glossy pink) -->
-                  <path d="M20 55 C20 30 42 15 68 15 C95 15 115 30 115 55 C115 75 95 85 68 85 C42 85 20 75 20 55 Z" fill="url(#piggyBody)" />
-                  
-                  <!-- Snout -->
-                  <ellipse cx="15" cy="55" rx="8" ry="12" fill="#f50057" stroke="#c51162" stroke-width="0.5" />
-                  <circle cx="12" cy="51" r="2.5" fill="#880e4f" opacity="0.4" />
-                  <circle cx="12" cy="59" r="2.5" fill="#880e4f" opacity="0.4" />
-                  
-                  <!-- Ears -->
-                  <path d="M72 18 L78 2 L92 20 Z" fill="#f50057" stroke="#c51162" stroke-width="0.5" />
-                  <path d="M85 30 L95 15 L108 35 Z" fill="#f50057" stroke="#c51162" stroke-width="0.5" />
-                  
-                  <!-- Legs -->
-                  <rect x="45" y="78" width="15" height="15" rx="6" fill="#c51162" />
-                  <rect x="85" y="78" width="15" height="15" rx="6" fill="#c51162" />
-                  
-                  <!-- Tail (Curly) -->
-                  <path d="M115 50 Q130 40 120 30 T110 20" fill="none" stroke="#f50057" stroke-width="2.5" stroke-linecap="round" />
-                  
-                  <!-- Glossy Highlights -->
-                  <ellipse cx="65" cy="38" rx="20" ry="12" fill="url(#piggyHighlight)" opacity="0.5" transform="rotate(-15, 65, 38)" />
-                  <circle cx="95" cy="55" r="10" fill="url(#piggyHighlight)" opacity="0.3" />
-                  <circle cx="45" cy="40" r="3.5" fill="#fff" opacity="0.8" /> <!-- Eye light -->
-                  
-                  <!-- Coin Slot -->
-                  <rect x="58" y="25" width="22" height="4" rx="2" fill="#fff" opacity="0.6" />
-                </svg>
-              </div>
-            </div>
-          </div>
         </div>
+
+
+
+        <div class="md-card md-card-ingresos">
+
+          <h3 class="md-card-title">Ultimos Ingresos</h3>
+
+          <div class="ingresos-table-wrap">
+
+            <table class="ingresos-table" v-if="recentIncomes.length">
+
+              <thead>
+
+                <tr>
+
+                  <th></th>
+
+                  <th>Paquete / Producto</th>
+
+                  <th>Monto</th>
+
+                  <th>Fecha y hora</th>
+
+                  <th></th>
+
+                </tr>
+
+              </thead>
+
+              <tbody>
+
+                <tr v-for="(row, idx) in recentIncomes" :key="'inc-' + idx">
+
+                  <td class="col-user">
+
+                    <div class="user-cell">
+
+                      <div class="user-avatar"><i class="fas fa-user"></i></div>
+
+                      <div>
+
+                        <span class="user-name">{{ row.name }}</span>
+
+                        <span class="user-sub">{{ row.subtitle }}</span>
+
+                      </div>
+
+                    </div>
+
+                  </td>
+
+                  <td>{{ row.product }}</td>
+
+                  <td class="col-monto">USD {{ formatMoney(row.amount) }}</td>
+
+                  <td class="col-fecha">{{ formatIncomeDate(row.date) }}</td>
+
+                  <td class="col-menu"><i class="fas fa-ellipsis-v"></i></td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+            <p v-else class="ingresos-empty">Aún no hay ingresos recientes para mostrar.</p>
+
+          </div>
+
+        </div>
+
       </div>
     </div>
   </App>
@@ -520,17 +378,19 @@ import App from "@/views/layouts/App";
 import api from "@/api";
 import Spinner from "@/components/Spinner.vue";
 import SkeletonLoader from "@/components/SkeletonLoader.vue";
+import NivelDiamondSvg from "@/components/dashboard/NivelDiamondSvg.vue";
 
 export default {
   components: {
     App,
     Spinner,
     SkeletonLoader,
+    NivelDiamondSvg,
   },
   data() {
     return {
-      banner: { img: null },
       ins: null,
+      insVirtual: null,
       outs: null,
       balance: null,
       _balance: null,
@@ -553,8 +413,14 @@ export default {
       op2: 0,
       op3: 0,
       node: {},
-      currentBanner: 0,
-      bannerInterval: null,
+      recentIncomes: [],
+      bonusUnilevel: 0,
+      bonusGeneracional: 0,
+      bonusRango: 0,
+      travelInternationalPct: 0,
+      travelNationalPct: 0,
+      gaugeCircumference: 2 * Math.PI * 48,
+      viajeCircumference: 2 * Math.PI * 32,
       };
   },
   computed: {
@@ -580,25 +446,63 @@ export default {
     },
     userPlan() {
       if (!this.plans) return null;
-      // Buscar por nombre o id según corresponda
+      // Buscar por nombre o id seg?n corresponda
       return this.plans.find(p => p.name === this.plan || p.id === this.plan);
     },
     title() {
       return "Dashboard";
     },
-    bannerImages() {
-      return [this.banner.img, this.banner.img2, this.banner.img3].filter(
-        (img) => typeof img === "string" && img.trim() !== ""
-      );
-    },
     activationLevelLabel() {
       if (this.activated) {
         if ((this.points || 0) >= 120) {
-          return "Activación Ejecutiva/Empresarial";
+          return "Activaci?n Ejecutiva/Empresarial";
         }
-        return "Activación Básica";
+        return "Activaci?n B?sica";
       }
       return this.formattedPlan;
+    },
+    gaugeOffset() {
+      const pct = Math.min(100, Math.max(0, Number(this.nextRankPercentage) || 0));
+      return this.gaugeCircumference - (this.gaugeCircumference * pct) / 100;
+    },
+    remainingRankPct() {
+      return Math.max(0, 100 - (Number(this.nextRankPercentage) || 0));
+    },
+    levelStats() {
+      const fmt = (n) => Number(n || 0).toLocaleString("es-PE");
+      return [
+        { label: "Volumen Personal", value: fmt(this.points), icon: "fas fa-user" },
+        { label: "Patrocinados Personales", value: fmt((this.directs || []).length), icon: "fas fa-handshake" },
+        { label: "Volumen Rango", value: fmt((this.frontals || []).length), icon: "fas fa-crown" },
+        { label: "Volumen Grupales", value: fmt(this.total_points), icon: "fas fa-users" },
+      ];
+    },
+    nextRankReq() {
+      const key = (this.nextRankName || "").toLowerCase();
+      const map = {
+        star: { points: 300, childs: 2 },
+        master: { points: 900, childs: 2 },
+        silver: { points: 1800, childs: 3 },
+        gold: { points: 3300, childs: 3 },
+        sapphire: { points: 9000, childs: 4 },
+        rubi: { points: 21000, childs: 4 },
+        diamante: { points: 60000, childs: 5 },
+        active: { points: 1, childs: 0 },
+      };
+      if (key.includes("doble")) return { points: 115000, childs: 5 };
+      if (key.includes("triple")) return { points: 225000, childs: 6 };
+      if (key.includes("estrella")) return { points: 520000, childs: 6 };
+      return map[key] || { points: 100, childs: 1 };
+    },
+    rankProgressStats() {
+      const req = this.nextRankReq;
+      const pct = (val, max) => (max ? Math.min(100, Math.round((Number(val) / max) * 100)) : 0);
+      return [
+        { label: "Volumen Personal", value: this.points || 0, progress: pct(this.points, req.points), icon: "fas fa-chart-line" },
+        { label: "Volumen Rango", value: (this.frontals || []).length, progress: pct((this.frontals || []).length, req.childs || 1), icon: "fas fa-layer-group" },
+        { label: "Patrocinados Personales", value: (this.directs || []).length, progress: pct((this.directs || []).length, req.childs), icon: "fas fa-user-friends" },
+        { label: "Volumen Grupales", value: this.total_points || 0, progress: pct(this.total_points, req.points), icon: "fas fa-users" },
+      ];
     },
   },
   filters: {
@@ -626,44 +530,69 @@ export default {
     },
   },
   methods: {
-    nextBanner() {
-      this.currentBanner = (this.currentBanner + 1) % this.bannerImages.length;
+    viajeOffset(pct) {
+      const p = Math.min(100, Math.max(0, Number(pct) || 0));
+      return this.viajeCircumference - (this.viajeCircumference * p) / 100;
     },
-    prevBanner() {
-      this.currentBanner =
-        (this.currentBanner - 1 + this.bannerImages.length) %
-        this.bannerImages.length;
+    formatMoney(n) {
+      return Number(n || 0).toLocaleString("es-PE", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     },
-    goToBanner(idx) {
-      this.currentBanner = idx;
+    formatIncomeDate(dateStr) {
+      if (!dateStr) return "?";
+      const d = new Date(dateStr);
+      if (Number.isNaN(d.getTime())) return String(dateStr);
+      const now = new Date();
+      const isToday = d.toDateString() === now.toDateString();
+      const time = d.toLocaleTimeString("es-PE", { hour: "2-digit", minute: "2-digit" });
+      if (isToday) return `Hoy, ${time}`;
+      return d.toLocaleDateString("es-PE", { day: "2-digit", month: "short", year: "numeric" }) + `, ${time}`;
     },
-    setupBannerAutoplay() {
-      // Reiniciar cualquier intervalo previo
-      if (this.bannerInterval) {
-        clearInterval(this.bannerInterval);
-        this.bannerInterval = null;
-      }
-      // Iniciar autoplay solo si hay más de una imagen
-      if (this.bannerImages.length > 1) {
-        this.bannerInterval = setInterval(() => {
-          // Proteger contra longitud 0
-          if (this.bannerImages.length > 0) {
-            this.nextBanner();
-          }
-        }, 5000);
+    sumBonus(transactions, pattern) {
+      return (transactions || [])
+        .filter((t) => t.type === "in" && pattern.test(String(t.name || "")))
+        .reduce((s, t) => s + Number(t.value || 0), 0);
+    },
+    async loadTransactionsExtra() {
+      try {
+        const { data } = await api.transactions(this.session);
+        if (data.error || !data.transactions) return;
+        const txs = data.transactions;
+        this.bonusUnilevel = Math.round(this.sumBonus(txs, /unilevel/i));
+        this.bonusGeneracional = Math.round(this.sumBonus(txs, /generacional/i));
+        this.bonusRango = Math.round(this.sumBonus(txs, /rango|residual|rank/i));
+        const incomes = txs
+          .filter((t) => t.type === "in")
+          .sort((a, b) => new Date(b.date) - new Date(a.date))
+          .slice(0, 6);
+        this.recentIncomes = incomes.map((t) => ({
+          name: t.user_name || `${this.$store.state.name || "Usuario"}`.trim(),
+          subtitle: this.formattedPlan,
+          product: t.name || "Ingreso",
+          amount: Number(t.value) || 0,
+          date: t.date,
+        }));
+        const virtualIn = txs.filter((t) => t.type === "in" && t.virtual).length;
+        const totalIn = txs.filter((t) => t.type === "in").length || 1;
+        this.travelInternationalPct = Math.min(100, Math.round((virtualIn / totalIn) * 100)) || 15;
+        this.travelNationalPct = Math.min(100, Number(this.nextRankPercentage) || 0) || 46;
+      } catch (e) {
+        console.warn("No se pudieron cargar movimientos:", e);
       }
     },
   },
   async created() {
-    // GET data
-    const { data } = await api.dashboard(this.session);
-    this.loading = false;
+    try {
+      const { data } = await api.dashboard(this.session);
 
-    // error
-    if (data.error && data.msg == "invalid session") {
-      this.$router.push("/login");
-      return;
-    }
+      // error
+      if (data.error && data.msg == "invalid session") {
+        this.$router.push("/login");
+        return;
+      }
+      if (data.error) {
+        console.error("Dashboard:", data.msg || data.error);
+        return;
+      }
 
     // success - actualizar store
     this.$store.commit("SET_NAME", data.name);
@@ -679,14 +608,13 @@ export default {
     this.$store.commit("SET_TOKEN", data.token);
     this.$store.commit("SET_TOTAL_POINTS", data.total_points);
 
-    // Verificar afiliación
+    // Verificar afiliaci?n
     if (!data.affiliated) {
       this.$router.push("/affiliation");
       return;
     }
 
     // Cargar datos del dashboard
-    this.banner = data.banner;
     this.ins = data.ins;
     this.insVirtual = data.insVirtual;
     this.outs = data.outs ? data.outs.toFixed(2) : "0.00";
@@ -709,13 +637,14 @@ export default {
     this.nextRankName = data.nextRankName || "";
     this.nextRankPercentage = data.nextRankPercentage || 0;
     this.provisionalRank = data.provisionalRank || "none";
-    this.travelBonusText = data.travelBonusText || 'Tu progreso hacia el Bono Viaje se actualizará próximamente. ¡Sigue trabajando para alcanzar tus objetivos!';
+    this.travelBonusText = data.travelBonusText || 'Tu progreso hacia el Bono Viaje se actualizar? pr?ximamente. ?Sigue trabajando para alcanzar tus objetivos!';
 
-    // Iniciar autoplay del banner si corresponde
-    this.setupBannerAutoplay();
-  },
-  beforeDestroy() {
-    if (this.bannerInterval) clearInterval(this.bannerInterval);
+    this.loadTransactionsExtra();
+    } catch (err) {
+      console.error("Error cargando dashboard:", err);
+    } finally {
+      this.loading = false;
+    }
   },
 };
 </script>
