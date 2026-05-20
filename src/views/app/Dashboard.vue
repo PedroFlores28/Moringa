@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <App :session="session" :title="title">
     <div v-cloak class="dashboard-page-root">
       <div v-if="loading" class="loading-container">
@@ -68,13 +68,15 @@
 
               <div class="rango-gauge-block">
 
-                <div class="gauge-ring">
+                <div class="gauge-ring" :class="{ 'gauge-ring--complete': gaugeIsComplete }">
 
                   <svg viewBox="0 0 120 120" class="gauge-svg">
 
-                    <circle cx="60" cy="60" r="48" fill="none" stroke="#e5efe8" stroke-width="10" />
+                    <circle cx="60" cy="60" r="48" fill="none" class="gauge-track" :stroke="gaugeTrackStroke" stroke-width="10" />
 
                     <circle
+
+                      class="gauge-progress"
 
                       cx="60" cy="60" r="48" fill="none"
 
@@ -90,11 +92,13 @@
 
                     <defs>
 
-                      <linearGradient id="gaugeGradMain" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <linearGradient id="gaugeGradMain" gradientUnits="userSpaceOnUse" x1="12" y1="12" x2="108" y2="108">
 
-                        <stop offset="0%" stop-color="#1b5e3a" />
+                        <stop offset="0%" :stop-color="gaugeGradStart" />
 
-                        <stop offset="100%" stop-color="#7cb342" />
+                        <stop offset="50%" :stop-color="gaugeGradMid" />
+
+                        <stop offset="100%" :stop-color="gaugeGradEnd" />
 
                       </linearGradient>
 
@@ -106,7 +110,7 @@
 
                     <i class="fas fa-crown gauge-crown"></i>
 
-                    <span class="gauge-pct">{{ nextRankPercentage }}%</span>
+                    <span class="gauge-pct" :style="{ color: gaugePctColor }">{{ nextRankPercentage }}%</span>
 
                     <span class="gauge-caption">Avance actual</span>
 
@@ -380,6 +384,29 @@ import Spinner from "@/components/Spinner.vue";
 import SkeletonLoader from "@/components/SkeletonLoader.vue";
 import NivelDiamondSvg from "@/components/dashboard/NivelDiamondSvg.vue";
 
+const THEME_FOREST_DARK = "#0f2a1c";
+const THEME_FOREST = "#1b5e3a";
+const THEME_FOREST_MID = "#2d6a4f";
+const THEME_GOLD = "#d4af37";
+const THEME_GOLD_SOFT = "#c9a962";
+const THEME_GOLD_LIGHT = "#e8c96a";
+
+function lerpColor(hexA, hexB, t) {
+  const u = Math.min(1, Math.max(0, Number(t) || 0));
+  const parse = (h) => {
+    const s = h.replace("#", "");
+    const n = parseInt(s.length === 3 ? s.split("").map((c) => c + c).join("") : s, 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  };
+  const a = parse(hexA);
+  const b = parse(hexB);
+  const clamp = (x) => Math.min(255, Math.max(0, Math.round(x)));
+  const r = clamp(a[0] + (b[0] - a[0]) * u);
+  const g = clamp(a[1] + (b[1] - a[1]) * u);
+  const bl = clamp(a[2] + (b[2] - a[2]) * u);
+  return `#${((1 << 24) + (r << 16) + (g << 8) + bl).toString(16).slice(1)}`;
+}
+
 export default {
   components: {
     App,
@@ -461,9 +488,36 @@ export default {
       }
       return this.formattedPlan;
     },
+    gaugePct() {
+      return Math.min(100, Math.max(0, Number(this.nextRankPercentage) || 0));
+    },
+    gaugeIsComplete() {
+      return this.gaugePct >= 100;
+    },
+    gaugeTrackStroke() {
+      return this.gaugeIsComplete ? "#f0e6c8" : "#e8efe9";
+    },
+    gaugeGradStart() {
+      const t = this.gaugePct / 100;
+      if (this.gaugeIsComplete) return THEME_GOLD_SOFT;
+      return lerpColor(THEME_FOREST_DARK, THEME_FOREST, t * 0.35 + 0.15);
+    },
+    gaugeGradMid() {
+      const t = this.gaugePct / 100;
+      if (this.gaugeIsComplete) return THEME_GOLD;
+      return lerpColor(THEME_FOREST, THEME_GOLD_SOFT, t * t + 0.2);
+    },
+    gaugeGradEnd() {
+      const t = this.gaugePct / 100;
+      if (this.gaugeIsComplete) return THEME_GOLD_LIGHT;
+      return lerpColor(THEME_FOREST_MID, THEME_GOLD_LIGHT, Math.min(1, t * 1.15 + 0.08));
+    },
+    gaugePctColor() {
+      if (this.gaugeIsComplete) return THEME_GOLD;
+      return lerpColor(THEME_FOREST_DARK, THEME_GOLD, (this.gaugePct / 100) * 0.85);
+    },
     gaugeOffset() {
-      const pct = Math.min(100, Math.max(0, Number(this.nextRankPercentage) || 0));
-      return this.gaugeCircumference - (this.gaugeCircumference * pct) / 100;
+      return this.gaugeCircumference - (this.gaugeCircumference * this.gaugePct) / 100;
     },
     remainingRankPct() {
       return Math.max(0, 100 - (Number(this.nextRankPercentage) || 0));

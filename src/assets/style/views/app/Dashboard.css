@@ -251,10 +251,24 @@
   pointer-events: none;
 }
 
+.gauge-progress {
+  transition: stroke-dashoffset 0.6s ease, filter 0.4s ease;
+}
+
+.gauge-ring--complete .gauge-progress {
+  filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.4));
+}
+
 .gauge-crown {
   font-size: 22px;
   color: #d4af37;
   margin-bottom: 4px;
+  transition: color 0.4s ease, filter 0.4s ease;
+}
+
+.gauge-ring--complete .gauge-crown {
+  color: #e8c96a;
+  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.5));
 }
 
 .gauge-pct {
@@ -262,6 +276,7 @@
   font-weight: 800;
   color: #0f2a1c;
   line-height: 1;
+  transition: color 0.4s ease;
 }
 
 .gauge-caption {
