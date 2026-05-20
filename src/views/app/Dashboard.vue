@@ -238,15 +238,17 @@
 
               <div class="viaje-gauge-item">
 
-                <div class="viaje-ring">
+                <div class="viaje-ring" :class="{ 'viaje-ring--complete': viajeIntlIsComplete }">
 
                   <svg viewBox="0 0 80 80">
 
-                    <circle cx="40" cy="40" r="32" fill="none" stroke="#e5efe8" stroke-width="6" />
+                    <circle cx="40" cy="40" r="32" fill="none" class="viaje-track" :stroke="viajeIntlTrackStroke" stroke-width="6" />
 
                     <circle
 
-                      cx="40" cy="40" r="32" fill="none" stroke="#2e7d32" stroke-width="6" stroke-linecap="round"
+                      class="viaje-progress viaje-progress--intl"
+
+                      cx="40" cy="40" r="32" fill="none" stroke="url(#viajeGradIntl)" stroke-width="6" stroke-linecap="round"
 
                       :stroke-dasharray="viajeCircumference"
 
@@ -256,9 +258,21 @@
 
                     />
 
+                    <defs>
+
+                      <linearGradient id="viajeGradIntl" gradientUnits="userSpaceOnUse" x1="8" y1="8" x2="72" y2="72">
+
+                        <stop offset="0%" :stop-color="viajeIntlGradStart" />
+
+                        <stop offset="100%" :stop-color="viajeIntlGradEnd" />
+
+                      </linearGradient>
+
+                    </defs>
+
                   </svg>
 
-                  <span class="viaje-pct">{{ travelInternationalPct }}%</span>
+                  <span class="viaje-pct" :style="{ color: viajeIntlPctColor }">{{ travelInternationalPct }}%</span>
 
                 </div>
 
@@ -268,15 +282,17 @@
 
               <div class="viaje-gauge-item">
 
-                <div class="viaje-ring">
+                <div class="viaje-ring" :class="{ 'viaje-ring--complete': viajeNatlIsComplete }">
 
                   <svg viewBox="0 0 80 80">
 
-                    <circle cx="40" cy="40" r="32" fill="none" stroke="#e5efe8" stroke-width="6" />
+                    <circle cx="40" cy="40" r="32" fill="none" class="viaje-track" :stroke="viajeNatlTrackStroke" stroke-width="6" />
 
                     <circle
 
-                      cx="40" cy="40" r="32" fill="none" stroke="#d4af37" stroke-width="6" stroke-linecap="round"
+                      class="viaje-progress viaje-progress--natl"
+
+                      cx="40" cy="40" r="32" fill="none" stroke="url(#viajeGradNatl)" stroke-width="6" stroke-linecap="round"
 
                       :stroke-dasharray="viajeCircumference"
 
@@ -286,9 +302,21 @@
 
                     />
 
+                    <defs>
+
+                      <linearGradient id="viajeGradNatl" gradientUnits="userSpaceOnUse" x1="8" y1="8" x2="72" y2="72">
+
+                        <stop offset="0%" :stop-color="viajeNatlGradStart" />
+
+                        <stop offset="100%" :stop-color="viajeNatlGradEnd" />
+
+                      </linearGradient>
+
+                    </defs>
+
                   </svg>
 
-                  <span class="viaje-pct">{{ travelNationalPct }}%</span>
+                  <span class="viaje-pct" :style="{ color: viajeNatlPctColor }">{{ travelNationalPct }}%</span>
 
                 </div>
 
@@ -390,6 +418,9 @@ const THEME_FOREST_MID = "#2d6a4f";
 const THEME_GOLD = "#d4af37";
 const THEME_GOLD_SOFT = "#c9a962";
 const THEME_GOLD_LIGHT = "#e8c96a";
+const THEME_GREEN_VIAJE = "#2e7d32";
+const THEME_GOLD_DEEP = "#b8942e";
+const THEME_GOLD_INTENSE = "#9a7b1a";
 
 function lerpColor(hexA, hexB, t) {
   const u = Math.min(1, Math.max(0, Number(t) || 0));
@@ -557,6 +588,48 @@ export default {
         { label: "Patrocinados Personales", value: (this.directs || []).length, progress: pct((this.directs || []).length, req.childs), icon: "fas fa-user-friends" },
         { label: "Volumen Grupales", value: this.total_points || 0, progress: pct(this.total_points, req.points), icon: "fas fa-users" },
       ];
+    },
+    viajeIntlPct() {
+      return Math.min(100, Math.max(0, Number(this.travelInternationalPct) || 0));
+    },
+    viajeNatlPct() {
+      return Math.min(100, Math.max(0, Number(this.travelNationalPct) || 0));
+    },
+    viajeIntlIsComplete() {
+      return this.viajeIntlPct >= 100;
+    },
+    viajeNatlIsComplete() {
+      return this.viajeNatlPct >= 100;
+    },
+    viajeIntlTrackStroke() {
+      return this.viajeIntlIsComplete ? "#d4e8d6" : "#e8efe9";
+    },
+    viajeNatlTrackStroke() {
+      return this.viajeNatlIsComplete ? "#f0e6c8" : "#e8efe9";
+    },
+    viajeIntlGradStart() {
+      return THEME_GREEN_VIAJE;
+    },
+    viajeIntlGradEnd() {
+      const t = this.viajeIntlPct / 100;
+      if (this.viajeIntlIsComplete) return THEME_FOREST_DARK;
+      return lerpColor(THEME_GREEN_VIAJE, THEME_FOREST_DARK, Math.min(1, t * 1.05 + 0.2));
+    },
+    viajeIntlPctColor() {
+      const t = this.viajeIntlPct / 100;
+      return lerpColor(THEME_FOREST, THEME_FOREST_DARK, t * 0.75);
+    },
+    viajeNatlGradStart() {
+      return THEME_GOLD;
+    },
+    viajeNatlGradEnd() {
+      const t = this.viajeNatlPct / 100;
+      if (this.viajeNatlIsComplete) return THEME_GOLD_INTENSE;
+      return lerpColor(THEME_GOLD, THEME_GOLD_INTENSE, Math.min(1, t * 1.05 + 0.2));
+    },
+    viajeNatlPctColor() {
+      const t = this.viajeNatlPct / 100;
+      return lerpColor(THEME_GOLD, THEME_GOLD_DEEP, t * 0.8);
     },
   },
   filters: {
