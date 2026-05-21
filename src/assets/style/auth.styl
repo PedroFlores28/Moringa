@@ -265,6 +265,11 @@ auth-gold-light = #e8d9a8
   @media (max-width: 768px)
     &.login-page
       background #ffffff !important
+      position relative !important
+      overflow visible !important
+      height auto !important
+      min-height 100vh !important
+      max-height none !important
 
       &::before
         position fixed !important
@@ -430,6 +435,8 @@ auth-gold-light = #e8d9a8
         border-radius 12px !important
         background linear-gradient(90deg, #b8893a 0%, auth-gold 45%, auth-gold-light 100%) !important
         box-shadow 0 4px 14px rgba(201, 162, 77, 0.35)
+        touch-action manipulation
+        -webkit-tap-highlight-color transparent
 
       .login-forgot
         margin-top 16px

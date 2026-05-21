@@ -67,10 +67,10 @@
 
       <p class="alert">{{ alert | alert }}</p>
 
-      <button class="login-button" v-show="!sending" @click="submit">
+      <button type="button" class="login-button" v-show="!sending" @click="submit">
         Iniciar Sesión
       </button>
-      <button class="login-button" v-show="sending" disabled>
+      <button type="button" class="login-button" v-show="sending" disabled>
         Validando datos ...
       </button>
 
@@ -203,6 +203,37 @@ export default {
         alert("Error al iniciar sesión con Google");
       }
     },
+    applyLoginProfile(data) {
+      if (data.name) this.$store.commit("SET_NAME", data.name);
+      if (data.lastName) this.$store.commit("SET_LAST_NAME", data.lastName);
+      if (data.email) this.$store.commit("SET_EMAIL", data.email);
+      if (data.photo) this.$store.commit("SET_PHOTO", data.photo);
+      if (data.plan) this.$store.commit("SET_PLAN", data.plan);
+      if (data.total_points !== undefined)
+        this.$store.commit("SET_TOTAL_POINTS", data.total_points);
+      if (data.affiliated !== undefined && data.affiliated !== null)
+        this.$store.commit("SET_AFFILIATED", data.affiliated);
+      if (data.tree !== undefined) this.$store.commit("SET_TREE", data.tree);
+      if (data.activated !== undefined)
+        this.$store.commit("SET_ACTIVATED", data.activated);
+      if (data._activated !== undefined)
+        this.$store.commit("SET__ACTIVATED", data._activated);
+      if (data.country) this.$store.commit("SET_COUNTRY", data.country);
+      if (data.token) this.$store.commit("SET_TOKEN", data.token);
+      if (data.balance !== undefined)
+        this.$store.commit("SET_BALANCE", data.balance);
+      if (data._balance !== undefined)
+        this.$store.commit("SET__BALANCE", data._balance);
+    },
+    loginErrorMessage(error) {
+      if (error.code === "ECONNABORTED") {
+        return "El servidor tardó demasiado. Verifica tu conexión e intenta de nuevo.";
+      }
+      if (!error.response) {
+        return "No se pudo conectar al servidor. Revisa tu internet.";
+      }
+      return "Error en el servidor. Intente nuevamente.";
+    },
     async submit() {
       const { dni, password, office_id, path } = this;
 
@@ -214,10 +245,10 @@ export default {
       }
 
       this.sending = true;
+      this.alert = null;
 
       try {
         const { data } = await api.login({ dni, password, office_id });
-        this.sending = false;
 
         if (data.error) {
           this.alert = data.msg;
@@ -230,69 +261,22 @@ export default {
           this.$store.commit("SET_OFFICE_ID", { office_id, path });
         }
 
-        if (data.affiliated === undefined || data.affiliated === null) {
+        if (data.affiliated !== undefined && data.affiliated !== null) {
+          this.applyLoginProfile(data);
+        } else {
           try {
             const userData = await api.Afiliation.GET(data.session);
-
             if (userData.data.error) {
               this.alert = "Error al obtener información del usuario";
               return;
             }
-
-            const userInfo = userData.data;
-
-            if (userInfo.name) this.$store.commit("SET_NAME", userInfo.name);
-            if (userInfo.lastName)
-              this.$store.commit("SET_LAST_NAME", userInfo.lastName);
-            if (userInfo.email) this.$store.commit("SET_EMAIL", userInfo.email);
-            if (userInfo.photo) this.$store.commit("SET_PHOTO", userInfo.photo);
-            if (userInfo.plan) this.$store.commit("SET_PLAN", userInfo.plan);
-            if (userInfo.total_points !== undefined)
-              this.$store.commit("SET_TOTAL_POINTS", userInfo.total_points);
-
-            this.$store.commit("SET_AFFILIATED", userInfo.affiliated);
-
-            if (userInfo.tree !== undefined)
-              this.$store.commit("SET_TREE", userInfo.tree);
-            if (userInfo.activated !== undefined)
-              this.$store.commit("SET_ACTIVATED", userInfo.activated);
-            if (userInfo._activated !== undefined)
-              this.$store.commit("SET__ACTIVATED", userInfo._activated);
-            if (userInfo.country)
-              this.$store.commit("SET_COUNTRY", userInfo.country);
-            if (userInfo.balance !== undefined)
-              this.$store.commit("SET_BALANCE", userInfo.balance);
-            if (userInfo._balance !== undefined)
-              this.$store.commit("SET__BALANCE", userInfo._balance);
+            this.applyLoginProfile(userData.data);
           } catch (userError) {
             this.alert = "Error al obtener información del usuario";
             return;
           }
-        } else {
-          if (data.name) this.$store.commit("SET_NAME", data.name);
-          if (data.lastName) this.$store.commit("SET_LAST_NAME", data.lastName);
-          if (data.email) this.$store.commit("SET_EMAIL", data.email);
-          if (data.photo) this.$store.commit("SET_PHOTO", data.photo);
-          if (data.plan) this.$store.commit("SET_PLAN", data.plan);
-          if (data.total_points !== undefined)
-            this.$store.commit("SET_TOTAL_POINTS", data.total_points);
-
-          this.$store.commit("SET_AFFILIATED", data.affiliated);
-
-          if (data.tree !== undefined) this.$store.commit("SET_TREE", data.tree);
-          if (data.activated !== undefined)
-            this.$store.commit("SET_ACTIVATED", data.activated);
-          if (data._activated !== undefined)
-            this.$store.commit("SET__ACTIVATED", data._activated);
-          if (data.country) this.$store.commit("SET_COUNTRY", data.country);
-          if (data.balance !== undefined)
-            this.$store.commit("SET_BALANCE", data.balance);
-          if (data._balance !== undefined)
-            this.$store.commit("SET__BALANCE", data._balance);
         }
 
-        await this.$nextTick();
-        await this.$nextTick();
         await this.$nextTick();
 
         if (
@@ -317,9 +301,10 @@ export default {
           this.$router.push("/affiliation");
         }
       } catch (error) {
-        this.sending = false;
-        this.alert = "Error en el servidor. Intente nuevamente.";
+        this.alert = this.loginErrorMessage(error);
         console.error("Error en login:", error);
+      } finally {
+        this.sending = false;
       }
     },
     reset(name) {

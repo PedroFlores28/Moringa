@@ -1587,5 +1587,6 @@ export default {
 
 
 <style lang="stylus">
+@import '../../assets/style/views/app/Activation.styl'
 @import '../../assets/style/views/app/Affiliation.styl'
 </style>

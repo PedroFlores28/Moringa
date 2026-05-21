@@ -1,3 +1,20 @@
+// Tema Moringa (alineado al menú lateral: verde bosque + dorado)
+$m-forest-dark = #0f2a1c
+$m-forest = #1b5e3a
+$m-forest-mid = #2d6a4f
+$m-green = #2e7d32
+$m-gold = #d4af37
+$m-gold-soft = #c9a962
+$m-gold-light = #e8c96a
+$m-gold-deep = #b8942e
+$m-gold-intense = #9a7b1a
+$m-accent = $m-forest
+$m-accent-hover = $m-forest-dark
+$m-accent-light = rgba(27, 94, 58, 0.08)
+$m-banner-bg = linear-gradient(135deg, $m-forest-mid 0%, $m-forest 55%, $m-forest-dark 100%)
+$m-gold-grad = linear-gradient(135deg, $m-gold-soft 0%, $m-gold 50%, $m-gold-deep 100%)
+$m-forest-grad = linear-gradient(135deg, $m-forest-mid 0%, $m-forest 100%)
+
 /* Estilos para el mensaje verde de afiliación */
 .affiliation-notification
   background linear-gradient(135deg, #4CAF50, #45a049)
@@ -89,7 +106,7 @@
 
 /* Banner de ancho completo */
 .affiliation-banner-full
-  background #ff6b9d
+  background $m-banner-bg
   color white
   padding 40px 30px
   border-radius 12px
@@ -171,7 +188,7 @@
 .affiliation-title-bar
   width 60px
   height 4px
-  background #ff6b9d
+  background $m-accent
   border-radius 2px
 
 .affiliation-header-right
@@ -180,7 +197,7 @@
   gap 15px
 
 .share-affiliation-btn
-  background #ff6b9d
+  background $m-gold-grad
   color white
   border none
   border-radius 8px
@@ -193,12 +210,12 @@
   gap 8px
 
   &:hover
-    background #e55a8a
+    background linear-gradient(135deg, $m-gold 0%, $m-gold-intense 100%)
     transform translateY(-2px)
 
 /* Banner principal */
 .affiliation-banner
-  background #ff6b9d
+  background $m-banner-bg
   color white
   padding 40px 30px
   text-align center
@@ -221,7 +238,7 @@
 .section-title
   font-size 1.3rem
   font-weight 700
-  color #333
+  color $m-forest-dark
   margin-bottom 20px
 
 .packages-grid
@@ -242,13 +259,13 @@
   text-align center
 
   &:hover
-    border-color #ff6b9d
+    border-color $m-accent
     transform translateY(-2px)
-    box-shadow 0 8px 25px rgba(255, 107, 157, 0.15)
+    box-shadow 0 8px 25px rgba(27, 94, 58, 0.18)
 
   &.active
-    border-color #ff6b9d
-    background #fff5f8
+    border-color $m-accent
+    background $m-accent-light
 
 .package-image
   width 120px
@@ -271,7 +288,7 @@
 .package-price
   font-size 1.3rem
   font-weight 700
-  color #ff6b9d
+  color $m-gold-deep
   margin-bottom 8px
 
 .package-description
@@ -284,7 +301,7 @@
   padding 0 30px 30px 30px
 
 .kit-banner
-  background #ff6b9d
+  background $m-banner-bg
   color white
   padding 30px
   border-radius 12px
@@ -344,7 +361,7 @@
   transition border-color 0.2s
 
   &:focus
-    border-color #ff6b9d
+    border-color $m-accent
     outline none
 
 .search-icon
@@ -384,13 +401,13 @@
   transition all 0.2s
 
   &:hover
-    border-color #ff6b9d
-    color #ff6b9d
+    border-color $m-accent
+    color $m-accent
 
   &.active
-    background #ff6b9d
+    background $m-accent
     color white
-    border-color #ff6b9d
+    border-color $m-accent
 
 /* Grid de productos con estilo de catálogo */
 .products-catalog-grid
@@ -441,7 +458,7 @@
 
 .product-catalog-card:hover
   box-shadow 0 8px 25px rgba(0,0,0,0.18), 0 4px 12px rgba(0,0,0,0.12)
-  border 2px solid #ff6b9d
+  border 2px solid $m-accent
   transform translateY(-2px)
   background linear-gradient(145deg, #ffffff 0%, #fafafa 100%)
 
@@ -453,7 +470,7 @@
   height 0
   border-style solid
   border-width 25px 25px 0 0
-  border-color #ff6b9d transparent transparent transparent
+  border-color $m-accent transparent transparent transparent
   z-index 2
   opacity 0.9
 
@@ -461,7 +478,7 @@
   position absolute
   top 12px
   right 12px
-  background #ff6b9d
+  background $m-accent
   color #fff
   border-radius 4px
   padding 6px 12px
@@ -522,7 +539,7 @@
   padding 5px 10px
 
 .qty-control-btn
-  background #ff6b9d
+  background $m-accent
   color white
   border none
   border-radius 6px
@@ -537,7 +554,7 @@
   justify-content center
 
   &:hover
-    background #e55a8a
+    background $m-accent-hover
     transform scale(1.05)
 
   &:disabled
@@ -553,7 +570,7 @@
   text-align center
 
 .add-to-cart-btn
-  background #ff6b9d
+  background $m-accent
   color white
   border none
   border-radius 8px
@@ -566,7 +583,7 @@
   gap 8px
 
   &:hover
-    background #e55a8a
+    background $m-accent-hover
     transform translateY(-2px)
 
   &:disabled
@@ -610,7 +627,7 @@
   border-radius 50%
 
   &:hover
-    color #ff6b9d
+    color $m-accent
     background #f8f9fa
 
 .cart-content
@@ -630,7 +647,7 @@
 .empty-cart-text
   font-size 1.1rem
   font-weight 600
-  color #8e24aa
+  color $m-gold-deep
   margin 0 0 8px 0
 
 .empty-cart-subtext
@@ -696,7 +713,7 @@
 
   span:last-child
     font-weight 600
-    color #d209b6
+    color $m-gold
 
 .summary-total
   display flex
@@ -709,7 +726,7 @@
   border-top 1px solid #ddd
   
   span:last-child
-    color #d209b6
+    color $m-gold
 
 .cart-actions
   padding 20px
@@ -718,7 +735,7 @@
   gap 10px
 
 .view-detail-btn
-  background #8e24aa
+  background $m-forest-grad
   color white
   border none
   border-radius 8px
@@ -729,11 +746,11 @@
   order 2
 
   &:hover
-    background #7b1fa2
+    background linear-gradient(135deg, $m-forest 0%, $m-forest-dark 100%)
     transform translateY(-1px)
 
 .go-to-pay-btn
-  background #ba68c8
+  background $m-gold-grad
   color white
   border none
   border-radius 8px
@@ -744,7 +761,7 @@
   order 1
 
   &:hover:not(:disabled)
-    background #ab47bc
+    background linear-gradient(135deg, $m-gold 0%, $m-gold-intense 100%)
     transform translateY(-1px)
 
   &:disabled
@@ -851,7 +868,7 @@
     width 40px
     height 40px
     border 4px solid #f3f3f3
-    border-top 4px solid #ff6b9d
+    border-top 4px solid $m-accent
     border-radius 50%
     animation spin 1s linear infinite
     margin-bottom 10px
@@ -869,13 +886,13 @@
 .modal-product-price
   font-size 1.5rem
   font-weight 700
-  color #ff6b9d
+  color $m-accent
   margin-bottom 8px
 
 .modal-product-points
   font-size 1.1rem
   font-weight 600
-  color #ff6b9d
+  color $m-accent
   margin-bottom 15px
 
 .product-description
@@ -912,7 +929,7 @@
   box-shadow 0 2px 8px rgba(0,0,0,0.1)
 
   &:hover
-    color #ff6b9d
+    color $m-accent
     background rgba(255, 255, 255, 1)
     transform scale(1.1)
 
@@ -955,7 +972,7 @@
   font-weight 700
 
 .cart-square-btn
-  background #a62994
+  background $m-gold-grad
   color #fff
   border none
   padding 16px 20px
@@ -964,7 +981,7 @@
   font-weight 600
   cursor pointer
   transition all 0.3s ease
-  box-shadow 0 4px 15px rgba(210,9,182,0.341)
+  box-shadow 0 4px 15px rgba(184, 148, 46, 0.35)
   display flex
   flex-direction row
   align-items center
@@ -976,9 +993,9 @@
   font-size 1.2rem
 
 .cart-square-btn:hover
-  background linear-gradient(135deg, #c2185b 0%, #ad1457 100%)
+  background linear-gradient(135deg, $m-gold 0%, $m-gold-intense 100%)
   transform translateY(-2px)
-  box-shadow 0 6px 20px rgba(255, 107, 53, 0.4)
+  box-shadow 0 6px 20px rgba(184, 148, 46, 0.4)
 
 .cart-square-btn:active
   transform translateY(0)
@@ -1014,7 +1031,7 @@
   h2
     font-size 1.4rem
     font-weight 700
-    color #8e24aa
+    color $m-gold-deep
     margin 0 0 8px 0
 
   p
@@ -1042,7 +1059,7 @@
   z-index 10
 
   &:hover
-    color #8e24aa
+    color $m-gold-deep
     background rgba(255, 255, 255, 1)
     transform scale(1.1)
 
@@ -1065,7 +1082,7 @@
     .empty-cart-text
       font-size 1.1rem
       font-weight 600
-      color #8e24aa
+      color $m-gold-deep
       margin 0 0 8px 0
 
     .empty-cart-subtext
@@ -1208,7 +1225,7 @@
     font-weight 700
 
   .cart-square-btn
-    background #a62994
+    background $m-gold-grad
     color #fff
     border none
     padding 16px 20px
@@ -1229,9 +1246,9 @@
     font-size 1.2rem
 
   .cart-square-btn:hover
-    background linear-gradient(135deg, #c2185b 0%, #ad1457 100%)
+    background linear-gradient(135deg, $m-gold 0%, $m-gold-intense 100%)
     transform translateY(-2px)
-    box-shadow 0 6px 20px rgba(255, 107, 53, 0.4)
+    box-shadow 0 6px 20px rgba(184, 148, 46, 0.4)
 
   .cart-square-btn:active
     transform translateY(0)
@@ -2256,3 +2273,58 @@
     transform rotate(0deg)
   100%
     transform rotate(360deg)
+
+/* Overrides: carrito desktop (clases de Activation.styl en Afiliación) */
+.affiliation-main-container
+  .sticky-cart-sidebar
+    border 1px solid rgba(212, 175, 55, 0.15)
+
+  .cart-header h3
+    color $m-forest-dark
+
+  .summary-details,
+  .summary-row span:last-child,
+  .total-row,
+  .total-row span:last-child
+    color $m-gold-deep
+
+  .pay-btn
+    background $m-gold-grad
+    color #fff
+    box-shadow 0 2px 10px rgba(184, 148, 46, 0.25)
+
+    &:hover:not(:disabled)
+      background linear-gradient(135deg, $m-gold 0%, $m-gold-intense 100%)
+      box-shadow 0 4px 16px rgba(184, 148, 46, 0.35)
+
+    &:disabled
+      background rgba(212, 175, 55, 0.15)
+      color $m-gold-deep
+
+  .view-detail-btn
+    background $m-forest-grad
+    color #fff
+    box-shadow 0 2px 10px rgba(27, 94, 58, 0.2)
+
+    &:hover
+      background linear-gradient(135deg, $m-forest 0%, $m-forest-dark 100%)
+      box-shadow 0 4px 12px rgba(27, 94, 58, 0.28)
+
+  .qty-control-btn,
+  .remove-btn
+    background $m-accent
+
+    &:hover
+      background $m-accent-hover
+
+  .cart-detail-header h2,
+  .cart-detail-interface .cart-detail-header h2
+    color $m-forest-dark
+
+  .empty-cart p,
+  .empty-cart-detail .empty-cart-text
+    color $m-gold-deep
+
+  .products-title
+    border-left-color $m-gold
+    color $m-forest-dark

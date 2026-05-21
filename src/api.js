@@ -15,6 +15,7 @@ const getBaseURL = () => {
 };
 
 axios.defaults.baseURL = getBaseURL();
+axios.defaults.timeout = 45000;
 
 class API {
   constructor({

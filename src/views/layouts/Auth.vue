@@ -179,6 +179,15 @@ export default {
 }
 
 @media (max-width: 768px) {
+  .login-page .form,
+  .register-page .form {
+    height: 100vh;
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .form {
     padding: 8px;
     height: 100%;
@@ -190,7 +199,7 @@ export default {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    border-radius: 50px 50px 0 0 !important; /* Bordes más redondos en círculos */
+    border-radius: 50px 50px 0 0 !important;
   }
 }
 
