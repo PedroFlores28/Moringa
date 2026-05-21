@@ -531,37 +531,7 @@ $m-forest-grad = linear-gradient(135deg, $m-forest-mid 0%, $m-forest 100%)
     color #333
     font-weight 700
 
-.product-quantity-controls
-  display flex
-  align-items center
-  gap 10px
-  background #f8f9fa
-  border-radius 8px
-  padding 5px 10px
-
-.qty-control-btn
-  background $m-accent
-  color white
-  border none
-  border-radius 6px
-  width 28px
-  height 28px
-  font-size 1rem
-  font-weight 700
-  cursor pointer
-  transition all 0.2s
-  display flex
-  align-items center
-  justify-content center
-
-  &:hover
-    background $m-accent-hover
-    transform scale(1.05)
-
-  &:disabled
-    background #ccc
-    cursor not-allowed
-    transform none
+/* product-quantity-controls: estilos stepper en Activation.styl */
 
 .qty-display
   font-size 1rem
@@ -1487,10 +1457,12 @@ $m-forest-grad = linear-gradient(135deg, $m-forest-mid 0%, $m-forest 100%)
   .product-catalog-price
     font-size 0.8rem
 
-  .qty-control-btn
-    width 24px
-    height 24px
-    font-size 0.9rem
+  .product-quantity-controls .qty-control-btn
+    width 30px
+    height 30px
+    min-width 30px
+    min-height 30px
+    font-size 1.1rem
 
   .add-to-cart-btn
     padding 6px 12px
@@ -2313,7 +2285,6 @@ $m-forest-grad = linear-gradient(135deg, $m-forest-mid 0%, $m-forest 100%)
       background linear-gradient(135deg, $m-forest 0%, $m-forest-dark 100%)
       box-shadow 0 4px 12px rgba(27, 94, 58, 0.28)
 
-  .qty-control-btn,
   .remove-btn
     background $m-accent
 
