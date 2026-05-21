@@ -437,7 +437,7 @@ export default {
 
 .pdf-canvas { width: 100%; height: auto; display: block; border-radius: 2px; }
 
-.page-loader { position: absolute; color: #e11d48; font-size: 30px; }
+.page-loader { position: absolute; color: #1b5e3a; font-size: 30px; }
 
 /* Improved Barita (Floating Progress Bar) */
 .floating-controls-wrap {
@@ -485,8 +485,9 @@ export default {
 .large-cover { width: 280px; border-radius: 6px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); z-index: 5; transition: width 0.3s; }
 @media (max-width: 767px) { .large-cover { width: 220px; } }
 .cover-glow { position: absolute; width: 400px; height: 400px; background: #e11d48; filter: blur(100px); opacity: 0.1; }
-.start-read-btn { background: #e11d48; color: #fff; border: none; padding: 14px 40px; border-radius: 30px; font-weight: 800; margin-top: 10px; cursor: pointer; transition: 0.3s; z-index: 10; }
-.start-read-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(225, 29, 72, 0.3); }
+.start-read-btn { background: linear-gradient(135deg, #1b5e3a 0%, #2d6a4f 100%); color: #fff; border: none; padding: 14px 40px; border-radius: 30px; font-weight: 800; margin-top: 10px; cursor: pointer; transition: 0.3s; z-index: 10; }
+.start-read-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(27, 94, 58, 0.35); }
+.start-read-btn .fa-spinner { color: #fff; }
 
 /* Back Button Overlay */
 .back-circle-btn {

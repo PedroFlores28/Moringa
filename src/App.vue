@@ -37,6 +37,7 @@ export default {
 
   @import 'assets/style/elements/inputs.styl'
   @import 'assets/style/elements/icons.styl'
+  @import 'assets/style/elements/loading.styl'
   @import 'assets/style/elements/buttons.styl'
   @import 'assets/style/elements/images.styl'
   @import 'assets/style/elements/texts.styl'

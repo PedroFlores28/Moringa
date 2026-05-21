@@ -1,7 +1,11 @@
 <template>
   <div
     class="spinner"
-    :style="{ width: size + 'px', height: size + 'px', borderColor: color }"
+    :style="{
+      width: size + 'px',
+      height: size + 'px',
+      borderTopColor: color
+    }"
   ></div>
 </template>
 
@@ -17,7 +21,7 @@ export default {
 
 <style scoped>
 .spinner {
-  border: 4px solid #f3f3f3;
+  border: 4px solid #e8f0eb;
   border-top: 4px solid #1b5e3a;
   border-radius: 50%;
   width: 40px;
