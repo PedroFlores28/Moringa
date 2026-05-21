@@ -412,10 +412,10 @@ import Spinner from "@/components/Spinner.vue";
 import SkeletonLoader from "@/components/SkeletonLoader.vue";
 import NivelDiamondSvg from "@/components/dashboard/NivelDiamondSvg.vue";
 
-const THEME_FOREST_DARK = "#0f2a1c";
-const THEME_FOREST = "#1b5e3a";
-const THEME_FOREST_MID = "#2d6a4f";
-const THEME_GOLD = "#d4af37";
+const THEME_FOREST_DARK = "#0e2318";
+const THEME_FOREST = "#1b4332";
+const THEME_FOREST_MID = "#1b5e3a";
+const THEME_GOLD = "#c5a059";
 const THEME_GOLD_SOFT = "#c9a962";
 const THEME_GOLD_LIGHT = "#e8c96a";
 const THEME_GREEN_VIAJE = "#2e7d32";

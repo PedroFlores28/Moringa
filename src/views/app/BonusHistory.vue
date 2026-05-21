@@ -29,6 +29,6 @@ export default {
 .empty-view i {
   font-size: 60px;
   margin-bottom: 20px;
-  color: #e91e63;
+  color: #c5a059;
 }
 </style>

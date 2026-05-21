@@ -10,7 +10,7 @@ export default {
   name: "Spinner",
   props: {
     size: { type: Number, default: 40 },
-    color: { type: String, default: "#086eb6" },
+    color: { type: String, default: "#1b5e3a" },
   },
 };
 </script>
@@ -18,7 +18,7 @@ export default {
 <style scoped>
 .spinner {
   border: 4px solid #f3f3f3;
-  border-top: 4px solid #086eb6;
+  border-top: 4px solid #1b5e3a;
   border-radius: 50%;
   width: 40px;
   height: 40px;

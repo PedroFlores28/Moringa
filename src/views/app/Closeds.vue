@@ -2,7 +2,7 @@
   <App :session="session" :title="title">
     <h4>CIERRES</h4>
 
-    <Spinner v-if="loading" :size="40" :color="'#086eb6'" />
+    <Spinner v-if="loading" :size="40" :color="'#1b5e3a'" />
 
     <div class="scroll" v-if="!loading">
       <i class="icon fa-solid fa-briefcase"></i>

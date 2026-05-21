@@ -1,6 +1,6 @@
 <template>
   <App :session="session" :title="title">
-    <Spinner v-if="loading" :size="40" :color="'#086eb6'" />
+    <Spinner v-if="loading" :size="40" :color="'#1b5e3a'" />
     <SkeletonLoader
       v-if="loading"
       :lines="6"

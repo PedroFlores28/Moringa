@@ -1,6 +1,6 @@
 <template>
   <App :session="session" :title="title">
-    <Spinner v-if="loading" :size="40" :color="'#086eb6'" />
+    <Spinner v-if="loading" :size="40" :color="'#1b5e3a'" />
     <h4 class="tabs">
       <router-link class="tab" to="/collect"> Nuevo Retiro </router-link>
       &nbsp;&nbsp;
@@ -332,7 +332,7 @@ export default {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  border: 2px solid #d209b6;
+  border: 2px solid #1b5e3a;
   background: #fff;
   box-shadow: 0 1px 4px rgba(255, 152, 0, 0.08);
   position: relative;
@@ -347,7 +347,7 @@ export default {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #9F00AD;
+  background: #1b4332;
   box-shadow: 0 2px 8px rgba(255, 152, 0, 0.13);
   margin: auto;
   animation: radio-pop 0.25s;
@@ -411,7 +411,7 @@ export default {
 }
 .soft-btn {
   width: 100%;
-  background: #d209b6;
+  background: #1b5e3a;
   color: #fff;
   border: none;
   border-radius: 22px;
@@ -429,10 +429,10 @@ export default {
   gap: 8px;
 }
 .soft-btn:active {
-  background: #9F00AD;
+  background: #1b4332;
 }
 .soft-btn:hover:not(:disabled) {
-  background: #9F00AD;
+  background: #1b4332;
   box-shadow: 0 6px 24px rgba(255, 152, 0, 0.18);
   transform: translateY(-2px) scale(1.03);
 }

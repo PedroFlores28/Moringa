@@ -1,6 +1,6 @@
 <template>
   <App :session="session" :title="title">
-    <Spinner v-if="loading" :size="40" :color="'#086eb6'" />
+    <Spinner v-if="loading" :size="40" :color="'#1b5e3a'" />
 
     <div v-if="!loading" class="whatsapp-generator">
       <div class="generator-card">
@@ -243,7 +243,7 @@ export default {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1)
 
 h2, h3
-  color: #086eb6
+  color: #1b5e3a
   margin-bottom: 20px
 
 .form-group
@@ -265,7 +265,7 @@ h2, h3
 
     &:focus
       outline: none
-      border-color: #086eb6
+      border-color: #1b5e3a
 
 .phone-input
   display: flex
@@ -278,7 +278,7 @@ h2, h3
     border: 2px solid #e0e0e0
     border-radius: 8px
     font-weight: 600
-    color: #086eb6
+    color: #1b5e3a
 
   input
     flex: 1
@@ -321,7 +321,7 @@ h2, h3
 
   .copy-btn
     padding: 12px 20px
-    background: #086eb6
+    background: #1b5e3a
     color: white
     border: none
     border-radius: 8px
@@ -419,7 +419,7 @@ h2, h3
     width: 40px
     height: 40px
     border-radius: 50%
-    background: #086eb6
+    background: #1b5e3a
     display: flex
     align-items: center
     justify-content: center

@@ -2,7 +2,7 @@
   <App :session="session" :title="title">
     <h4>MOVIMIENTOS</h4>
 
-    <Spinner v-if="loading" :size="40" :color="'#086eb6'" />
+    <Spinner v-if="loading" :size="40" :color="'#1b5e3a'" />
     <SkeletonLoader
       v-if="loading"
       :lines="8"
@@ -142,7 +142,7 @@ export default {
   overflow: hidden;
 }
 .collects-table thead tr {
-  background: #d209b6;
+  background: #1b5e3a;
   color: #fff;
   position: sticky;
   top: 0;
@@ -155,13 +155,13 @@ export default {
   padding: 14px 12px;
   text-align: left;
   font-size: 15px;
-  border-bottom: 1.5px solid #d209b666;
+  border-bottom: 1.5px solid #1b5e3a66;
 }
 .collects-table tbody tr:nth-child(even) {
-  background: #d209b666;
+  background: #1b5e3a66;
 }
 .collects-table tbody tr:hover {
-  background: #d209b666;
+  background: #1b5e3a66;
   transition: background 0.2s;
 }
 .in {

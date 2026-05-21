@@ -449,6 +449,7 @@
 
           <div class="page-topbar__actions">
             <button
+              v-if="showTopbarNotify"
               type="button"
               class="page-topbar__notify"
               aria-label="Notificaciones"
@@ -965,6 +966,14 @@ export default {
     },
     education() {
       return this.$store.state.education;
+    },
+    showTopbarNotify() {
+      const p = (this.$route && this.$route.path) ? this.$route.path : "";
+      return (
+        p === "/activation" ||
+        p === "/affiliation" ||
+        p === "/activations"
+      );
     },
     herramientasRouteActive() {
       const p = (this.$route && this.$route.path) ? this.$route.path : "";

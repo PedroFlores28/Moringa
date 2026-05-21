@@ -332,12 +332,15 @@ body, .app
         gap 8px
         align-items center
 
-      @media (max-width: 640px)
-        .page-topbar__user-text
+      @media (max-width: m-break)
+        .page-topbar__avatar
+          display none
+
+        .page-topbar__chevron
           display none
 
         .page-topbar__user
-          padding 4px
+          display none
 
       >section
         padding 8px 16px
@@ -348,10 +351,6 @@ body, .app
         width 100%
         flex 1
         min-width 0
-
-        @media (max-width: 640px)
-          .page-topbar__user
-            display none
 
       >section.app-page--dashboard
         padding 14px 20px 72px
@@ -365,7 +364,7 @@ body, .app
       display none
 
   .share-button
-    background-color: #D209B6;
+    background-color: c-moringa-forest-mid;
     color: #fff;
     border: none;
     border-radius: 5px;

@@ -1556,7 +1556,7 @@ export default {
         // Agregar marcador personalizado
         const customIcon = L.divIcon({
           className: 'custom-marker',
-          html: '<div style="background-color: #d209b6; width: 30px; height: 30px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;"><i class="fas fa-map-marker-alt" style="color: white; font-size: 14px;"></i></div>',
+          html: '<div style="background-color: #1b5e3a; width: 30px; height: 30px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;"><i class="fas fa-map-marker-alt" style="color: white; font-size: 14px;"></i></div>',
           iconSize: [30, 30],
           iconAnchor: [15, 15]
         });
@@ -1565,7 +1565,7 @@ export default {
           .addTo(this.map)
           .bindPopup(`
             <div style="text-align: center; padding: 10px;">
-              <h4 style="margin: 0 0 8px 0; color: #9f00ad; font-weight: 700;">${office.name}</h4>
+              <h4 style="margin: 0 0 8px 0; color: #1b4332; font-weight: 700;">${office.name}</h4>
               <p style="margin: 0; color: #666; font-size: 14px;">${office.address}</p>
               ${office.phone && office.phone !== 'No disponible' ? `<p style="margin: 5px 0 0 0; color: #333; font-size: 13px;"><i class="fas fa-phone"></i> ${office.phone}</p>` : ''}
             </div>
@@ -1635,7 +1635,7 @@ export default {
         // Agregar marcador personalizado más pequeño
         const smallCustomIcon = L.divIcon({
           className: 'custom-marker-small',
-          html: '<div style="background-color: #d209b6; width: 24px; height: 24px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;"><i class="fas fa-map-marker-alt" style="color: white; font-size: 12px;"></i></div>',
+          html: '<div style="background-color: #1b5e3a; width: 24px; height: 24px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;"><i class="fas fa-map-marker-alt" style="color: white; font-size: 12px;"></i></div>',
           iconSize: [24, 24],
           iconAnchor: [12, 12]
         });

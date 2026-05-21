@@ -24,6 +24,6 @@ export default {
   transition: color 0.2s;
 }
 .theme-toggle:focus {
-  outline: 2px solid #086eb6;
+  outline: 2px solid #1b5e3a;
 }
 </style>

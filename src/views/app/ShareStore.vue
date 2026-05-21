@@ -1,7 +1,7 @@
 <template>
   <App :session="session" :title="title">
     <div v-cloak class="share-store-container">
-      <Spinner v-if="loading" :size="40" :color="'#086eb6'" />
+      <Spinner v-if="loading" :size="40" :color="'#1b5e3a'" />
 
       <div v-if="!loading" class="share-store-content">
         <!-- Header -->

@@ -1,13 +1,14 @@
 // Tema Moringa (alineado al menú lateral: verde bosque + dorado)
-$m-forest-dark = #0f2a1c
-$m-forest = #1b5e3a
-$m-forest-mid = #2d6a4f
-$m-green = #2e7d32
-$m-gold = #d4af37
-$m-gold-soft = #c9a962
-$m-gold-light = #e8c96a
-$m-gold-deep = #b8942e
-$m-gold-intense = #9a7b1a
+@import '../../vars.styl'
+$m-forest-dark = c-moringa-dark
+$m-forest = c-moringa-forest-mid
+$m-forest-mid = c-moringa-forest-light
+$m-green = c-moringa-green
+$m-gold = c-moringa-gold
+$m-gold-soft = c-moringa-gold-soft
+$m-gold-light = c-moringa-gold-light
+$m-gold-deep = c-moringa-gold-deep
+$m-gold-intense = c-moringa-gold-intense
 $m-accent = $m-forest
 $m-accent-hover = $m-forest-dark
 $m-accent-light = rgba(27, 94, 58, 0.08)
@@ -972,7 +973,7 @@ $m-forest-grad = linear-gradient(135deg, $m-forest-mid 0%, $m-forest 100%)
   font-weight 700
 
 .cart-square-btn
-  background $m-gold-grad
+  background linear-gradient(135deg, $m-forest-mid 0%, $m-forest 55%, $m-forest-dark 100%)
   color #fff
   border none
   padding 16px 20px
@@ -981,7 +982,7 @@ $m-forest-grad = linear-gradient(135deg, $m-forest-mid 0%, $m-forest 100%)
   font-weight 600
   cursor pointer
   transition all 0.3s ease
-  box-shadow 0 4px 15px rgba(184, 148, 46, 0.35)
+  box-shadow 0 4px 15px rgba(14, 35, 24, 0.25)
   display flex
   flex-direction row
   align-items center
@@ -991,11 +992,12 @@ $m-forest-grad = linear-gradient(135deg, $m-forest-mid 0%, $m-forest 100%)
 
 .cart-square-btn i
   font-size 1.2rem
+  color $m-gold-light
 
 .cart-square-btn:hover
-  background linear-gradient(135deg, $m-gold 0%, $m-gold-intense 100%)
+  background linear-gradient(135deg, $m-forest 0%, $m-forest-dark 100%)
   transform translateY(-2px)
-  box-shadow 0 6px 20px rgba(184, 148, 46, 0.4)
+  box-shadow 0 6px 20px rgba(14, 35, 24, 0.35)
 
 .cart-square-btn:active
   transform translateY(0)
@@ -1225,7 +1227,7 @@ $m-forest-grad = linear-gradient(135deg, $m-forest-mid 0%, $m-forest 100%)
     font-weight 700
 
   .cart-square-btn
-    background $m-gold-grad
+    background linear-gradient(135deg, $m-forest-mid 0%, $m-forest 55%, $m-forest-dark 100%)
     color #fff
     border none
     padding 16px 20px
@@ -1234,7 +1236,7 @@ $m-forest-grad = linear-gradient(135deg, $m-forest-mid 0%, $m-forest 100%)
     font-weight 600
     cursor pointer
     transition all 0.3s ease
-    box-shadow 0 4px 15px rgba(210,9,182,0.341)
+    box-shadow 0 4px 15px rgba(14, 35, 24, 0.25)
     display flex
     flex-direction row
     align-items center
@@ -1244,11 +1246,12 @@ $m-forest-grad = linear-gradient(135deg, $m-forest-mid 0%, $m-forest 100%)
 
   .cart-square-btn i
     font-size 1.2rem
+    color $m-gold-light
 
   .cart-square-btn:hover
-    background linear-gradient(135deg, $m-gold 0%, $m-gold-intense 100%)
+    background linear-gradient(135deg, $m-forest-mid 0%, $m-forest-dark 100%)
     transform translateY(-2px)
-    box-shadow 0 6px 20px rgba(184, 148, 46, 0.4)
+    box-shadow 0 6px 20px rgba(14, 35, 24, 0.35)
 
   .cart-square-btn:active
     transform translateY(0)

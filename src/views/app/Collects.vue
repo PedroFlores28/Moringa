@@ -7,7 +7,7 @@
         Historial de Retiros
       </router-link>
     </h4>
-    <Spinner v-if="loading" :size="40" :color="'#086eb6'" />
+    <Spinner v-if="loading" :size="40" :color="'#1b5e3a'" />
     <SkeletonLoader
       v-if="loading"
       :lines="8"
@@ -138,7 +138,7 @@ export default {
   font-size: 1.18rem;
   font-weight: 600;
   color: #fff;
-  background: #d209b666;
+  background: #1b5e3a66;
   border-radius: 18px;
   padding: 10px 28px;
   margin: 0 6px;
@@ -149,7 +149,7 @@ export default {
 }
 .tab:hover,
 .tab.router-link-exact-active {
-  background: #9f00ad;
+  background: #1b4332;
   color: #fff;
   box-shadow: 0 4px 16px rgba(255, 152, 0, 0.13);
   transform: translateY(-2px) scale(1.04);
@@ -169,7 +169,7 @@ export default {
   overflow: hidden;
 }
 .collects-table thead tr {
-  background: #d209b6;
+  background: #1b5e3a;
   color: #fff;
   position: sticky;
   top: 0;
@@ -182,13 +182,13 @@ export default {
   padding: 14px 12px;
   text-align: left;
   font-size: 15px;
-  border-bottom: 1.5px solid #d209b666;
+  border-bottom: 1.5px solid #1b5e3a66;
 }
 .collects-table tbody tr:nth-child(even) {
-  background: #d209b666;
+  background: #1b5e3a66;
 }
 .collects-table tbody tr:hover {
-  background: #d209b666;
+  background: #1b5e3a66;
   transition: background 0.2s;
 }
 .collects-bank,

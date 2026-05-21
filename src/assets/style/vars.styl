@@ -12,45 +12,49 @@ c-blue  = #0093cb
 c-semi-dark-blue  = #001c50
 c-dark-blue  = #00112b
 
-c-main-blue   = #086eb6
-c-main-green  = #5db02c
+// Paleta Moringa (menú + app)
+c-moringa-dark = #0e2318
+c-moringa-dark-deep = #0a1a12
+c-moringa-forest = #1b4332
+c-moringa-forest-mid = #1b5e3a
+c-moringa-forest-light = #2d6a4f
+c-moringa-green = #2e7d32
+c-moringa-gold = #c5a059
+c-moringa-gold-soft = #c9a962
+c-moringa-gold-light = #e8c96a
+c-moringa-gold-deep = #b8942e
+c-moringa-gold-intense = #9a7b1a
+c-moringa-accent-light = #e8f0eb
+c-moringa-cream = #f0ede0
+c-moringa-bg-page = #f5f7f4
 
-c-main-light-green  = #4BB167
-
+c-main-blue   = c-moringa-forest-mid
+c-main-green  = c-moringa-forest-mid
+c-main-light-green = c-moringa-forest-light
 c-main-red    = #991920
-c-main-golden = #d9ad26
-
+c-main-golden = c-moringa-gold
 c-main-turk = #4fbbc3
-
-// c-main-purple = #351251
-// c-main-light-purple = #ab49cc
-// c-main-light-green = #5db02c
-c-main-light-green = #008F39
-c-main-green = #326c10
+c-main-purple = c-moringa-gold
 
 // Sidebar Moringa (verde bosque + dorado)
-c-menu-dark-bg = #0f2a1c
-c-menu-dark-bg-deep = #0a1f14
-c-menu-item-bg = #153d28
+c-menu-dark-bg = c-moringa-dark
+c-menu-dark-bg-deep = c-moringa-dark-deep
+c-menu-item-bg = #153528
 c-menu-active-bg = rgba(255, 255, 255, 0.08)
-c-menu-active-pink = #d4af37
-c-menu-gold = #d4af37
-c-menu-gold-soft = #c9a962
-c-menu-pink-gradient = linear-gradient(135deg, #e8c96a 0%, #b8942e 100%)
+c-menu-active-pink = c-moringa-gold
+c-menu-gold = c-moringa-gold
+c-menu-gold-soft = c-moringa-gold-soft
+c-menu-pink-gradient = linear-gradient(135deg, c-moringa-gold-light 0%, c-moringa-gold-deep 100%)
 c-menu-text-dim = rgba(255, 255, 255, 0.92)
 c-menu-text-muted = rgba(255, 255, 255, 0.65)
-c-menu-border = rgba(212, 175, 55, 0.22)
-
+c-menu-border = rgba(197, 160, 89, 0.22)
 
 c-red    = #ef476f
 c-orange = #f78c6b
 c-yellow = #ffd166
 c-green  = #06d6a0
-
 c-ligh-green = #80c700
-
 c-msn = #00B2FF
-
 
 // layout
 _grid()
@@ -63,16 +67,15 @@ _flex()
   align-items center
 
 // --- Dark/Light mode variables ---
-// Paleta principal
-color-primary = #086eb6
-color-secondary = #5db02c
-color-accent = #f78c6b
+color-primary = c-moringa-forest-mid
+color-secondary = c-moringa-forest-light
+color-accent = c-moringa-gold
 color-error = #ef476f
 color-success = #06d6a0
 color-warning = #ffd166
 
 // Light mode
-light-bg = #f7f8fa
+light-bg = c-moringa-bg-page
 light-bg-card = #fff
 light-text = #222
 light-border = #e0e0e0
@@ -82,15 +85,11 @@ dark-bg = #181a1b
 dark-bg-card = #23272f
 dark-text = #f1f1f1
 dark-border = #333
-
-dark-primary = #4fbbc3
+dark-primary = c-moringa-gold-soft
 
 global-font = 'Inter', 'Roboto', 'Montserrat', Arial, sans-serif
 
-// Variable para modo actual
 app-bg = light-bg
 app-bg-card = light-bg-card
 app-text = light-text
 app-border = light-border
-
-// Se sobreescriben en modo oscuro

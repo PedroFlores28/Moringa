@@ -74,7 +74,7 @@
           :class="{ active: selectedCategory === cat.name }"
           @click="selectCategory(cat.name)"
         >
-          <div class="cat-icon-wrapper" :style="{ backgroundColor: selectedCategory === cat.name ? '#e91e63' : cat.color }">
+          <div class="cat-icon-wrapper" :style="{ backgroundColor: selectedCategory === cat.name ? '#1b5e3a' : cat.color }">
             <img v-if="cat.img" :src="cat.img" :alt="cat.name" />
             <i v-else :class="cat.icon" :style="{ color: selectedCategory === cat.name ? 'white' : '#2d3436' }"></i>
           </div>
@@ -130,7 +130,7 @@ export default {
       visualCategories: [
         { name: "Todos", icon: "fas fa-th", color: "#f1f2f6" },
         { name: "Productos ClassMoringa", icon: "fas fa-leaf", color: "#e3f2fd" },
-        { name: "Bienestar", icon: "fas fa-heart", color: "#f3e5f5" },
+        { name: "Bienestar", icon: "fas fa-heart", color: "#e8f0eb" },
         { name: "Hogar", icon: "fas fa-home", color: "#fff3e0" },
         { name: "Tecnología", icon: "fas fa-laptop", color: "#e0f2f1" },
         { name: "Herramientas", icon: "fas fa-tools", color: "#efebe9" },
@@ -221,7 +221,7 @@ export default {
 
 .savings-bonus-container
   padding 22px 24px
-  background #fafafa
+  background c-moringa-bg-page
   min-height 100vh
   font-family 'Inter', sans-serif
 
@@ -231,11 +231,11 @@ export default {
   .main-title
     font-size 30px
     font-weight 800
-    color #2d3436
+    color c-moringa-dark
     margin 0
     
     .highlight
-      color #e91e63
+      color c-moringa-gold
 
   .subtitle
     color #636e72
@@ -252,8 +252,7 @@ export default {
     grid-template-columns 1fr
 
 .promo-banner
-  /* Izquierda más profunda, derecha más clara + resplandor tras el chancho (como referencia) */
-  background linear-gradient(95deg, #c02677 0%, #db2777 22%, #ec4899 50%, #f9a8d4 88%, #fbcfe8 100%)
+  background linear-gradient(95deg, c-moringa-forest-light 0%, c-moringa-forest-mid 35%, c-moringa-forest 68%, c-moringa-dark 100%)
   border-radius 16px
   padding 22px 20px 20px 32px
   display flex
@@ -262,7 +261,7 @@ export default {
   color white
   overflow hidden
   position relative
-  box-shadow 0 16px 40px rgba(233, 30, 99, 0.14)
+  box-shadow 0 16px 40px rgba(14, 35, 24, 0.18)
   box-sizing border-box
   min-height 230px
   height auto
@@ -331,7 +330,7 @@ export default {
       height auto
       object-fit contain
       object-position right center
-      filter drop-shadow(0 16px 28px rgba(120, 20, 60, 0.28)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.12))
+      filter drop-shadow(0 16px 28px rgba(14, 35, 24, 0.25)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.12))
 
   /* ===== Banner promocional - Móvil ===== */
   @media (max-width m-break)
@@ -366,14 +365,14 @@ export default {
         max-width 100%
 
 .balance-card
-  background #301050 // Dark purple
+  background linear-gradient(135deg, c-moringa-forest 0%, c-moringa-dark 100%)
   border-radius 18px
   padding 20px 22px 18px 22px
   color #fff
   display flex
   flex-direction column
   justify-content space-between
-  box-shadow 0 10px 24px rgba(48, 16, 80, 0.14)
+  box-shadow 0 10px 24px rgba(14, 35, 24, 0.2)
   box-sizing border-box
   min-height 230px
 
@@ -417,8 +416,8 @@ export default {
     line-height 1.4
 
   .history-btn
-    background white
-    color #301050
+    background c-moringa-cream
+    color c-moringa-dark
     border none
     border-radius 10px
     padding 12px 16px
@@ -519,10 +518,10 @@ export default {
     box-shadow 0 6px 14px rgba(0,0,0,0.03)
       
     &.active
-      background #e91e63
+      background c-moringa-forest-mid
       color white
-      border-color #e91e63
-      box-shadow 0 10px 22px rgba(233, 30, 99, 0.22)
+      border-color c-moringa-forest-mid
+      box-shadow 0 10px 22px rgba(14, 35, 24, 0.2)
 
 .category-filters
   display flex
@@ -550,9 +549,9 @@ export default {
       background #f1f2f6
     
     &.active
-      background #e91e63
+      background c-moringa-forest-mid
       color white
-      box-shadow 0 4px 10px rgba(233, 30, 99, 0.3)
+      box-shadow 0 4px 10px rgba(14, 35, 24, 0.2)
 
 .visual-categories
   display grid
@@ -578,12 +577,12 @@ export default {
     &:hover
       transform translateY(-2px)
       box-shadow 0 12px 26px rgba(0,0,0,0.06)
-      border-color rgba(233, 30, 99, 0.18)
+      border-color rgba(27, 94, 58, 0.22)
 
     &.active
-      background #fff0f3
-      border-color rgba(233, 30, 99, 0.18)
-      box-shadow 0 14px 28px rgba(233, 30, 99, 0.10)
+      background c-moringa-accent-light
+      border-color rgba(27, 94, 58, 0.25)
+      box-shadow 0 14px 28px rgba(14, 35, 24, 0.1)
       transform translateY(-2px)
 
     .cat-icon-wrapper
@@ -607,7 +606,7 @@ export default {
         object-fit contain
 
     &.active .cat-icon-wrapper
-      box-shadow 0 8px 18px rgba(233, 30, 99, 0.28)
+      box-shadow 0 8px 18px rgba(14, 35, 24, 0.22)
       transform scale(1.04)
 
     span
@@ -617,7 +616,7 @@ export default {
       text-align center
       transition color 280ms cubic-bezier(0.4, 0, 0.2, 1)
       &.active-text
-        color #e91e63
+        color c-moringa-forest-mid
         font-weight 700
 
 .featured-section
@@ -630,21 +629,25 @@ export default {
     h3
       font-size 20px
       font-weight 800
-      color #2d3436
+      color c-moringa-dark
       margin 0
       padding-left 10px
-      border-left 4px solid #e91e63
+      border-left 4px solid c-moringa-gold
     
     .view-all
-      color #e91e63
+      color c-moringa-forest-mid
       font-size 14px
       font-weight 600
       text-decoration none
       display flex
       align-items center
-      gap-5px
+      gap 5px
+      
+      i
+        color c-moringa-gold
       
       &:hover
+        color c-moringa-forest
         text-decoration underline
 
 .products-grid
@@ -714,7 +717,7 @@ export default {
     .product-price
       font-size 18px
       font-weight 800
-      color #2d3436
+      color c-moringa-gold-deep
       margin-bottom 15px
       display flex
       align-items center
@@ -725,7 +728,7 @@ export default {
         font-size 14px
 
     .redeem-btn
-      background #e91e63
+      background linear-gradient(135deg, c-moringa-forest-mid 0%, c-moringa-forest 100%)
       color white
       border none
       border-radius 10px
@@ -737,8 +740,8 @@ export default {
       margin-bottom 10px
       
       &:hover
-        background #d81b60
-        box-shadow 0 4px 12px rgba(233, 30, 99, 0.3)
+        background linear-gradient(135deg, c-moringa-forest 0%, c-moringa-dark 100%)
+        box-shadow 0 4px 12px rgba(14, 35, 24, 0.25)
 
     .product-footer
       font-size 10px

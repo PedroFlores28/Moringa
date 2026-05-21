@@ -1,6 +1,6 @@
 <template>
   <App :session="session" :office_id="office_id" :title="title">
-    <Spinner v-if="loading" :size="40" :color="'#086eb6'" />
+    <Spinner v-if="loading" :size="40" :color="'#1b5e3a'" />
     <div v-if="!loading" class="directs-container">
       <!-- Header morado con Nuevo Registro -->
       <div class="header-card">

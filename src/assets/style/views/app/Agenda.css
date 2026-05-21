@@ -1,6 +1,9 @@
 /* Variable Definitions */
 :global(:root) {
-  --agenda-primary: #7b145c;
+  --agenda-primary: #1b5e3a;
+  --agenda-primary-dark: #0e2318;
+  --agenda-gold: #c5a059;
+  --agenda-accent-light: #e8f0eb;
   --agenda-secondary: #c21874;
   --agenda-bg: #f8f9fa;
   --agenda-glass: rgba(255, 255, 255, 0.8);

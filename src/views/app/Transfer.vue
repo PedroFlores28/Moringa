@@ -10,7 +10,7 @@
     <div class="transfer-soft-bg">
       <section class="transfer-soft-section">
         <h4 class="transfer-title">MONEDERO CLASSMORINGA</h4>
-        <Spinner v-if="loading" :size="40" :color="'#086eb6'" />
+        <Spinner v-if="loading" :size="40" :color="'#1b5e3a'" />
         <div v-if="!loading">
           <form
             v-if="!confirmation"
@@ -269,7 +269,7 @@ export default {
   font-size: 1.18rem;
   font-weight: 600;
   color: #fff;
-  background: #9F00AD;
+  background: #1b4332;
   border-radius: 18px;
   padding: 10px 28px;
   margin: 0 6px;
@@ -280,7 +280,7 @@ export default {
 }
 .tab:hover,
 .tab.router-link-exact-active {
-  background: #d209b6;
+  background: #1b5e3a;
   color: #fff;
   box-shadow: 0 4px 16px rgba(255, 0, 221, 0.13);
   transform: translateY(-2px) scale(1.04);
@@ -289,7 +289,7 @@ export default {
   text-align: center;
   font-size: 1.3rem;
   font-weight: 700;
-  color: #9F00AD;
+  color: #1b4332;
   margin-bottom: 18px;
   letter-spacing: 1px;
 }
@@ -339,7 +339,7 @@ export default {
 }
 .soft-btn {
   width: 100%;
-  background: #d209b6;
+  background: #1b5e3a;
   color: #fff;
   border: none;
   border-radius: 22px;
@@ -360,7 +360,7 @@ export default {
   background: #fb8c00;
 }
 .soft-btn:hover:not(:disabled) {
-  background: #9F00AD;
+  background: #1b4332;
   box-shadow: 0 6px 24px rgba(255, 152, 0, 0.18);
   transform: translateY(-2px) scale(1.03);
 }
