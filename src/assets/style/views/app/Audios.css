@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
+/* Paleta Moringa (menú lateral) */
+:root {
+  --audios-primary: #1b5e3a;
+  --audios-primary-dark: #1b4332;
+  --audios-primary-light: #2d6a4f;
+  --audios-gold: #c5a059;
+  --audios-accent-bg: #e8f0eb;
+  --audios-chip-bg: #f0ede0;
+}
+
 .audios-view {
     background-color: #fff;
     min-height: 100vh;
@@ -118,8 +128,9 @@
 }
 
 .tab-item.active {
-    background-color: #E91E63;
+    background: linear-gradient(135deg, #1b5e3a 0%, #2d6a4f 100%);
     color: #fff;
+    box-shadow: 0 4px 12px rgba(27, 94, 58, 0.25);
 }
 
 /* Category Chips */
@@ -137,7 +148,7 @@
 }
 
 .chip-item {
-    background-color: #FFF0F5;
+    background-color: var(--audios-chip-bg);
     border: none;
     border-radius: 10px;
     padding: 6px 15px;
@@ -149,8 +160,9 @@
 }
 
 .chip-item.active {
-    background-color: #FFF0F5;
-    color: #333;
+    background-color: var(--audios-accent-bg);
+    color: var(--audios-primary-dark);
+    border: 1px solid rgba(197, 160, 89, 0.35);
 }
 
 /* Audio List */
@@ -178,14 +190,14 @@
 .audio-icon-ping {
     width: 50px;
     height: 50px;
-    background-color: #E91E63;
+    background: linear-gradient(135deg, #1b5e3a 0%, #2d6a4f 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
     font-size: 20px;
-    box-shadow: 0 4px 10px rgba(233, 30, 99, 0.3);
+    box-shadow: 0 4px 10px rgba(27, 94, 58, 0.3);
 }
 
 .audio-icon-ping::after {
@@ -195,7 +207,7 @@
     left: -5px;
     right: -5px;
     bottom: -5px;
-    border: 1px solid rgba(233, 30, 99, 0.2);
+    border: 1px solid rgba(197, 160, 89, 0.35);
     border-radius: 50%;
 }
 
@@ -238,8 +250,8 @@
     text-transform: capitalize;
     color: #fff;
     /* Cualquier categoría nueva del admin debe verse; antes solo había fondo en clases fijas */
-    background-color: #E91E63;
-    box-shadow: 0 2px 8px rgba(233, 30, 99, 0.25);
+    background: linear-gradient(135deg, #1b5e3a 0%, #2d6a4f 100%);
+    box-shadow: 0 2px 8px rgba(27, 94, 58, 0.25);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -251,7 +263,7 @@
 .audio-tag.seguimiento,
 .audio-tag.liderazgo,
 .audio-tag.mentalidad {
-    background-color: #E91E63;
+    background: linear-gradient(135deg, #1b5e3a 0%, #2d6a4f 100%);
 }
 
 .audio-tag.producto {
@@ -289,7 +301,7 @@
 }
 
 .fav-btn i.active {
-    color: #E91E63;
+    color: var(--audios-gold);
 }
 
 .play-btn-list {
@@ -297,8 +309,8 @@
     height: 35px;
     border-radius: 50%;
     border: none;
-    background-color: #FFF0F5;
-    color: #E91E63;
+    background-color: var(--audios-accent-bg);
+    color: var(--audios-primary);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -340,7 +352,7 @@
 .player-icon-wrapper {
     width: 45px;
     height: 45px;
-    background-color: #E91E63;
+    background: linear-gradient(135deg, #1b5e3a 0%, #2d6a4f 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -401,14 +413,14 @@
 }
 
 .progress-fill {
-    background: linear-gradient(90deg, #FF4081, #E91E63);
+    background: linear-gradient(90deg, #c5a059, #1b5e3a);
     height: 3px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     left: 0;
     border-radius: 2px;
-    box-shadow: 0 0 12px rgba(233, 30, 99, 0.6);
+    box-shadow: 0 0 12px rgba(27, 94, 58, 0.45);
 }
 
 .progress-knob {
@@ -419,7 +431,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%) translateX(-50%);
-    box-shadow: 0 0 15px rgba(233, 30, 99, 0.9), 0 0 5px rgba(255, 255, 255, 1);
+    box-shadow: 0 0 15px rgba(197, 160, 89, 0.7), 0 0 5px rgba(255, 255, 255, 1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -446,7 +458,7 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    color: #E91E63;
+    color: var(--audios-primary);
     display: flex;
     align-items: center;
     justify-content: center;

@@ -371,35 +371,34 @@ export default {
     },
     getModalityTheme(modality) {
       const m = (modality || "").toString().toLowerCase();
-      // Virtual: fucsia
+      // Virtual: verde claro Moringa
       if (m === "virtual") {
         return {
-          main: "#e91e63",
-          bg: "#e91e631A",
-          shadow: "0 10px 26px rgba(233, 30, 99, 0.28)"
+          main: "#2d6a4f",
+          bg: "#2d6a4f1A",
+          shadow: "0 10px 26px rgba(45, 106, 79, 0.28)"
         };
       }
-      // Presencial: morado
+      // Presencial: dorado Moringa
       if (m === "presencial") {
         return {
-          main: "#7c3aed",
-          bg: "#7c3aed1A",
-          shadow: "0 10px 26px rgba(124, 58, 237, 0.28)"
+          main: "#c5a059",
+          bg: "#c5a0591A",
+          shadow: "0 10px 26px rgba(197, 160, 89, 0.28)"
         };
       }
-      // Mixto/Mixta: híbrido (entre fucsia y morado)
+      // Mixto/Mixta: verde bosque + acento dorado
       if (m === "mixto" || m === "mixta") {
         return {
-          main: "#c026d3",
-          bg: "#c026d31A",
-          shadow: "0 10px 26px rgba(192, 38, 211, 0.28)"
+          main: "#1b5e3a",
+          bg: "#1b5e3a1A",
+          shadow: "0 10px 26px rgba(27, 94, 58, 0.28)"
         };
       }
-      // Default (incluye Mixto/Mixta)
       return {
-        main: "#e91e63",
-        bg: "#e91e631A",
-        shadow: "0 10px 26px rgba(233, 30, 99, 0.28)"
+        main: "#1b5e3a",
+        bg: "#1b5e3a1A",
+        shadow: "0 10px 26px rgba(27, 94, 58, 0.28)"
       };
     },
     eventIconStyle(event) {
@@ -654,8 +653,8 @@ export default {
   min-height: 140px;
   color: white;
   background:
-    radial-gradient(900px 220px at 85% 25%, rgba(233, 30, 99, 0.34) 0%, rgba(233, 30, 99, 0) 60%),
-    linear-gradient(135deg, #0b0b10 0%, #1a0b14 55%, #0b0b10 100%);
+    radial-gradient(900px 220px at 85% 25%, rgba(197, 160, 89, 0.28) 0%, rgba(197, 160, 89, 0) 60%),
+    linear-gradient(135deg, #0e2318 0%, #1b4332 55%, #0e2318 100%);
   position: relative;
   overflow: hidden;
 }
@@ -667,7 +666,7 @@ export default {
   right: 0;
   bottom: 0;
   height: 3px;
-  background: linear-gradient(90deg, #e91e63 0%, #b01268 55%, #e91e63 100%);
+  background: linear-gradient(90deg, #c5a059 0%, #1b5e3a 55%, #c5a059 100%);
   opacity: 0.95;
   pointer-events: none;
   z-index: 2;
@@ -680,7 +679,7 @@ export default {
   right: 0;
   bottom: 0;
   width: 46%;
-  background-image: radial-gradient(rgba(233, 30, 99, 0.55) 1px, rgba(233, 30, 99, 0) 1px);
+  background-image: radial-gradient(rgba(197, 160, 89, 0.45) 1px, rgba(197, 160, 89, 0) 1px);
   background-size: 8px 8px;
   opacity: 0.55;
   pointer-events: none;
@@ -702,8 +701,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #e91e63 0%, #b01268 100%);
-  box-shadow: 0 10px 28px rgba(233, 30, 99, 0.26);
+  background: linear-gradient(135deg, #1b5e3a 0%, #2d6a4f 100%);
+  box-shadow: 0 10px 28px rgba(27, 94, 58, 0.26);
   flex-shrink: 0;
 }
 
@@ -713,9 +712,9 @@ export default {
 }
 
 .modal-type-badge {
-  background: rgba(233, 30, 99, 0.16);
-  border: 1px solid rgba(233, 30, 99, 0.35);
-  color: #e91e63;
+  background: rgba(197, 160, 89, 0.16);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  color: #e8c96a;
   padding: 6px 14px;
   border-radius: 999px;
   font-size: 0.95rem;
@@ -763,14 +762,14 @@ export default {
 }
 
 .detail-item i {
-  color: #e91e63;
+  color: #1b5e3a;
   width: 22px;
   text-align: center;
   font-size: 1.1rem;
 }
 
 .detail-link {
-  color: #c21874;
+  color: #1b5e3a;
   font-weight: 700;
   word-break: break-all;
 }
@@ -780,8 +779,8 @@ export default {
   align-items: center;
   justify-content: center;
   gap: 18px;
-  background: linear-gradient(90deg, #b01268 0%, #e91e63 100%);
-  box-shadow: 0 12px 30px rgba(176, 18, 104, 0.25);
+  background: linear-gradient(90deg, #1b4332 0%, #1b5e3a 100%);
+  box-shadow: 0 12px 30px rgba(14, 35, 24, 0.25);
 }
 
 .modal-cta i {

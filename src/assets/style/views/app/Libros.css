@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
+/* Paleta Moringa (menú lateral) */
+:root {
+  --libros-primary: #1b5e3a;
+  --libros-primary-dark: #1b4332;
+  --libros-gold: #c5a059;
+  --libros-accent-bg: #e8f0eb;
+  --libros-chip-bg: #f0ede0;
+}
+
 .libros-view {
     background-color: #fff;
     min-height: 100vh;
@@ -119,8 +128,9 @@
 }
 
 .tab-item.active {
-    background-color: #E91E63;
+    background: linear-gradient(135deg, #1b5e3a 0%, #2d6a4f 100%);
     color: #fff;
+    box-shadow: 0 4px 12px rgba(27, 94, 58, 0.25);
 }
 
 /* Category Chips */
@@ -137,7 +147,7 @@
 }
 
 .chip-item {
-    background-color: #FFF0F5;
+    background-color: var(--libros-chip-bg);
     border: none;
     border-radius: 10px;
     padding: 6px 15px;
@@ -149,8 +159,9 @@
 }
 
 .chip-item.active {
-    background-color: #FFF0F5;
-    color: #333;
+    background-color: var(--libros-accent-bg);
+    color: var(--libros-primary-dark);
+    border: 1px solid rgba(197, 160, 89, 0.35);
 }
 
 /* Book List (Grid 2 columns mobile) */
@@ -218,7 +229,7 @@
 }
 
 .bookmark-btn i.active {
-    color: #E91E63;
+    color: var(--libros-gold);
 }
 
 .book-info {
