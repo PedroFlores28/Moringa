@@ -79,7 +79,7 @@
               />
             </div>
             <div class="collect-soft-balance">
-              <small>Total disponible: S/. {{ balance }}</small>
+              <small>Total disponible: Bs. {{ balance }}</small>
             </div>
             <div class="soft-form-group">
               <label>Monto a retirar</label>

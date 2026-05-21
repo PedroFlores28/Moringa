@@ -182,7 +182,7 @@ export default {
     formatDate(dateStr) {
       if (!dateStr) return 'Desconocido'
       const d = new Date(dateStr)
-      return d.toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+      return d.toLocaleDateString('es-BO', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
     },
     async UPDATE() {
       const { name, lastName, dni, relation, phone } = this

@@ -18,7 +18,7 @@
             @submit.prevent="validate"
           >
             <div class="transfer-soft-balance">
-              <small>Total disponible: S/. {{ balance }}</small>
+              <small>Total disponible: Bs. {{ balance }}</small>
             </div>
             <div class="soft-form-group">
               <label>Usuario receptor (DNI)</label>
@@ -81,7 +81,7 @@
                 <span v-if="error2" class="soft-alert">{{ error2 }}</span>
               </transition>
               <div class="transfer-soft-summary">
-                <small>Monto a enviar: S/. {{ amount }}</small
+                <small>Monto a enviar: Bs. {{ amount }}</small
                 ><br />
                 <span
                   ><i>{{ desc }}</i></span

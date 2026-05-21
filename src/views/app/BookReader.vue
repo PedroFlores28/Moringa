@@ -152,8 +152,8 @@
 
 <script>
 // PDF.js CDN Links
-const PDFJS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js';
-const PDFJS_WORKER_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+const PDFJS_URL = 'https://cdnjs.cloudflare.com/ajax/libBspdf.jBs2.16.105/pdf.min.js';
+const PDFJS_WORKER_URL = 'https://cdnjs.cloudflare.com/ajax/libBspdf.jBs2.16.105/pdf.worker.min.js';
 
 export default {
   props: {

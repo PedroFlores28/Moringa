@@ -30,7 +30,7 @@
                   <div class="cart-item-details">
                     <div class="cart-item-quantity">{{ item.total }} Unid.</div>
                     <div class="cart-item-name">{{ item.name }}</div>
-                    <div class="cart-item-price">S/ {{ getProductPrice(item) }}</div>
+                    <div class="cart-item-price">Bs {{ getProductPrice(item) }}</div>
                     <div class="cart-item-points">{{ item.points }} pts</div>
                   </div>
                 </div>
@@ -42,7 +42,7 @@
                   </div>
                   <div class="cart-item-details">
                     <div class="cart-item-quantity">Delivery</div>
-                    <div class="cart-item-price">S/ {{ deliveryZoneInfo.price.toFixed(2) }}</div>
+                    <div class="cart-item-price">Bs {{ deliveryZoneInfo.price.toFixed(2) }}</div>
                   </div>
                 </div>
 
@@ -86,7 +86,7 @@
                   <div class="transaction-row total">
                     <div class="transaction-item">
                       <span class="label">Total:</span>
-                      <span class="value">S/ {{ orderSummaryTotal.toFixed(2) }}</span>
+                      <span class="value">Bs {{ orderSummaryTotal.toFixed(2) }}</span>
                     </div>
                   </div>
                 </div>
@@ -103,16 +103,16 @@
                   </div>
                   <div class="summary-row">
                     <span>Subtotal:</span>
-                    <span>S/ {{ cartTotal.toFixed(2) }}</span>
+                    <span>Bs {{ cartTotal.toFixed(2) }}</span>
                   </div>
                   <!-- Línea de delivery cuando hay zona seleccionada -->
                   <div v-if="deliveryZoneInfo && deliveryData.department === 'lima'" class="summary-row delivery-row">
                     <span>🚚 Delivery:</span>
-                    <span>S/ {{ deliveryZoneInfo.price.toFixed(2) }}</span>
+                    <span>Bs {{ deliveryZoneInfo.price.toFixed(2) }}</span>
                   </div>
                   <div class="summary-row total">
                     <span>Total:</span>
-                    <span>S/ {{ finalTotal.toFixed(2) }}</span>
+                    <span>Bs {{ finalTotal.toFixed(2) }}</span>
                   </div>
                 </div>
               </div>
@@ -584,15 +584,15 @@
                   <div v-show="check" class="balance-details">
                     <div class="balance-item">
                       <span>Saldo disponible:</span>
-                      <span class="balance-amount">S/ {{ balance.toFixed(2) }}</span>
+                      <span class="balance-amount">Bs {{ balance.toFixed(2) }}</span>
                     </div>
                     <div class="balance-item">
                       <span>Saldo no disponible:</span>
-                      <span class="balance-amount">S/ {{ _balance.toFixed(2) }}</span>
+                      <span class="balance-amount">Bs {{ _balance.toFixed(2) }}</span>
                     </div>
                     <div v-if="remaining > 0" class="balance-item remaining">
                       <span>Restante a pagar:</span>
-                      <span class="balance-amount">S/ {{ remaining.toFixed(2) }}</span>
+                      <span class="balance-amount">Bs {{ remaining.toFixed(2) }}</span>
                     </div>
                   </div>
                 </div>

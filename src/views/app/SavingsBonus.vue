@@ -29,7 +29,7 @@
         <div class="balance-card">
           <p class="balance-label">Saldo disponible</p>
           <div class="balance-amount">
-            <span class="currency">S/</span> {{ sifrahBalance.toLocaleString('es-PE', { minimumFractionDigits: 2 }) }}
+            <span class="currency">Bs</span> {{ sifrahBalance.toLocaleString('es-BO', { minimumFractionDigits: 2 }) }}
             <img
               class="coin-icon-img"
               src="../../assets/img/coin-saldo-icon.png"
@@ -86,7 +86,7 @@
       <div class="featured-section">
         <div class="section-header">
           <h3>Productos destacados</h3>
-          <router-link to="/savings-bonus/all" class="view-all">Ver todos <i class="fas fa-arrow-right"></i></router-link>
+          <router-link to="/savings-bonuBsall" class="view-all">Ver todos <i class="fas fa-arrow-right"></i></router-link>
         </div>
 
         <div class="products-grid">
@@ -99,7 +99,7 @@
               <h4 class="product-name">{{ product.name }}</h4>
               <p class="product-sub">{{ product.sub }}</p>
               <div class="product-price">
-                <span class="price-coin">🪙</span> S/ {{ product.price }}
+                <span class="price-coin">🪙</span> Bs {{ product.price }}
               </div>
               <button class="redeem-btn" @click="redeem(product)">Canjear</button>
               <p class="product-footer">No genera puntos ni comisiones</p>

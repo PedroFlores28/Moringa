@@ -21,11 +21,11 @@ export default {
   data() {
     return {
       tools:
-        "https://drive.google.com/drive/folders/12Vd2jVrn7QUNhe3G0NTideUfK4NiI5mK?usp=share_link",
+        "https://drive.google.com/drive/folderBs12Vd2jVrn7QUNhe3G0NTideUfK4NiI5mK?usp=share_link",
       presentation:
-        "https://drive.google.com/drive/folders/1qwooLRceDXMxMr3I_Sm2K6QpUQmyJoZ5?usp=share_link",
+        "https://drive.google.com/drive/folderBs1qwooLRceDXMxMr3I_Sm2K6QpUQmyJoZ5?usp=share_link",
       videos:
-        "https://drive.google.com/drive/folders/1aUs465WhQnoOPl6cMeHgnLT9j8wZz6IG?usp=share_link",
+        "https://drive.google.com/drive/folderBs1aUs465WhQnoOPl6cMeHgnLT9j8wZz6IG?usp=share_link",
 
       loading: true,
     };

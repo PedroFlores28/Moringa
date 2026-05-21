@@ -302,13 +302,13 @@ export default {
       if (!val) return "-";
       const d = new Date(val);
       if (isNaN(d.getTime())) return "-";
-      // Ej: "abril de 2026" (es-PE) -> "Abril 2026"
-      const raw = d.toLocaleDateString("es-PE", { month: "long", year: "numeric" });
+      // Ej: "abril de 2026" (es-BO) -> "Abril 2026"
+      const raw = d.toLocaleDateString("es-BO", { month: "long", year: "numeric" });
       const normalized = raw.replace(/\s+de\s+/gi, " ").trim();
       return normalized.charAt(0).toUpperCase() + normalized.slice(1);
     },
     price(val) {
-      return `S/. ${val}`;
+      return `Bs. ${val}`;
     },
     status(val) {
       if (val == "pending") return "Pendiente";

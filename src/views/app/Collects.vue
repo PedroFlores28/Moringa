@@ -43,7 +43,7 @@
                 </div>
               </td>
               <td>{{ collect.desc || '—' }}</td>
-              <td class="collects-amount">S/. {{ collect.amount }}</td>
+              <td class="collects-amount">Bs. {{ collect.amount }}</td>
               <td>{{ collect.office }}</td>
               <td>
                 <span :class="['status-badge', collect.status]">

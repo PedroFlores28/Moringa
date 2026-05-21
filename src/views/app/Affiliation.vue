@@ -165,7 +165,7 @@
                       </div>
                       <div class="package-info">
                         <h5 class="package-name">{{ plan.name }}</h5>
-                        <div class="package-price">S/{{ plan.amount }}</div>
+                        <div class="package-price">Bs. {{ plan.amount }}</div>
                         <div class="package-description">
                           Seleccionas {{ plan.max_products }} productos
                         </div>
@@ -198,7 +198,7 @@
                 <div class="cart-button-container-mobile">
                   <div class="cart-info-left">
                     <div class="cart-price-info">
-                      <span class="total-price">Monto: S/ {{ selec_plan ? selec_plan.amount : 0 }}.00</span>
+                      <span class="total-price">Monto: Bs. {{ selec_plan ? selec_plan.amount : 0 }}.00</span>
                       <span class="total-items">Puntos: {{ selec_plan ? selec_plan.affiliation_points : 0 }} pts</span>
                     </div>
                   </div>
@@ -401,7 +401,7 @@
                     </div>
                     <div class="summary-row total-row">
                       <span>Total:</span>
-                      <span>S/ {{ selec_plan ? selec_plan.amount : 0 }}.00</span>
+                      <span>Bs. {{ selec_plan ? selec_plan.amount : 0 }}.00</span>
                     </div>
                   </div>
                 </div>
@@ -499,7 +499,7 @@
                   </div>
                   <div class="summary-row total-row">
                     <span>Total:</span>
-                    <span>S/ {{ selec_plan ? selec_plan.amount : 0 }}.00</span>
+                    <span>Bs. {{ selec_plan ? selec_plan.amount : 0 }}.00</span>
                   </div>
                 </div>
               </div>
@@ -616,7 +616,7 @@
                 </div>
                 <div class="summary-total">
                   <span>Total a pagar:</span>
-                  <span>S/. {{ selec_plan ? selec_plan.amount : 0 }}</span>
+                  <span>Bs. {{ selec_plan ? selec_plan.amount : 0 }}</span>
                 </div>
               </div>
               <div class="pay-section">
@@ -632,9 +632,9 @@
                   <small>Deseo usar mi saldo</small>
                 </label>
                 <div v-if="!check" class="balance-info">
-                  <small>Saldo no disponible: S/. {{ _balance }}</small
+                  <small>Saldo no disponible: Bs. {{ _balance }}</small
                   ><br />
-                  <small>Saldo disponible: S/. {{ balance }}</small
+                  <small>Saldo disponible: Bs. {{ balance }}</small
                   ><br />
                 <div class="pay-methods">
                   <small>Medio de Pago</small><br />
@@ -860,7 +860,7 @@ export default {
 
     text() {
       if (!this.selec_plan) return "";
-      return `S/. ${this.selec_plan.amount || 0} / ${
+      return `Bs. ${this.selec_plan.amount || 0} / ${
         this.selec_plan.affiliation_points || 0
       } PTS`;
     },

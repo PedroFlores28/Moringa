@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <App :session="session" :title="title">
     <div v-cloak class="dashboard-page-root">
       <div v-if="loading" class="loading-container">
@@ -554,7 +554,7 @@ export default {
       return Math.max(0, 100 - (Number(this.nextRankPercentage) || 0));
     },
     levelStats() {
-      const fmt = (n) => Number(n || 0).toLocaleString("es-PE");
+      const fmt = (n) => Number(n || 0).toLocaleString("es-BO");
       return [
         { label: "Volumen Personal", value: fmt(this.points), icon: "fas fa-user" },
         { label: "Patrocinados Personales", value: fmt((this.directs || []).length), icon: "fas fa-handshake" },
@@ -662,7 +662,7 @@ export default {
       return this.viajeCircumference - (this.viajeCircumference * p) / 100;
     },
     formatMoney(n) {
-      return Number(n || 0).toLocaleString("es-PE", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      return Number(n || 0).toLocaleString("es-BO", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     },
     formatIncomeDate(dateStr) {
       if (!dateStr) return "?";
@@ -670,9 +670,9 @@ export default {
       if (Number.isNaN(d.getTime())) return String(dateStr);
       const now = new Date();
       const isToday = d.toDateString() === now.toDateString();
-      const time = d.toLocaleTimeString("es-PE", { hour: "2-digit", minute: "2-digit" });
+      const time = d.toLocaleTimeString("es-BO", { hour: "2-digit", minute: "2-digit" });
       if (isToday) return `Hoy, ${time}`;
-      return d.toLocaleDateString("es-PE", { day: "2-digit", month: "short", year: "numeric" }) + `, ${time}`;
+      return d.toLocaleDateString("es-BO", { day: "2-digit", month: "short", year: "numeric" }) + `, ${time}`;
     },
     sumBonus(transactions, pattern) {
       return (transactions || [])

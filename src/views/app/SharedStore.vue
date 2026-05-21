@@ -157,7 +157,7 @@
                 <div class="cart-button-container-mobile">
                   <div class="cart-info-left">
                     <div class="cart-price-info">
-                      <span class="total-price">Monto: S/ {{ cartTotal.toFixed(2) }}</span>
+                      <span class="total-price">Monto: Bs {{ cartTotal.toFixed(2) }}</span>
                       <span class="total-items">Puntos: {{ cartPoints }} pts</span>
                     </div>
                   </div>
@@ -203,7 +203,7 @@
                         {{ product.subdescription }}
                       </div>
                       <div class="product-catalog-price">
-                        Precio Socio: <span class="price-amount">S/ {{ getProductPrice(product) }}</span>
+                        Precio Socio: <span class="price-amount">Bs {{ getProductPrice(product) }}</span>
                       </div>
                     </div>
                     
@@ -269,7 +269,7 @@
                   <div class="cart-item-info">
                     <h4>{{ item.name }}</h4>
                     <div class="cart-item-details">
-                      <span class="cart-item-price">S/ {{ getProductPrice(item) }}</span>
+                      <span class="cart-item-price">Bs {{ getProductPrice(item) }}</span>
                       <span class="cart-item-points">{{ item.points }}pts</span>
                     </div>
                   </div>
@@ -311,7 +311,7 @@
                   </div>
                   <div class="summary-row total-row">
                     <span>Total:</span>
-                    <span>S/ {{ cartTotal.toFixed(2) }}</span>
+                    <span>Bs {{ cartTotal.toFixed(2) }}</span>
                   </div>
                 </div>
               </div>
@@ -360,7 +360,7 @@
           
           <div class="product-modal-right">
             <div class="product-modal-info">
-              <div class="modal-product-price">S/ {{ getProductPrice(selectedProduct) }}</div>
+              <div class="modal-product-price">Bs {{ getProductPrice(selectedProduct) }}</div>
               <div class="modal-product-points">{{ selectedProduct.points }} pts</div>
               
               <div class="product-description">
@@ -398,7 +398,7 @@
               <div class="cart-detail-item-info">
                 <h4>{{ item.name }}</h4>
                 <div class="cart-detail-item-details">
-                  <span class="cart-detail-item-price">S/ {{ getProductPrice(item) }}</span>
+                  <span class="cart-detail-item-price">Bs {{ getProductPrice(item) }}</span>
                   <span class="cart-detail-item-points">{{ item.points }}pts</span>
                 </div>
               </div>
@@ -440,7 +440,7 @@
               </div>
               <div class="summary-row total-row">
                 <span>Total:</span>
-                <span>S/ {{ cartTotal.toFixed(2) }}</span>
+                <span>Bs {{ cartTotal.toFixed(2) }}</span>
               </div>
             </div>
           </div>
@@ -669,10 +669,10 @@ export default {
       let message = `¡Hola! Me interesa comprar los siguientes productos de tu tienda ClassMoringa:\n\n`;
       
       this.cartItems.forEach((item, index) => {
-        message += `${index + 1}. ${item.name} - Cantidad: ${item.total} - S/ ${(this.getProductPrice(item) * item.total).toFixed(2)}\n`;
+        message += `${index + 1}. ${item.name} - Cantidad: ${item.total} - Bs ${(this.getProductPrice(item) * item.total).toFixed(2)}\n`;
       });
       
-      message += `\nTotal: S/ ${this.cartTotal.toFixed(2)}`;
+      message += `\nTotal: Bs ${this.cartTotal.toFixed(2)}`;
       message += `\nPuntos: ${this.cartPoints}`;
       
       // Aquí deberías tener el número de WhatsApp del dueño de la tienda
