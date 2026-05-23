@@ -1478,6 +1478,7 @@
 /* Sistema de banners: izquierda grande + derecha (centro apilado + banner derecho alto) */
 /* Solo desktop; móvil usa alturas propias en @media (max-width: 767px) */
 $banners-row-height = clamp(150px, 12vw, 200px)
+$banner-radius = 16px
 
 .banners-grid-wrapper {
   display: grid;
@@ -1494,12 +1495,18 @@ $banners-row-height = clamp(150px, 12vw, 200px)
   display: flex;
   flex-direction: column;
   min-height: $banners-row-height;
+  overflow: hidden;
+  border-radius: $banner-radius;
 }
 
 .banner-left .banner-placeholder {
   flex: 1;
   min-height: $banners-row-height;
   height: 100%;
+  border-radius: $banner-radius;
+  overflow: hidden;
+  border: 1px solid #d0d0d0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .banner-placeholder {
@@ -1510,13 +1517,14 @@ $banners-row-height = clamp(150px, 12vw, 200px)
     #e0e0e0 90deg 180deg
   );
   background-size: 20px 20px;
-  border-radius: 12px;
+  border-radius: $banner-radius;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   border: 1px solid #d0d0d0;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  overflow: hidden;
 }
 
 .banner-right-with-center {
@@ -1568,13 +1576,14 @@ $banners-row-height = clamp(150px, 12vw, 200px)
     #e0e0e0 90deg 180deg
   );
   background-size: 20px 20px;
-  border-radius: 12px;
+  border-radius: $banner-radius;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   border: 1px solid #d0d0d0;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  overflow: hidden;
 }
 
 .banner-right-main .banner-placeholder {
@@ -1587,13 +1596,14 @@ $banners-row-height = clamp(150px, 12vw, 200px)
     #e0e0e0 90deg 180deg
   );
   background-size: 20px 20px;
-  border-radius: 12px;
+  border-radius: $banner-radius;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   border: 1px solid #d0d0d0;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  overflow: hidden;
 }
 
 /* Estilos para los textos de banners */
@@ -1620,14 +1630,14 @@ $banners-row-height = clamp(150px, 12vw, 200px)
     #e0e0e0 90deg 180deg
   );
   background-size: 20px 20px;
-  border-radius: inherit;
+  border-radius: $banner-radius;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: none;
-  box-shadow: none;
-  position: relative;
+  border: 1px solid #d0d0d0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   overflow: hidden;
+  position: relative;
   transition: all 0.3s ease;
 }
 
@@ -5014,7 +5024,7 @@ $banners-row-height = clamp(150px, 12vw, 200px)
   flex: 1;
   position: relative;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: $banner-radius;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   border: 1px solid #d0d0d0;
   display: flex;
@@ -5025,7 +5035,7 @@ $banners-row-height = clamp(150px, 12vw, 200px)
   height: 100%;
   object-fit: cover;
   object-position: center;
-  border-radius: 12px;
+  border-radius: $banner-radius;
   transition: transform 0.3s ease;
   display: block;
 }
