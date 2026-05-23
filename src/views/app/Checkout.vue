@@ -656,7 +656,6 @@ export default {
       availableDistricts: [],
       
       // Instancia del mapa de Leaflet
-      map: null,
       
       // Intervalo para actualización automática
       officesUpdateInterval: null,
@@ -1341,84 +1340,6 @@ export default {
       return null;
     },
     
-    initMap(office) {
-      
-      // Verificar que Leaflet está disponible
-      if (typeof L === 'undefined') {
-        console.error('Leaflet no está disponible. Verifica que se haya cargado la librería.');
-        return;
-      }
-      
-      const coords = this.getMapCoordinates(office);
-      
-      if (!coords) {
-        console.warn('No se pudieron obtener coordenadas para la oficina:', office.name);
-        return;
-      }
-      
-      // Verificar que el elemento del mapa existe
-      const mapElement = document.getElementById('map');
-      if (!mapElement) {
-        console.warn('Elemento del mapa no encontrado');
-        return;
-      }
-      
-      // Limpiar el mapa si ya existe
-      if (this.map) {
-        this.map.remove();
-        this.map = null;
-      }
-      
-      try {
-        
-        // Crear mapa de Leaflet
-        this.map = L.map('map', {
-          zoomControl: true,
-          scrollWheelZoom: true,
-          doubleClickZoom: true,
-          boxZoom: true,
-          keyboard: true,
-          dragging: true,
-          touchZoom: true
-        }).setView([coords.lat, coords.lng], 15);
-        
-        // Agregar capa de tiles
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-          maxZoom: 19
-        }).addTo(this.map);
-        
-        // Agregar marcador personalizado
-        const customIcon = L.divIcon({
-          className: 'custom-marker',
-          html: '<div style="background-color: #1b5e3a; width: 30px; height: 30px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;"><i class="fas fa-map-marker-alt" style="color: white; font-size: 14px;"></i></div>',
-          iconSize: [30, 30],
-          iconAnchor: [15, 15]
-        });
-        
-        L.marker([coords.lat, coords.lng], { icon: customIcon })
-          .addTo(this.map)
-          .bindPopup(`
-            <div style="text-align: center; padding: 10px;">
-              <h4 style="margin: 0 0 8px 0; color: #1b4332; font-weight: 700;">${office.name}</h4>
-              <p style="margin: 0; color: #666; font-size: 14px;">${office.address}</p>
-              ${office.phone && office.phone !== 'No disponible' ? `<p style="margin: 5px 0 0 0; color: #333; font-size: 13px;"><i class="fas fa-phone"></i> ${office.phone}</p>` : ''}
-            </div>
-          `)
-          .openPopup();
-        
-        // Ajustar el tamaño del mapa después de cargar
-        setTimeout(() => {
-          if (this.map) {
-            this.map.invalidateSize();
-          }
-        }, 200);
-        
-      } catch (error) {
-        console.error('Error al inicializar el mapa:', error);
-      }
-    },
-    
     onVoucherFileChange(event) {
       const file = event.target.files[0];
       if (file) {
@@ -1725,22 +1646,6 @@ export default {
         }
       }
     },
-    selectedPickupPoint: {
-      handler(newPickupPoint) {
-        if (newPickupPoint) {
-          const office = this.offices.find(o => o.id == newPickupPoint);
-          if (office) {
-            // Esperar a que el DOM se actualice
-            this.$nextTick(() => {
-              setTimeout(() => {
-                this.initMap(office);
-              }, 100);
-            });
-          }
-        }
-      }
-    },
-
     // Watcher para cuando cambie el paso actual
     currentStep: {
       handler(newStep) {
@@ -1840,12 +1745,6 @@ export default {
     // Limpiar el intervalo cuando el componente se destruye
     if (this.officesUpdateInterval) {
       clearInterval(this.officesUpdateInterval);
-    }
-    
-    // Limpiar el mapa cuando el componente se destruye
-    if (this.map) {
-      this.map.remove();
-      this.map = null;
     }
     
   }

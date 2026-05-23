@@ -1475,35 +1475,30 @@
   display: none;
 }
 
-/* Sistema de banners con Grid - Izquierda separada, Derecha con centro integrado */
+/* Sistema de banners: izquierda grande + derecha (centro apilado + banner derecho alto) */
+$banners-row-height = clamp(300px, 26vw, 400px)
+
 .banners-grid-wrapper {
   display: grid;
-  grid-template-columns: 3.8fr 3.8fr; /* Dos columnas de igual proporción */
-  gap: 15px;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
   width: 100%;
-  margin: 0;
+  margin: 0 0 20px;
   padding: 0;
-  position: relative;
-  background: transparent;
-  transform-origin: top left;
-  /* will-change: transform; */
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  overflow: hidden;
-  // contain: layout style paint;
   align-items: stretch;
 }
 
-/* Banner izquierda - Columna izquierda del grid */
 .banner-left {
-  grid-column: 1;
   min-width: 0;
-  position: relative;
-  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  min-height: $banners-row-height;
 }
 
 .banner-left .banner-placeholder {
-  height: 400px;
+  flex: 1;
+  min-height: $banners-row-height;
+  height: 100%;
 }
 
 .banner-placeholder {
@@ -1523,76 +1518,69 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-/* Banners del centro - Medianos */
-/* Banner derecha con centro integrado - Columna derecha del grid */
 .banner-right-with-center {
-  grid-column: 2;
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Banners del centro más anchos, banner derecho más estrecho */
-  gap: 8px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 12px;
   min-width: 0;
-  position: relative;
-  align-items: start; /* Alinear todos los elementos al inicio */
-}
-
-/* Columna de banners del centro uno debajo del otro */
-.banner-center-column {
-  display flex
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-/*   grid-column: 1;
-  display: grid; */
-  grid-template-rows: 1fr 1fr; /* Dos filas iguales para los banners del centro */
-  gap: 4px; /* Gap más pequeño para que estén más juntos */
-  width: 100%;
-  position: relative;
+  min-height: $banners-row-height;
   align-items: stretch;
-  align-self: start; /* Alinear al inicio para que esté al mismo nivel */
 }
 
-/* Banner centro superior */
-.banner-center-top {
-  grid-row: 1;
-  width: 100%;
- /* Altura uniforme con el resto */
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.banner-center-column {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 12px;
+  min-height: 0;
+  height: 100%;
 }
 
-/* Banner centro inferior */
+.banner-center-top,
 .banner-center-bottom {
-  grid-row: 2;
-  width: 100%;
- /* Altura uniforme con el resto */
-  position: relative;
+  min-height: 0;
   overflow: hidden;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
 }
 
-/* Banner derecha principal */
 .banner-right-main {
   grid-column: 2;
-  width: 100%;
-/* Banner principal */
-  position: relative;
+  grid-row: 1 / span 2;
+  min-height: 0;
   overflow: hidden;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  align-self: start; /* Alinear al inicio para que esté al mismo nivel */
+  flex-direction: column;
 }
 
 /* Estilos para los placeholders de banners */
 .banner-center-top .banner-placeholder,
-.banner-center-bottom .banner-placeholder,
+.banner-center-bottom .banner-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  flex: 1;
+  background: repeating-conic-gradient(
+    #f0f0f0 0deg 90deg,
+    #e0e0e0 90deg 180deg
+  );
+  background-size: 20px 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 1px solid #d0d0d0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
 .banner-right-main .banner-placeholder {
   width: 100%;
+  height: 100%;
+  min-height: 100%;
+  flex: 1;
   background: repeating-conic-gradient(
     #f0f0f0 0deg 90deg,
     #e0e0e0 90deg 180deg
@@ -4451,60 +4439,53 @@
   }
 }
 
-/* Media queries para dispositivos móviles - Banner izquierdo arriba, derecho abajo */
+/* Móvil: banner izquierdo arriba; abajo centro apilado + banner derecho (tercera imagen) */
 @media (max-width: 767px) {
   .banners-grid-wrapper {
-    display: grid;
-    grid-template-columns: 1fr; /* Una sola columna en móvil */
-    grid-template-rows: auto auto; /* Banner izquierdo arriba, derecho abajo */
-    gap: 6px; /* Separación reducida entre banner izquierdo y derecho */
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
   }
-  
+
   .banner-left {
-    grid-column: 1;
-    grid-row: 1;
-    width: 100%;
-/* Altura reducida para mejor proporción en móvil */
+    min-height: auto;
   }
-  
+
+  .banner-left .banner-placeholder,
+  .banner-left .banner-image-container {
+    min-height: 160px;
+    aspect-ratio: 16 / 9;
+  }
+
   .banner-right-with-center {
-    grid-column: 1;
-    grid-row: 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Banners del centro y derecho lado a lado en móvil */
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    min-height: 220px;
     gap: 8px;
-    width: 100%; /* Separación reducida para crear menos espacio visual */
   }
-  
+
   .banner-center-column {
     grid-column: 1;
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    gap: 6px; /* Gap más pequeño para mejor proporción */
+    grid-row: 1 / span 2;
+    gap: 8px;
   }
-  
-  .banner-center-top,
-  .banner-center-bottom {
-    height: px; /* Altura reducida para móvil */
-  }
-  
+
   .banner-right-main {
     grid-column: 2;
-/* Altura reducida que coincida con los dos banners del centro + gap */
+    grid-row: 1 / span 2;
+    display: flex !important;
+    min-height: 0;
   }
-  
-  /* Ajustar alturas de contenedores de imágenes en móvil */
-  .banner-left .banner-image-container {
 
+  .banner-center-top .banner-placeholder,
+  .banner-center-bottom .banner-placeholder {
+    min-height: 0;
+    height: 100%;
   }
-  
-  .banner-center-top .banner-image-container,
-  .banner-center-bottom .banner-image-container {
 
-  }
-  
-  .banner-right-main .banner-image-container {
-
+  .banner-right-main .banner-placeholder {
+    min-height: 100%;
+    height: 100%;
   }
 }
 
@@ -5024,40 +5005,58 @@
   }
 }
 
-/* Estilos para las imágenes de banners */
+/* Imágenes de banners: cubrir el contenedor y alinear alturas */
 .banner-image-container {
   width: 100%;
+  height: 100%;
+  min-height: 0;
+  flex: 1;
   position: relative;
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   border: 1px solid #d0d0d0;
+  display: flex;
 }
 
 .banner-image {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
   object-position: center;
   border-radius: 12px;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease;
+  display: block;
 }
 
 .banner-image:hover {
   transform: scale(1.02);
 }
 
-/* Asegurar que las imágenes tengan las mismas dimensiones que los placeholders */
-.banner-left .banner-image-container {
-
-}
-
 .banner-center-top .banner-image-container,
-.banner-center-bottom .banner-image-container {
-
-}
-
+.banner-center-bottom .banner-image-container,
 .banner-right-main .banner-image-container {
-
+  min-height: 0;
 }
+
+.banner-left .banner-image-container {
+  min-height: $banners-row-height;
+}
+
+.banner-right-main .banner-placeholder {
+  min-height: 100%;
+  height: 100%;
+}
+
+/* Ocultar cualquier resto visual del sistema de puntos */
+.tienda-sifrah-container
+  .points-bar,
+  .points-badge,
+  .cart-item-points,
+  .modal-product-points,
+  .product-points,
+  .cart-detail-item-points
+    display none !important
 
 // Clase para deshabilitar scroll cuando el modal está abierto
 body.modal-open {
