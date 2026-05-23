@@ -1476,7 +1476,7 @@
 }
 
 /* Sistema de banners: izquierda grande + derecha (centro apilado + banner derecho alto) */
-$banners-row-height = clamp(300px, 26vw, 400px)
+$banners-row-height = clamp(200px, 18vw, 280px)
 
 .banners-grid-wrapper {
   display: grid;
@@ -4453,14 +4453,14 @@ $banners-row-height = clamp(300px, 26vw, 400px)
 
   .banner-left .banner-placeholder,
   .banner-left .banner-image-container {
-    min-height: 160px;
+    min-height: 110px;
     aspect-ratio: 16 / 9;
   }
 
   .banner-right-with-center {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    min-height: 220px;
+    min-height: 160px;
     gap: 8px;
   }
 
