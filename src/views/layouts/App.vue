@@ -332,33 +332,9 @@
           </router-link>
         </div>
 
-        <a
-          @click="actived(4)"
-          v-if="office_id == null && affiliated"
-          :class="{ 'active-parent': herramientasActive }"
-          :style="{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center'
-          }"
-        >
-          <span> <i class="fas fa-tools"></i> Herramientas </span>
-          <i class="fa fa-angle-down" style="margin-left: 16px"></i>
-        </a>
-        <div class="sub-menu" :class="{ active: herramientasActive }">
-          <router-link to="/materials" @click.native="closeAllMenus">
-            <i class="fas fa-folder"></i> Materiales
-          </router-link>
-          <router-link to="/flyer-editor" @click.native="closeAllMenus">
-            <i class="fas fa-image"></i> Editor de flyer
-          </router-link>
-          <router-link to="/whatsapp-link-generator" @click.native="closeAllMenus">
-            <i class="fab fa-whatsapp"></i> Generador de links
-          </router-link>
-          <router-link to="/share-store" @click.native="closeAllMenus">
-            <i class="fas fa-share-alt"></i> Compartir tienda
-          </router-link>
-        </div>
+        <router-link to="/materials" @click.native="closeAllMenus" v-if="office_id == null && affiliated">
+          <i class="fas fa-folder"></i> Materiales
+        </router-link>
 
         <a
           @click="actived(5)"
@@ -664,31 +640,10 @@
             </router-link>
           </div>
 
-          <a @click.stop="toggleMobileSubmenu(4)" v-if="office_id == null && affiliated" class="mobile-menu-item mobile-menu-item-with-submenu" :class="{ 'active': mobileSubmenus[4] || herramientasRouteActive }">
-            <span style="display: flex; align-items: center;">
-              <i class="fas fa-tools" style="width: 20px; margin-right: 12px;"></i>
-              Herramientas
-            </span>
-            <i class="fa fa-angle-down" :class="{ 'rotated': mobileSubmenus[4] || herramientasRouteActive }"></i>
-          </a>
-          <div class="mobile-submenu" :class="{ 'active': mobileSubmenus[4] || herramientasRouteActive }" v-if="office_id == null && affiliated">
-            <router-link to="/materials" @click.native="handleNavigationClickAndClose" class="mobile-submenu-item">
-              <i class="fas fa-folder"></i>
-              <span>Materiales</span>
-            </router-link>
-            <router-link to="/flyer-editor" @click.native="handleNavigationClickAndClose" class="mobile-submenu-item">
-              <i class="fas fa-image"></i>
-              <span>Editor de flyer</span>
-            </router-link>
-            <router-link to="/whatsapp-link-generator" @click.native="handleNavigationClickAndClose" class="mobile-submenu-item">
-              <i class="fab fa-whatsapp"></i>
-              <span>Generador de links</span>
-            </router-link>
-            <router-link to="/share-store" @click.native="handleNavigationClickAndClose" class="mobile-submenu-item">
-              <i class="fas fa-share-alt"></i>
-              <span>Compartir tienda</span>
-            </router-link>
-          </div>
+          <router-link to="/materials" v-if="office_id == null && affiliated" @click.native="handleNavigationClickAndClose" class="mobile-menu-item">
+            <i class="fas fa-folder" style="width: 20px; margin-right: 12px;"></i>
+            <span>Materiales</span>
+          </router-link>
 
           <a
             @click.stop="toggleMobileSubmenu(5)"
@@ -950,9 +905,6 @@ export default {
     commissions() {
       return this.$store.state.commissions;
     },
-    education() {
-      return this.$store.state.education;
-    },
     showTopbarNotify() {
       const p = (this.$route && this.$route.path) ? this.$route.path : "";
       return (
@@ -960,18 +912,6 @@ export default {
         p === "/affiliation" ||
         p === "/activations"
       );
-    },
-    herramientasRouteActive() {
-      const p = (this.$route && this.$route.path) ? this.$route.path : "";
-      return (
-        p === "/materials" ||
-        p === "/flyer-editor" ||
-        p === "/whatsapp-link-generator" ||
-        p === "/share-store"
-      );
-    },
-    herramientasActive() {
-      return this.education || this.herramientasRouteActive;
     },
     universidad() {
       return this.$store.state.universidad;
