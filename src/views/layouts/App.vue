@@ -336,51 +336,6 @@
           <i class="fas fa-folder"></i> Materiales
         </router-link>
 
-        <a
-          @click="actived(5)"
-          v-if="office_id == null && affiliated"
-          :class="{ 'active-parent': universidadActive }"
-          :style="{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center'
-          }"
-        >
-          <span style="display: flex; align-items: center;">
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              style="width: 22px; margin-right: 10px; flex: 0 0 auto;"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M12 3L1.5 8.5L12 14L22.5 8.5L12 3Z" />
-              <path d="M4 10V15.2C4 15.7 4.28 16.16 4.72 16.38L12 20L19.28 16.38C19.72 16.16 20 15.7 20 15.2V10L12 14L4 10Z" />
-              <path d="M22.5 8.5V14.2C22.5 14.64 22.14 15 21.7 15H21.3C20.86 15 20.5 14.64 20.5 14.2V9.55L22.5 8.5Z" />
-              <path d="M6.2 18.1C5.76 18.1 5.4 18.46 5.4 18.9V20.2C5.4 20.64 5.76 21 6.2 21H13.4C13.84 21 14.2 20.64 14.2 20.2V18.9C14.2 18.46 13.84 18.1 13.4 18.1H6.2Z" />
-              <path d="M15.6 18.35C15.6 17.6 16.2 17 16.95 17C17.7 17 18.3 17.6 18.3 18.35C18.3 19.1 17.7 19.7 16.95 19.7C16.2 19.7 15.6 19.1 15.6 18.35Z" />
-            </svg>
-            Universidad ClassMoringa
-          </span>
-          <i class="fa fa-angle-down" style="margin-left: 16px"></i>
-        </a>
-        <div class="sub-menu" :class="{ active: universidadActive }" v-if="office_id == null && affiliated">
-          <router-link to="/agenda" @click.native="closeAllMenus">
-            <i class="fas fa-calendar-alt"></i> Agenda
-          </router-link>
-          <router-link to="/tools" @click.native="closeAllMenus">
-            <i class="fas fa-graduation-cap"></i> Educación
-          </router-link>
-          <router-link to="/libros" @click.native="closeAllMenus">
-            <i class="fas fa-book"></i> Libros
-          </router-link>
-          <router-link to="/audios" @click.native="closeAllMenus">
-            <i class="fas fa-headphones"></i> Audios
-          </router-link>
-        </div>
-
         </div>
 
         <div v-if="office_id == null" class="sidebar-profile-card">
@@ -645,51 +600,6 @@
             <span>Materiales</span>
           </router-link>
 
-          <a
-            @click.stop="toggleMobileSubmenu(5)"
-            v-if="office_id == null && affiliated"
-            class="mobile-menu-item mobile-menu-item-with-submenu"
-            :class="{ 'active': mobileSubmenus[5] }"
-          >
-            <span style="display: flex; align-items: center;">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-                style="width: 20px; margin-right: 12px; flex: 0 0 auto;"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path d="M12 3L1.5 8.5L12 14L22.5 8.5L12 3Z" />
-                <path d="M4 10V15.2C4 15.7 4.28 16.16 4.72 16.38L12 20L19.28 16.38C19.72 16.16 20 15.7 20 15.2V10L12 14L4 10Z" />
-                <path d="M22.5 8.5V14.2C22.5 14.64 22.14 15 21.7 15H21.3C20.86 15 20.5 14.64 20.5 14.2V9.55L22.5 8.5Z" />
-                <path d="M6.2 18.1C5.76 18.1 5.4 18.46 5.4 18.9V20.2C5.4 20.64 5.76 21 6.2 21H13.4C13.84 21 14.2 20.64 14.2 20.2V18.9C14.2 18.46 13.84 18.1 13.4 18.1H6.2Z" />
-                <path d="M15.6 18.35C15.6 17.6 16.2 17 16.95 17C17.7 17 18.3 17.6 18.3 18.35C18.3 19.1 17.7 19.7 16.95 19.7C16.2 19.7 15.6 19.1 15.6 18.35Z" />
-              </svg>
-              Universidad ClassMoringa
-            </span>
-            <i class="fa fa-angle-down" :class="{ 'rotated': mobileSubmenus[5] }"></i>
-          </a>
-          <div class="mobile-submenu" :class="{ 'active': mobileSubmenus[5] }" v-if="office_id == null && affiliated">
-            <router-link to="/agenda" @click.native="handleNavigationClickAndClose" class="mobile-submenu-item">
-              <i class="fas fa-calendar-alt"></i>
-              <span>Agenda</span>
-            </router-link>
-            <router-link to="/tools" @click.native="handleNavigationClickAndClose" class="mobile-submenu-item">
-              <i class="fas fa-graduation-cap"></i>
-              <span>Educación</span>
-            </router-link>
-            <router-link to="/libros" @click.native="handleNavigationClickAndClose" class="mobile-submenu-item">
-              <i class="fas fa-book"></i>
-              <span>Libros</span>
-            </router-link>
-            <router-link to="/audios" @click.native="handleNavigationClickAndClose" class="mobile-submenu-item">
-              <i class="fas fa-headphones"></i>
-              <span>Audios</span>
-            </router-link>
-          </div>
-
           <router-link
             to="/profile"
             @click.native="handleNavigationClickAndClose"
@@ -912,22 +822,6 @@ export default {
         p === "/affiliation" ||
         p === "/activations"
       );
-    },
-    universidad() {
-      return this.$store.state.universidad;
-    },
-    universidadRouteActive() {
-      const p = (this.$route && this.$route.path) ? this.$route.path : "";
-      return (
-        p === "/universidad-sifrah" ||
-        p === "/agenda" ||
-        p === "/tools" ||
-        p === "/libros" ||
-        p === "/audios"
-      );
-    },
-    universidadActive() {
-      return this.universidad || this.universidadRouteActive;
     },
     affiliationLink() {
       return `${ROOT}/register/${this.token}`;
