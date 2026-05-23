@@ -46,7 +46,10 @@
 
                     <span class="nivel-stat-label">{{ s.label }}</span>
 
-                    <span class="nivel-stat-value">{{ s.value }}</span>
+                    <span
+                      class="nivel-stat-value"
+                      :class="s.valueClass"
+                    >{{ s.value }}</span>
 
                   </div>
 
@@ -62,85 +65,191 @@
 
           <div class="md-card md-card-rango">
 
-            <h3 class="md-card-title rango-card-title">Rango {{ rank | _rank }}</h3>
+            <div class="rango-layout">
 
-            <div class="rango-body">
+              <div class="rango-col-left">
 
-              <div class="rango-gauge-block">
+                <h3 class="md-card-title rango-card-title">
+                  Rango {{ rankCycleTargetLabel }}
+                </h3>
 
-                <div class="gauge-ring" :class="{ 'gauge-ring--complete': gaugeIsComplete }">
+                <div class="rango-gauge-block">
 
-                  <svg viewBox="0 0 120 120" class="gauge-svg">
+                  <div class="gauge-ring" :class="{ 'gauge-ring--complete': gaugeIsComplete }">
 
-                    <circle cx="60" cy="60" r="48" fill="none" class="gauge-track" :stroke="gaugeTrackStroke" stroke-width="10" />
+                    <svg viewBox="0 0 120 120" class="gauge-svg">
 
-                    <circle
+                      <circle cx="60" cy="60" r="48" fill="none" class="gauge-track" :stroke="gaugeTrackStroke" stroke-width="10" />
 
-                      class="gauge-progress"
+                      <circle
 
-                      cx="60" cy="60" r="48" fill="none"
+                        class="gauge-progress"
 
-                      stroke="url(#gaugeGradMain)" stroke-width="10" stroke-linecap="round"
+                        cx="60" cy="60" r="48" fill="none"
 
-                      :stroke-dasharray="gaugeCircumference"
+                        stroke="url(#gaugeGradMain)" stroke-width="10" stroke-linecap="round"
 
-                      :stroke-dashoffset="gaugeOffset"
+                        :stroke-dasharray="gaugeCircumference"
 
-                      transform="rotate(-90 60 60)"
+                        :stroke-dashoffset="gaugeOffset"
 
-                    />
+                        transform="rotate(-90 60 60)"
 
-                    <defs>
+                      />
 
-                      <linearGradient id="gaugeGradMain" gradientUnits="userSpaceOnUse" x1="12" y1="12" x2="108" y2="108">
+                      <defs>
 
-                        <stop offset="0%" :stop-color="gaugeGradStart" />
+                        <linearGradient id="gaugeGradMain" gradientUnits="userSpaceOnUse" x1="12" y1="12" x2="108" y2="108">
 
-                        <stop offset="50%" :stop-color="gaugeGradMid" />
+                          <stop offset="0%" :stop-color="gaugeGradStart" />
 
-                        <stop offset="100%" :stop-color="gaugeGradEnd" />
+                          <stop offset="50%" :stop-color="gaugeGradMid" />
 
-                      </linearGradient>
+                          <stop offset="100%" :stop-color="gaugeGradEnd" />
 
-                    </defs>
+                        </linearGradient>
 
-                  </svg>
+                      </defs>
 
-                  <div class="gauge-center">
+                    </svg>
 
-                    <i class="fas fa-crown gauge-crown"></i>
+                    <div class="gauge-center">
 
-                    <span class="gauge-pct" :style="{ color: gaugePctColor }">{{ nextRankPercentage }}%</span>
+                      <i class="fas fa-crown gauge-crown"></i>
 
-                    <span class="gauge-caption">Avance actual</span>
+                      <span class="gauge-pct" :style="{ color: gaugePctColor }">{{ rankCycleOverallPct }}%</span>
+
+                      <span class="gauge-caption">Avance actual</span>
+
+                    </div>
+
+                  </div>
+
+                  <p class="rango-next-text">
+
+                    a {{ rankCycleRemainingPct }}% de subir a
+
+                    <strong>{{ rankCycleTargetLabel }}</strong>
+
+                  </p>
+
+                </div>
+
+              </div>
+
+              <div class="rango-col-right">
+
+                <div class="rango-quick-stats">
+
+                  <div class="rango-quick-stat">
+
+                    <div class="rango-quick-icon"><i class="fas fa-user-friends"></i></div>
+
+                    <div class="rango-quick-text">
+
+                      <span class="rango-quick-label">Patrocinados personales</span>
+
+                      <span class="rango-quick-value">{{ rankCyclePersonalDirects }}</span>
+
+                    </div>
+
+                  </div>
+
+                  <div class="rango-quick-divider" aria-hidden="true"></div>
+
+                  <div class="rango-quick-stat">
+
+                    <div class="rango-quick-icon"><i class="fas fa-sync-alt"></i></div>
+
+                    <div class="rango-quick-text">
+
+                      <span class="rango-quick-label">Ciclos del rango</span>
+
+                      <span class="rango-quick-value">{{ rankCycleCyclesLabel }}</span>
+
+                    </div>
 
                   </div>
 
                 </div>
 
-                <p class="rango-next-text">
+                <div class="rango-cycles-panel">
 
-                  a {{ remainingRankPct }}% de subir a
+                  <div class="rango-cycles-head">
 
-                  <strong>{{ nextRankName | _rank }}</strong>
+                    <h4 class="rango-cycles-title">Progreso de ciclos del rango</h4>
 
-                </p>
+                    <p class="rango-cycles-hint">
 
-              </div>
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
 
-              <div class="rango-mini-grid">
+                      Cada ciclo requiere <strong>{{ rankCycleProductsPerCycle }}</strong> productos
 
-                <div v-for="(s, i) in rankProgressStats" :key="'rp-' + i" class="mini-stat">
+                    </p>
 
-                  <span class="mini-stat-icon"><i :class="s.icon"></i></span>
+                  </div>
 
-                  <div class="mini-stat-content">
+                  <div class="rango-cycles-grid">
 
-                    <span class="mini-stat-label">{{ s.label }}</span>
+                    <div
 
-                    <span class="mini-stat-value">{{ s.value }}</span>
+                      v-for="c in rankCycleList"
 
-                    <div class="mini-bar"><span class="mini-bar-fill" :style="{ width: s.progress + '%' }"></span></div>
+                      :key="'cyc-' + c.index"
+
+                      class="rango-cycle-card"
+
+                      :class="'rango-cycle-card--' + c.status"
+
+                    >
+
+                      <span class="rango-cycle-name">{{ c.label }}</span>
+
+                      <span
+                        class="rango-cycle-badge"
+                        :class="'rango-cycle-badge--' + c.status"
+                      >{{ c.statusLabel }}</span>
+
+                      <span class="rango-cycle-amount">{{ c.display }}</span>
+
+                    </div>
+
+                  </div>
+
+                  <div
+                    v-if="rankCycleList.length"
+                    class="rango-cycles-timeline"
+                    aria-hidden="true"
+                  >
+
+                    <div class="rango-timeline-line">
+
+                      <span
+                        v-for="(c, ti) in rankCycleList"
+                        :key="'seg-' + c.index"
+                        class="rango-timeline-seg"
+                        :class="rankCycleTimelineSegClass(ti)"
+                      ></span>
+
+                    </div>
+
+                    <div class="rango-timeline-dots">
+
+                      <span
+                        v-for="c in rankCycleList"
+
+                        :key="'dot-' + c.index"
+
+                        class="rango-timeline-dot"
+                        :class="'rango-timeline-dot--' + c.status"
+
+                      >
+
+                        <i v-if="c.status === 'completed'" class="fas fa-check"></i>
+
+                      </span>
+
+                    </div>
 
                   </div>
 
@@ -158,67 +267,69 @@
 
         <div class="md-row md-row-mid">
 
-          <router-link to="/affiliation" class="md-card md-card-registro">
-
-            <div class="registro-content">
-
-              <div class="registro-text">
-
-                <h3>Registro Único</h3>
-
-                <p>Únete y comienza<br />tu camino al exito</p>
-
-                <span class="registro-btn">Más informacion</span>
-
-              </div>
-
-              <div class="registro-icon-wrap">
-
-                <i class="fas fa-user-plus"></i>
-
-              </div>
-
-            </div>
-
-          </router-link>
+          <affiliation-status-card
+            :variant="affiliationCard.variant"
+            :title="affiliationCard.title"
+            :title-highlight="affiliationCard.titleHighlight"
+            :message="affiliationCard.message"
+            :to="affiliationCard.to"
+          />
 
 
 
           <div class="md-card md-card-comisiones">
 
-            <h3 class="md-card-title">Comisiones</h3>
+            <h3 class="md-card-title comisiones-title">Comisiones</h3>
 
-            <p class="md-card-sub">Completa los porcentajes y disfruta el viaje!</p>
+            <p class="md-card-sub comisiones-sub">
+              Consulta tus ganancias y el estado de tus saldos.
+            </p>
 
-            <div class="comisiones-row">
+            <div class="comisiones-saldos">
 
-              <div class="comision-pill comision-pill--green">
+              <div class="comision-saldo-item comision-saldo-item--earned">
 
-                <div class="comision-circle"><i class="fas fa-star"></i></div>
+                <div class="comision-saldo-icon-wrap">
 
-                <span class="comision-name">Bono Unilevel</span>
+                  <i class="fas fa-dollar-sign" aria-hidden="true"></i>
 
-                <span class="comision-val">{{ bonusUnilevel }}</span>
+                </div>
 
-              </div>
+                <span class="comision-saldo-label">Total ganado</span>
 
-              <div class="comision-pill comision-pill--blue">
-
-                <div class="comision-circle"><i class="fas fa-star"></i></div>
-
-                <span class="comision-name">Bono Generacional</span>
-
-                <span class="comision-val">{{ bonusGeneracional }}</span>
+                <span class="comision-saldo-value">Bs {{ formatMoney(totalEarned) }}</span>
 
               </div>
 
-              <div class="comision-pill comision-pill--purple">
+              <div class="comision-saldo-divider" aria-hidden="true"></div>
 
-                <div class="comision-circle"><i class="fas fa-star"></i></div>
+              <div class="comision-saldo-item comision-saldo-item--available">
 
-                <span class="comision-name">Bono Rango</span>
+                <div class="comision-saldo-icon-wrap">
 
-                <span class="comision-val">{{ bonusRango }}</span>
+                  <i class="fas fa-wallet" aria-hidden="true"></i>
+
+                </div>
+
+                <span class="comision-saldo-label">Saldo disponible</span>
+
+                <span class="comision-saldo-value">Bs {{ balanceDisplay }}</span>
+
+              </div>
+
+              <div class="comision-saldo-divider" aria-hidden="true"></div>
+
+              <div class="comision-saldo-item comision-saldo-item--locked">
+
+                <div class="comision-saldo-icon-wrap">
+
+                  <i class="fas fa-lock" aria-hidden="true"></i>
+
+                </div>
+
+                <span class="comision-saldo-label">Saldo no disponible</span>
+
+                <span class="comision-saldo-value">Bs {{ unavailableBalanceDisplay }}</span>
 
               </div>
 
@@ -411,6 +522,7 @@ import api from "@/api";
 import Spinner from "@/components/Spinner.vue";
 import SkeletonLoader from "@/components/SkeletonLoader.vue";
 import NivelDiamondSvg from "@/components/dashboard/NivelDiamondSvg.vue";
+import AffiliationStatusCard from "@/components/AffiliationStatusCard.vue";
 
 const THEME_FOREST_DARK = "#0e2318";
 const THEME_FOREST = "#1b4332";
@@ -444,6 +556,7 @@ export default {
     Spinner,
     SkeletonLoader,
     NivelDiamondSvg,
+    AffiliationStatusCard,
   },
   data() {
     return {
@@ -472,14 +585,20 @@ export default {
       op3: 0,
       node: {},
       recentIncomes: [],
-      bonusUnilevel: 0,
-      bonusGeneracional: 0,
-      bonusRango: 0,
+      totalEarned: 0,
       travelInternationalPct: 0,
       travelNationalPct: 0,
       gaugeCircumference: 2 * Math.PI * 48,
       viajeCircumference: 2 * Math.PI * 32,
-      };
+      plan: "",
+      affiliated: false,
+      monthlyPurchaseBs: 0,
+      personalProductCount: 0,
+      groupProductCount: 0,
+      monthlyActive: false,
+      minActivePurchaseBs: 360,
+      rankCycle: null,
+    };
   },
   computed: {
     session() {
@@ -504,8 +623,69 @@ export default {
     },
     userPlan() {
       if (!this.plans) return null;
-      // Buscar por nombre o id seg?n corresponda
-      return this.plans.find(p => p.name === this.plan || p.id === this.plan);
+      return this.plans.find(
+        (p) => p.name === this.plan || p.id === this.plan
+      );
+    },
+    affiliationPackageKind() {
+      const raw = String(this.plan || this.$store.state.plan || "").trim();
+      const norm = raw.toLowerCase();
+      const matched = this.userPlan;
+      const name = String((matched && matched.name) || raw).toLowerCase();
+      const amount = matched ? Number(matched.amount) : NaN;
+
+      const isEmpresario =
+        norm === "master" ||
+        norm === "empresario" ||
+        /empresario/.test(name) ||
+        amount === 500;
+
+      if (isEmpresario) return "empresario";
+
+      const isClass =
+        norm === "class" ||
+        norm === "basic" ||
+        norm === "standard" ||
+        norm === "business" ||
+        /class/.test(name) ||
+        amount === 480;
+
+      if (isClass) return "class";
+
+      // Afiliado con plan desconocido: solo existen CLASS y EMPRESARIO → CLASS por defecto
+      return "class";
+    },
+    affiliationCard() {
+      const affiliated =
+        this.affiliated || this.$store.state.affiliated;
+
+      if (!affiliated) {
+        return {
+          variant: "register",
+          title: "Regístrate Ahora",
+          titleHighlight: "",
+          message: "Únete y comienza tu camino al éxito",
+          to: "/affiliation",
+        };
+      }
+
+      if (this.affiliationPackageKind === "empresario") {
+        return {
+          variant: "empresario",
+          title: "Paquete EMPRESARIO",
+          titleHighlight: "EMPRESARIO",
+          message: "Impulsa tu negocio y crece con tu equipo",
+          to: "/affiliation",
+        };
+      }
+
+      return {
+        variant: "class",
+        title: "Paquete CLASS",
+        titleHighlight: "CLASS",
+        message: "Ya formas parte de ClassMoringa",
+        to: "/affiliation",
+      };
     },
     title() {
       return "Dashboard";
@@ -520,7 +700,36 @@ export default {
       return this.formattedPlan;
     },
     gaugePct() {
-      return Math.min(100, Math.max(0, Number(this.nextRankPercentage) || 0));
+      return Math.min(100, Math.max(0, Number(this.rankCycleOverallPct) || 0));
+    },
+    rankCycleList() {
+      return (this.rankCycle && this.rankCycle.cycles) || [];
+    },
+    rankCycleOverallPct() {
+      return (this.rankCycle && this.rankCycle.overallPct) || 0;
+    },
+    rankCycleRemainingPct() {
+      return (this.rankCycle && this.rankCycle.remainingPct) != null
+        ? this.rankCycle.remainingPct
+        : this.remainingRankPct;
+    },
+    rankCycleTargetLabel() {
+      const key =
+        (this.rankCycle && this.rankCycle.targetRank) ||
+        this.nextRankName ||
+        "star";
+      return this.$options.filters._rank(key);
+    },
+    rankCyclePersonalDirects() {
+      return (this.rankCycle && this.rankCycle.personalDirects) != null
+        ? this.rankCycle.personalDirects
+        : (this.directs || []).length;
+    },
+    rankCycleCyclesLabel() {
+      return (this.rankCycle && this.rankCycle.cyclesLabel) || "0 / 4";
+    },
+    rankCycleProductsPerCycle() {
+      return (this.rankCycle && this.rankCycle.productsPerCycle) || 600;
     },
     gaugeIsComplete() {
       return this.gaugePct >= 100;
@@ -554,12 +763,34 @@ export default {
       return Math.max(0, 100 - (Number(this.nextRankPercentage) || 0));
     },
     levelStats() {
-      const fmt = (n) => Number(n || 0).toLocaleString("es-BO");
+      const personal = Number(this.personalProductCount) || 0;
+      let personalLabel = "0";
+      if (personal === 1) personalLabel = "1 compra personal";
+      else if (personal > 1) personalLabel = personal + " compras personales";
+      const active = !!this.monthlyActive;
+
       return [
-        { label: "Volumen Personal", value: fmt(this.points), icon: "fas fa-user" },
-        { label: "Patrocinados Personales", value: fmt((this.directs || []).length), icon: "fas fa-handshake" },
-        { label: "Volumen Rango", value: fmt((this.frontals || []).length), icon: "fas fa-crown" },
-        { label: "Volumen Grupales", value: fmt(this.total_points), icon: "fas fa-users" },
+        {
+          label: "Compra mensual",
+          value: "Bs " + this.formatMoney(this.monthlyPurchaseBs),
+          icon: "fas fa-shopping-cart",
+        },
+        {
+          label: "Estado",
+          value: active ? "Activo" : "Inactivo",
+          icon: active ? "fas fa-check-circle" : "fas fa-times-circle",
+          valueClass: active ? "nivel-stat-value--active" : "nivel-stat-value--inactive",
+        },
+        {
+          label: "Compras personales",
+          value: personalLabel,
+          icon: "fas fa-box-open",
+        },
+        {
+          label: "Volumen grupal",
+          value: String(Number(this.groupProductCount) || 0),
+          icon: "fas fa-users",
+        },
       ];
     },
     nextRankReq() {
@@ -631,6 +862,14 @@ export default {
       const t = this.viajeNatlPct / 100;
       return lerpColor(THEME_GOLD, THEME_GOLD_DEEP, t * 0.8);
     },
+    balanceDisplay() {
+      const n = Number(this.balance);
+      return Number.isFinite(n) ? n.toFixed(2) : "0.00";
+    },
+    unavailableBalanceDisplay() {
+      const n = Number(this._balance);
+      return Number.isFinite(n) ? n.toFixed(2) : "0.00";
+    },
   },
   filters: {
     _rank(val) {
@@ -664,6 +903,13 @@ export default {
     formatMoney(n) {
       return Number(n || 0).toLocaleString("es-BO", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     },
+    rankCycleTimelineSegClass(index) {
+      const c = this.rankCycleList[index];
+      if (!c) return "rango-timeline-seg--pending";
+      if (c.status === "completed") return "rango-timeline-seg--completed";
+      if (c.status === "in_progress") return "rango-timeline-seg--progress";
+      return "rango-timeline-seg--pending";
+    },
     formatIncomeDate(dateStr) {
       if (!dateStr) return "?";
       const d = new Date(dateStr);
@@ -674,19 +920,22 @@ export default {
       if (isToday) return `Hoy, ${time}`;
       return d.toLocaleDateString("es-BO", { day: "2-digit", month: "short", year: "numeric" }) + `, ${time}`;
     },
-    sumBonus(transactions, pattern) {
-      return (transactions || [])
-        .filter((t) => t.type === "in" && pattern.test(String(t.name || "")))
-        .reduce((s, t) => s + Number(t.value || 0), 0);
+    async loadAffiliationPlans() {
+      try {
+        const { data } = await api.Afiliation.GET(this.session);
+        if (data.error) return;
+        if (data.plans && data.plans.length) {
+          this.plans = data.plans;
+        }
+      } catch (e) {
+        console.warn("No se pudieron cargar planes de afiliación:", e);
+      }
     },
     async loadTransactionsExtra() {
       try {
         const { data } = await api.transactions(this.session);
         if (data.error || !data.transactions) return;
         const txs = data.transactions;
-        this.bonusUnilevel = Math.round(this.sumBonus(txs, /unilevel/i));
-        this.bonusGeneracional = Math.round(this.sumBonus(txs, /generacional/i));
-        this.bonusRango = Math.round(this.sumBonus(txs, /rango|residual|rank/i));
         const incomes = txs
           .filter((t) => t.type === "in")
           .sort((a, b) => new Date(b.date) - new Date(a.date))
@@ -728,18 +977,14 @@ export default {
     this.$store.commit("SET__ACTIVATED", data._activated);
     this.$store.commit("SET_ACTIVATED", data.activated);
     this.$store.commit("SET_PLAN", data.plan);
+    this.plan = data.plan || "";
+    this.affiliated = !!data.affiliated;
     this.$store.commit("SET_COUNTRY", data.country);
     this.$store.commit("SET_PHOTO", data.photo);
     this.$store.commit("SET_TREE", data.tree);
     this.$store.commit("SET_EMAIL", data.email);
     this.$store.commit("SET_TOKEN", data.token);
     this.$store.commit("SET_TOTAL_POINTS", data.total_points);
-
-    // Verificar afiliaci?n
-    if (!data.affiliated) {
-      this.$router.push("/affiliation");
-      return;
-    }
 
     // Cargar datos del dashboard
     this.ins = data.ins;
@@ -750,6 +995,10 @@ export default {
     this.sifrahBalance = Number(data.sifrahBalance) || 0;
     this.balance = balNum.toFixed(2);
     this._balance = vbalNum.toFixed(2);
+    this.totalEarned =
+      data.totalEarned != null
+        ? Number(data.totalEarned) || 0
+        : (Number(data.ins) || 0) + (Number(data.insVirtual) || 0);
     this.$store.commit("SET_BALANCE", balNum);
     this.$store.commit("SET__BALANCE", vbalNum);
     this.team = data.team;
@@ -765,8 +1014,18 @@ export default {
     this.nextRankPercentage = data.nextRankPercentage || 0;
     this.provisionalRank = data.provisionalRank || "none";
     this.travelBonusText = data.travelBonusText || 'Tu progreso hacia el Bono Viaje se actualizar? pr?ximamente. ?Sigue trabajando para alcanzar tus objetivos!';
+    this.monthlyPurchaseBs = Number(data.monthlyPurchaseBs) || 0;
+    this.personalProductCount = Number(data.personalProductCount) || 0;
+    this.groupProductCount = Number(data.groupProductCount) || 0;
+    this.monthlyActive = !!data.monthlyActive;
+    this.minActivePurchaseBs = Number(data.minActivePurchaseBs) || 360;
+    this.rankCycle = data.rankCycle || null;
+    if (data.rankCycle && data.rankCycle.overallPct != null) {
+      this.nextRankPercentage = data.rankCycle.overallPct;
+    }
 
     this.loadTransactionsExtra();
+    this.loadAffiliationPlans();
     } catch (err) {
       console.error("Error cargando dashboard:", err);
     } finally {

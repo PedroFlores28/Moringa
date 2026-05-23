@@ -207,6 +207,14 @@
   letter-spacing: -0.02em;
 }
 
+.nivel-stat-value--active {
+  color: #1b7a3d;
+}
+
+.nivel-stat-value--inactive {
+  color: #b45309;
+}
+
 /* --- Rango / gauge --- */
 .md-card-rango {
   background: #fafafa;
@@ -300,6 +308,241 @@
   font-weight: 700;
 }
 
+.rango-layout {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+  margin-top: 4px;
+}
+
+.rango-col-left {
+  flex: 0 0 200px;
+  min-width: 180px;
+}
+
+.rango-col-right {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.rango-quick-stats {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 14px;
+  background: #f2f4f3;
+  border-radius: 12px;
+  border: 1px solid #e6ebe8;
+}
+
+.rango-quick-stat {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.rango-quick-divider {
+  width: 1px;
+  align-self: stretch;
+  background: #d8e0dc;
+  flex-shrink: 0;
+}
+
+.rango-quick-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #1f6b47 0%, #0f3d28 100%);
+  color: #e8c96a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.rango-quick-label {
+  display: block;
+  font-size: 0.72rem;
+  color: #6d7a72;
+  line-height: 1.2;
+}
+
+.rango-quick-value {
+  display: block;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #1a2e24;
+  line-height: 1.1;
+  margin-top: 2px;
+}
+
+.rango-cycles-panel {
+  background: #f8f9f8;
+  border: 1px solid #e6ebe8;
+  border-radius: 12px;
+  padding: 14px 16px 18px;
+}
+
+.rango-cycles-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  margin-bottom: 14px;
+}
+
+.rango-cycles-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1a2e24;
+}
+
+.rango-cycles-hint {
+  margin: 0;
+  font-size: 0.72rem;
+  color: #6d7a72;
+}
+
+.rango-cycles-hint strong {
+  color: #1f6b47;
+  font-weight: 700;
+}
+
+.rango-cycles-hint i {
+  margin-right: 4px;
+  color: #9aa89f;
+}
+
+.rango-cycles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.rango-cycle-card {
+  background: #fff;
+  border: 1px solid #e6ebe8;
+  border-radius: 10px;
+  padding: 10px 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 88px;
+}
+
+.rango-cycle-name {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #4a5c52;
+  letter-spacing: 0.02em;
+}
+
+.rango-cycle-badge {
+  font-size: 0.58rem;
+  font-weight: 700;
+  padding: 4px 6px;
+  border-radius: 6px;
+  line-height: 1.2;
+}
+
+.rango-cycle-badge--completed {
+  background: #1f6b47;
+  color: #fff;
+}
+
+.rango-cycle-badge--in_progress {
+  background: #d4af37;
+  color: #1a2e24;
+}
+
+.rango-cycle-badge--pending {
+  background: #e8ece9;
+  color: #6d7a72;
+}
+
+.rango-cycle-amount {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #1a2e24;
+  margin-top: auto;
+}
+
+.rango-cycles-timeline {
+  position: relative;
+  margin-top: 14px;
+  padding: 0 8px;
+}
+
+.rango-timeline-line {
+  display: flex;
+  height: 4px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #e5ebe7;
+}
+
+.rango-timeline-seg {
+  flex: 1;
+  height: 100%;
+}
+
+.rango-timeline-seg--completed {
+  background: #1f6b47;
+}
+
+.rango-timeline-seg--progress {
+  background: linear-gradient(90deg, #1f6b47 0%, #d4af37 100%);
+}
+
+.rango-timeline-seg--pending {
+  background: #e5ebe7;
+}
+
+.rango-timeline-dots {
+  display: flex;
+  justify-content: space-between;
+  margin-top: -14px;
+  padding: 0 2px;
+}
+
+.rango-timeline-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid #d0d8d4;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+.rango-timeline-dot--completed {
+  background: #1f6b47;
+  border-color: #1f6b47;
+}
+
+.rango-timeline-dot--in_progress {
+  border-color: #d4af37;
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.25);
+}
+
+.rango-timeline-dot--pending {
+  background: #fff;
+  border-color: #cfd8d3;
+}
+
 .rango-mini-grid {
   flex: 1;
   min-width: 0;
@@ -381,9 +624,9 @@
     padding: 14px 20px 12px;
   }
 
-  .rango-body {
+  .rango-layout {
     gap: 22px;
-    margin-top: 30px;
+    margin-top: 8px;
   }
 
   .rango-gauge-block {
@@ -510,48 +753,100 @@
   color: #d4af37;
 }
 
-/* --- Comisiones --- */
-.comisiones-row {
-  display: flex;
-  gap: 12px;
-  justify-content: space-between;
+/* --- Comisiones / saldos --- */
+.md-card-comisiones {
+  background: #fff;
 }
 
-.comision-pill {
+.comisiones-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #0f1a2e;
+  margin-bottom: 6px;
+}
+
+.comisiones-sub {
+  font-size: 0.88rem;
+  color: #6d7a72;
+  margin: 0 0 20px;
+  line-height: 1.45;
+}
+
+.comisiones-saldos {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.comision-saldo-item {
   flex: 1;
   text-align: center;
-  padding: 8px 4px;
+  padding: 8px 12px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
-.comision-circle {
-  width: 56px;
-  height: 56px;
+.comision-saldo-divider {
+  width: 1px;
+  background: #e4e9e6;
+  flex-shrink: 0;
+  margin: 4px 0;
+}
+
+.comision-saldo-icon-wrap {
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
-  margin: 0 auto 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #d4af37;
-  font-size: 18px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  font-size: 20px;
+  font-weight: 700;
 }
 
-.comision-pill--green .comision-circle { background: linear-gradient(145deg, #43a047, #2e7d32); }
-.comision-pill--blue .comision-circle { background: linear-gradient(145deg, #42a5f5, #1565c0); }
-.comision-pill--purple .comision-circle { background: linear-gradient(145deg, #c5a059, #9a7b1a); }
+.comision-saldo-item--earned .comision-saldo-icon-wrap {
+  background: rgba(31, 107, 71, 0.12);
+  color: #1f6b47;
+}
 
-.comision-name {
+.comision-saldo-item--available .comision-saldo-icon-wrap {
+  background: rgba(33, 99, 180, 0.12);
+  color: #2163b4;
+}
+
+.comision-saldo-item--locked .comision-saldo-icon-wrap {
+  background: rgba(217, 119, 6, 0.14);
+  color: #c2410c;
+}
+
+.comision-saldo-label {
   display: block;
-  font-size: 0.8rem;
-  color: #5a6b62;
-  margin-bottom: 4px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #1a2e24;
   line-height: 1.25;
 }
 
-.comision-val {
-  font-size: 1.35rem;
+.comision-saldo-value {
+  display: block;
+  font-size: 1.5rem;
   font-weight: 800;
-  color: #0f2a1c;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.comision-saldo-item--earned .comision-saldo-value {
+  color: #1f6b47;
+}
+
+.comision-saldo-item--available .comision-saldo-value {
+  color: #2163b4;
+}
+
+.comision-saldo-item--locked .comision-saldo-value {
+  color: #c2410c;
 }
 
 /* --- Bonos viaje --- */
@@ -778,9 +1073,14 @@
     margin-top: 8px;
   }
 
-  .rango-body {
+  .rango-layout {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+  }
+
+  .rango-col-left {
+    flex: none;
+    width: 100%;
   }
 
   .rango-gauge-block {
@@ -790,8 +1090,18 @@
     border-right: none;
   }
 
-  .rango-mini-grid {
+  .rango-cycles-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .rango-quick-stats {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .rango-quick-divider {
     width: 100%;
+    height: 1px;
   }
 
   .mini-stat {
@@ -801,9 +1111,15 @@
 
 @media (max-width: 640px) {
 
-  .comisiones-row {
+  .comisiones-saldos {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+  }
+
+  .comision-saldo-divider {
+    width: 100%;
+    height: 1px;
+    margin: 4px 0;
   }
 
   .md-card {

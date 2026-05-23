@@ -149,7 +149,7 @@
                   <h4 class="section-title">1.- Elige tu paquete de Afiliación:</h4>
                   <div class="packages-grid">
                     <div 
-                      v-for="plan in plans" 
+                      v-for="plan in availablePlans" 
                       :key="plan.id"
                       class="package-card"
                       :class="{ active: selec_plan && selec_plan.id === plan.id }"
@@ -730,6 +730,10 @@ import App from "@/views/layouts/App";
 import api from "@/api";
 import lib from "@/lib";
 import Spinner from "@/components/Spinner.vue";
+import {
+  filterAffiliationPlansForUser,
+  isEmpresarioTier,
+} from "@/utils/affiliationPlans";
 
 const INVOICE_ROOT = process.env.VUE_APP_INVOICE_ROOT;
 
@@ -774,6 +778,8 @@ export default {
       selectError: "",
       showPendingModal: false,
              affiliation: null,
+       affiliations: [],
+       memberAffiliated: false,
        showRedirectMessage: false, // Controla si mostrar el mensaje de redirección
        // Nuevas propiedades para la selección de productos
        searchTerm: '',
@@ -803,6 +809,23 @@ export default {
     },
     affiliated() {
       return this.$store.state.affiliated;
+    },
+    availablePlans() {
+      var hasPlan =
+        this.plan &&
+        String(this.plan).trim().toLowerCase() !== "none";
+      var affiliatedFlag =
+        this.memberAffiliated ||
+        this.affiliated ||
+        hasPlan ||
+        (this.affiliations && this.affiliations.length > 0);
+
+      return filterAffiliationPlansForUser(this.plans || [], {
+        plan: this.plan || this.$store.state.plan,
+        affiliated: affiliatedFlag,
+        affiliation: this.affiliation,
+        approvedAffiliations: this.affiliations || [],
+      });
     },
 
     categories() {
@@ -876,13 +899,11 @@ export default {
       return this.selec_plan && this.selec_plan.id === "master";
     },
     isMasterPlanApproved() {
-      // Trofeo solo si la afiliación fue aprobada como master o el usuario ya es master
+      if (isEmpresarioTier({ id: this.plan })) return true;
       return (
-        (this.affiliation &&
-          this.affiliation.plan &&
-          this.affiliation.plan.id === "master" &&
-          this.affiliation.status === "approved") ||
-        this.plan === "master"
+        this.affiliation &&
+        this.affiliation.status === "approved" &&
+        isEmpresarioTier(this.affiliation.plan)
       );
     },
     showMasterTrophy() {
@@ -985,6 +1006,7 @@ export default {
       this.$store.commit("SET_NAME", data.name);
       this.$store.commit("SET_LAST_NAME", data.lastName);
       this.$store.commit("SET_AFFILIATED", data.affiliated);
+      this.memberAffiliated = !!data.affiliated;
       this.$store.commit("SET_ACTIVATED", data.activated);
       this.$store.commit("SET__ACTIVATED", data._activated);
       this.$store.commit("SET_PLAN", data.plan);
@@ -994,11 +1016,7 @@ export default {
       if (data.dni) this.$store.commit("SET_DNI", data.dni);
       this.$store.commit("SET_TOKEN", data.token);
 
-      // Usar directamente los planes que llegan del backend
       this.plans = data.plans || [];
-      if (this.plans.length > 0) {
-        this.selec_plan = this.plans[0];
-      }
 
       // Initialize products with proper structure
       if (data.products && Array.isArray(data.products)) {
@@ -1031,15 +1049,11 @@ export default {
       this.offices = data.offices || [];
       this.affiliation = data.affiliation || null;
       this.affiliations = data.affiliations || [];
+      this.applyAvailablePlansSelection();
       await this.loadAffiliationBanners();
 
       // Set congrats state
-      if (
-        this.plan == "master" ||
-        (this.affiliation &&
-          this.affiliation.plan.id == "master" &&
-          this.affiliation.status == "approved")
-      ) {
+      if (this.isMasterPlanApproved) {
         this.congrats = true;
       }
 
@@ -1071,6 +1085,17 @@ export default {
   },
   
   methods: {
+    applyAvailablePlansSelection() {
+      const visible = this.availablePlans;
+      if (visible.length > 0) {
+        const stillValid =
+          this.selec_plan &&
+          visible.some((p) => p.id === this.selec_plan.id);
+        if (!stillValid) this.selec_plan = visible[0];
+        return;
+      }
+      this.selec_plan = null;
+    },
     async loadAffiliationBanners() {
       try {
         const { data } = await api.AffiliationBanners.GET(this.session);
@@ -1121,6 +1146,10 @@ export default {
         if (data.lastName) this.$store.commit("SET_LAST_NAME", data.lastName);
         if (data.photo) this.$store.commit("SET_PHOTO", data.photo);
         if (data.plan) this.$store.commit("SET_PLAN", data.plan);
+        if (data.affiliated !== undefined) {
+          this.$store.commit("SET_AFFILIATED", data.affiliated);
+          this.memberAffiliated = !!data.affiliated;
+        }
         if (data.country) this.$store.commit("SET_COUNTRY", data.country);
         if (data.tree !== undefined) this.$store.commit("SET_TREE", data.tree);
         if (data.activated !== undefined) this.$store.commit("SET_ACTIVATED", data.activated);
@@ -1131,10 +1160,7 @@ export default {
         
         // Cargar datos específicos para la afiliación
         this.plans = data.plans || [];
-        if (this.plans.length > 0) {
-          this.selec_plan = this.plans[0];
-        }
-        
+
         // Initialize products with proper structure
         if (data.products && Array.isArray(data.products)) {
           this.products = data.products.map((product) => ({
@@ -1164,15 +1190,11 @@ export default {
         this.offices = data.offices || [];
         this.affiliation = data.affiliation || null;
         this.affiliations = data.affiliations || [];
+        this.applyAvailablePlansSelection();
         await this.loadAffiliationBanners();
-        
+
         // Set congrats state
-        if (
-          this.plan == "master" ||
-          (this.affiliation &&
-            this.affiliation.plan.id == "master" &&
-            this.affiliation.status == "approved")
-        ) {
+        if (this.isMasterPlanApproved) {
           this.congrats = true;
         }
         
