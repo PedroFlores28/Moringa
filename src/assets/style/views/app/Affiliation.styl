@@ -339,6 +339,58 @@ $m-forest-grad = linear-gradient(135deg, $m-forest-mid 0%, $m-forest 100%)
 .products-section
   padding 0 30px 30px 30px
 
+.plan-selection-info
+  display flex
+  align-items center
+  gap 16px
+  padding 16px 20px
+  margin-bottom 24px
+  background #fff
+  border-radius 12px
+  box-shadow 0 2px 8px rgba(0, 0, 0, 0.08)
+
+  &__icon
+    flex 0 0 auto
+    width 28px
+    height 28px
+    border-radius 50%
+    background #f5a623
+    color #fff
+    display flex
+    align-items center
+    justify-content center
+    font-size 14px
+
+  &__content
+    flex 1
+    min-width 0
+
+  &__plan
+    display block
+    font-size 1rem
+    font-weight 700
+    color #333
+    margin-bottom 4px
+
+  &__message
+    margin 0
+    font-size 0.95rem
+    color #666
+    line-height 1.4
+
+    strong
+      color #f5a623
+      font-weight 700
+
+  &__counter
+    flex 0 0 auto
+    padding 8px 14px
+    background #f0f0f0
+    border-radius 999px
+    font-size 0.95rem
+    font-weight 700
+    color #333
+
 .products-filters
   margin-bottom 25px
 
@@ -1152,6 +1204,15 @@ $m-forest-grad = linear-gradient(135deg, $m-forest-mid 0%, $m-forest 100%)
 @media (max-width: 768px)
   .affiliation-content-wrapper
     padding 0 10px
+
+  .plan-selection-info
+    flex-wrap wrap
+    gap 12px
+    padding 14px 16px
+    margin-bottom 20px
+
+    &__counter
+      margin-left auto
 
   .affiliation-banner-full
     padding 30px 20px

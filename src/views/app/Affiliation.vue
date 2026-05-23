@@ -174,26 +174,6 @@
                   </div>
                 </div>
 
-                <!-- Sección 2: Kit de inicio -->
-                <div class="kit-section">
-                  <h4 class="section-title">2.- Llévate tu Kit de Inicio:</h4>
-                <div
-                  class="kit-banner"
-                  :class="{ 'has-image': affiliationBanners.kit }"
-                >
-                  <img
-                    v-if="affiliationBanners.kit"
-                    :src="affiliationBanners.kit"
-                    alt="Banner Kit de Inicio"
-                    class="kit-banner__image"
-                    @error="handleBannerImageError('kit')"
-                  />
-                  <div v-else class="kit-content">
-                    <h5>Kit de Inicio Incluido</h5>
-                    <p>Todo lo que necesitas para comenzar</p>
-                  </div>
-                </div>
-                </div>
                 <!-- Resumen del carrito móvil - Copiado de Activation.vue -->
                 <div class="cart-button-container-mobile">
                   <div class="cart-info-left">
@@ -208,9 +188,28 @@
                   </button>
                 </div>
 
-                <!-- Sección 3: Selección de productos -->
+                <!-- Sección 2: Selección de productos -->
                 <div class="products-section">
-                  <h4 class="section-title">3.- Escoge tus productos:</h4>
+                  <h4 class="section-title">2.- Escoge tus productos:</h4>
+
+                  <div v-if="selec_plan" class="plan-selection-info">
+                    <div class="plan-selection-info__icon" aria-hidden="true">
+                      <i class="fas fa-info"></i>
+                    </div>
+                    <div class="plan-selection-info__content">
+                      <strong class="plan-selection-info__plan">{{ selec_plan.name }}</strong>
+                      <p class="plan-selection-info__message">
+                        <template v-if="planSelectionRemaining > 0">
+                          Selecciona <strong>{{ planSelectionRemainingFormatted }}</strong>
+                          {{ planSelectionRemaining === 1 ? 'producto' : 'productos' }} más para completar
+                        </template>
+                        <template v-else>
+                          Has completado tu selección de productos
+                        </template>
+                      </p>
+                    </div>
+                    <span class="plan-selection-info__counter">{{ planSelectionProgress }}</span>
+                  </div>
                   
                   <!-- Filtros y búsqueda -->
                   <div class="products-filters">
@@ -935,6 +934,26 @@ export default {
         const weight = Number(product.weight) || 1;
         return total + (product.total * weight);
       }, 0);
+    },
+
+    planSelectionRemaining() {
+      if (!this.selec_plan) return 0;
+      return Math.max(0, this.selec_plan.max_products - this.validationTotalItems);
+    },
+
+    planSelectionRemainingFormatted() {
+      const remaining = this.planSelectionRemaining;
+      return Number.isInteger(remaining) ? remaining : parseFloat(remaining.toFixed(1));
+    },
+
+    planSelectionProgress() {
+      if (!this.selec_plan) return "0/0";
+      const max = this.selec_plan.max_products;
+      const current = Math.min(this.validationTotalItems, max);
+      const formattedCurrent = Number.isInteger(current)
+        ? current
+        : parseFloat(current.toFixed(1));
+      return `${formattedCurrent}/${max}`;
     },
 
     // Nuevas propiedades computadas para el catálogo de productos
