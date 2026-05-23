@@ -209,13 +209,7 @@
         </a>
         <div class="sub-menu" :class="{ active: buys }">
           <router-link to="/activation" @click.native="closeAllMenus" v-if="affiliated">
-            <i class="fas fa-shopping-bag"></i> Tienda
-          </router-link>
-          <router-link to="/savings-bonus" @click.native="closeAllMenus" v-if="affiliated">
-            <i class="fas fa-piggy-bank"></i> Bono Ahorro
-          </router-link>
-          <router-link to="/my-redemptions" @click.native="closeAllMenus" v-if="affiliated">
-            <i class="fas fa-box-open"></i> Mis Canjes
+            <i class="fas fa-shopping-bag"></i> Compras
           </router-link>
           <router-link to="/affiliation" @click.native="closeAllMenus">
             <i class="fas fa-user-plus"></i> Afiliación
@@ -555,15 +549,7 @@
           <div class="mobile-submenu" :class="{ 'active': mobileSubmenus[0] }">
             <router-link to="/activation" v-if="affiliated" @click.native="handleNavigationClickAndClose" class="mobile-submenu-item">
               <i class="fas fa-shopping-bag"></i>
-              <span>Tienda</span>
-            </router-link>
-            <router-link to="/savings-bonus" v-if="affiliated" @click.native="handleNavigationClickAndClose" class="mobile-submenu-item">
-              <i class="fas fa-piggy-bank"></i>
-              <span>Bono Ahorro</span>
-            </router-link>
-            <router-link to="/my-redemptions" v-if="affiliated" @click.native="handleNavigationClickAndClose" class="mobile-submenu-item">
-              <i class="fas fa-box-open"></i>
-              <span>Mis Canjes</span>
+              <span>Compras</span>
             </router-link>
             <router-link to="/affiliation" @click.native="handleNavigationClickAndClose" class="mobile-submenu-item">
               <i class="fas fa-user-plus"></i>
