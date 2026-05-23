@@ -86,7 +86,7 @@
         <div v-if="showRedirectMessage && !(affiliation && affiliation.status === 'pending')" class="affiliation-notification">
           <div class="affiliation-notification-content">
             <div class="affiliation-notification-header">
-              <i class="fas fa-star" style="color: #ffd700; margin-right: 10px;"></i>
+              <i class="fas fa-handshake" style="color: #ffd700; margin-right: 10px;"></i>
               <span style="font-weight: bold; font-size: 16px;">¡Bienvenido a ClassMoringa!</span>
             </div>
             <div class="affiliation-notification-body">
@@ -179,7 +179,6 @@
                   <div class="cart-info-left">
                     <div class="cart-price-info">
                       <span class="total-price">Monto: Bs. {{ selec_plan ? selec_plan.amount : 0 }}.00</span>
-                      <span class="total-items">Puntos: {{ selec_plan ? selec_plan.affiliation_points : 0 }} pts</span>
                     </div>
                   </div>
                   <button @click="openCartDetailModal" class="cart-square-btn">
@@ -265,12 +264,6 @@
                     >
                       <!-- Esquina decorativa de la tarjeta -->
                       <div class="card-corner"></div>
-                      
-                      <!-- Badge de puntos -->
-                      <div class="points-badge">
-                        <i class="fas fa-star"></i>
-                        {{ product.points }} pts
-                      </div>
                       
                       <!-- Imagen del producto -->
                       <div class="product-image-container">
@@ -361,10 +354,6 @@
                     />
                     <div class="cart-item-info">
                       <h4>{{ product.name }}</h4>
-                      <div class="cart-item-details">
-
-                        <span class="cart-item-points">{{ product.points }}pts</span>
-                      </div>
                     </div>
                     <div class="cart-item-controls">
                       <div class="cart-item-quantity-controls">
@@ -393,10 +382,6 @@
                     <div class="summary-row">
                       <span>Total productos:</span>
                       <span class="summary-value">{{ displayTotalItems.toFixed(1) }} items</span>
-                    </div>
-                    <div class="summary-row">
-                      <span>Puntos:</span>
-                      <span>{{ selec_plan ? selec_plan.affiliation_points : 0 }}.00</span>
                     </div>
                     <div class="summary-row total-row">
                       <span>Total:</span>
@@ -447,10 +432,6 @@
                   </div>
                   <div class="cart-detail-item-info">
                     <h4>{{ item.name }}</h4>
-                    <div class="cart-detail-item-details">
-
-                      <span class="cart-detail-item-points">{{ item.points }}pts</span>
-                    </div>
                   </div>
                   <div class="cart-detail-item-controls">
                     <div class="cart-detail-quantity-controls">
@@ -491,10 +472,6 @@
                   <div class="summary-row">
                     <span>Total productos:</span>
                     <span class="summary-value">{{ displayTotalItems.toFixed(1) }} items</span>
-                  </div>
-                  <div class="summary-row">
-                    <span>Puntos:</span>
-                    <span>{{ selec_plan ? selec_plan.affiliation_points : 0 }}.00</span>
                   </div>
                   <div class="summary-row total-row">
                     <span>Total:</span>
@@ -560,8 +537,6 @@
                     <div class="product-modal-right">
                       <div class="product-modal-info">
 
-                        <div class="modal-product-points">{{ selectedProduct.points }} pts</div>
-                        
                         <div class="product-description">
                           <h4>Descripción:</h4>
                           <p>{{ getProductDescription(selectedProduct) }}</p>

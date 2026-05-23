@@ -22,15 +22,9 @@
       
       <!-- Contenido principal (siempre visible, pero opaco durante carga) -->
       <div class="tienda-sifrah-container" :class="{ 'content-loading': loading || !products || products.length === 0 }">
-        <!-- Header con título y barra de puntos -->
+        <!-- Header con título -->
         <div class="store-header">
-          <!-- Título principal de la tienda -->
           <h1 class="store-title">Tienda ClassMoringa</h1>
-
-          <!-- Barra de puntos del usuario -->
-          <div class="points-bar">
-            <span class="points-icon">💎</span> Puntos: <b>{{ current_points }}</b>
-          </div>
         </div>
         
         <!-- Sistema de banners con Grid - Izquierda separada, Derecha con centro integrado -->
@@ -171,7 +165,6 @@
                     <div class="cart-info-left">
                       <div class="cart-price-info">
                         <span class="total-price">Monto: Bs {{ cartTotal.toFixed(2) }}</span>
-                        <span class="total-items">Puntos: {{ cartPoints }} pts</span>
                       </div>
                     </div>
                     <button @click="openCartDetailModal" class="cart-square-btn">
@@ -198,12 +191,6 @@
                     >
                       <!-- Esquina decorativa de la tarjeta -->
                       <div class="card-corner"></div>
-                      
-                      <!-- Badge de puntos -->
-                      <div class="points-badge">
-                        <i class="fas fa-star"></i>
-                        {{ product.points }} pts
-                      </div>
                       
                       <!-- Imagen del producto -->
                       <div class="product-image-container">
@@ -292,7 +279,6 @@
                       <h4>{{ item.name }}</h4>
                       <div class="cart-item-details">
                         <span class="cart-item-price">Bs {{ getProductPrice(item) }}</span>
-                        <span class="cart-item-points">{{ item.points }}pts</span>
                       </div>
                     </div>
                     <div class="cart-item-controls">
@@ -326,10 +312,6 @@
                     <div class="summary-row">
                       <span>Total productos:</span>
                       <span class="summary-value">{{ cartItemsTotal }} items</span>
-                    </div>
-                    <div class="summary-row">
-                      <span>Puntos:</span>
-                      <span>{{ cartPoints.toFixed(2) }}</span>
                     </div>
                     <div class="summary-row total-row">
                       <span>Total:</span>
@@ -387,7 +369,6 @@
             <div class="product-modal-right">
               <div class="product-modal-info">
                 <div class="modal-product-price">Bs {{ getProductPrice(selectedProduct) }}</div>
-                <div class="modal-product-points">{{ selectedProduct.points }} pts</div>
                 
                 <div class="product-description">
                   <h4>Descripción:</h4>
@@ -427,7 +408,6 @@
                   <h4>{{ item.name }}</h4>
                   <div class="cart-detail-item-details">
                     <span class="cart-detail-item-price">Bs {{ getProductPrice(item) }}</span>
-                    <span class="cart-detail-item-points">{{ item.points }}pts</span>
                   </div>
                 </div>
                 <div class="cart-detail-item-controls">
@@ -462,10 +442,6 @@
                 <div class="summary-row">
                   <span>Total productos:</span>
                   <span class="summary-value">{{ cartItemsTotal }} items</span>
-                </div>
-                <div class="summary-row">
-                  <span>Puntos:</span>
-                  <span>{{ cartPoints.toFixed(2) }}</span>
                 </div>
                 <div class="summary-row total-row">
                   <span>Total:</span>

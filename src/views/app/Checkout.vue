@@ -31,7 +31,6 @@
                     <div class="cart-item-quantity">{{ item.total }} Unid.</div>
                     <div class="cart-item-name">{{ item.name }}</div>
                     <div class="cart-item-price">Bs {{ getProductPrice(item) }}</div>
-                    <div class="cart-item-points">{{ item.points }} pts</div>
                   </div>
                 </div>
                 
@@ -78,10 +77,6 @@
                       <span class="label">Estado:</span>
                       <span class="value">Pendiente de Pago</span>
                     </div>
-                    <div class="transaction-item">
-                      <span class="label">Puntos:</span>
-                      <span class="value">{{ orderSummaryPoints.toFixed(2) }}</span>
-                    </div>
                   </div>
                   <div class="transaction-row total">
                     <div class="transaction-item">
@@ -96,10 +91,6 @@
                   <div class="summary-row">
                     <span>Total productos:</span>
                     <span>{{ cartItemsTotal }} items</span>
-                  </div>
-                  <div class="summary-row">
-                    <span>Puntos:</span>
-                    <span>{{ cartPoints.toFixed(2) }}</span>
                   </div>
                   <div class="summary-row">
                     <span>Subtotal:</span>

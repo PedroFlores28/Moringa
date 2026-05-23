@@ -45,7 +45,6 @@
                     <th>Periodo</th>
                     <th>Productos</th>
                     <th>Monto</th>
-                    <th>Puntos</th>
                     <th>Voucher</th>
                     <th>Estado</th>
                     <th>Boleta</th>
@@ -53,7 +52,7 @@
                 </thead>
                 <tbody v-if="periodFilter && !filteredActivations.length">
                   <tr>
-                    <td colspan="8" class="activations-empty-msg">
+                    <td colspan="7" class="activations-empty-msg">
                       No hay compras en este período.
                     </td>
                   </tr>
@@ -81,7 +80,6 @@
                       </div>
                     </td>
                     <td>{{ activation.price | price }}</td>
-                    <td>{{ activation.points }}</td>
                     <td>
                       <a :href="activation.voucher" target="_blank">
                         <img :src="activation.voucher" class="voucher-img" />
@@ -125,7 +123,7 @@
                     :key="group.key"
                   >
                     <tr class="period-group-header">
-                      <td colspan="8">{{ group.label }}</td>
+                      <td colspan="7">{{ group.label }}</td>
                     </tr>
                     <tr v-for="activation in group.items" :key="activation.id">
                       <td>{{ activation.date | date }}</td>
@@ -146,7 +144,6 @@
                         </div>
                       </td>
                       <td>{{ activation.price | price }}</td>
-                      <td>{{ activation.points }}</td>
                       <td>
                         <a :href="activation.voucher" target="_blank">
                           <img :src="activation.voucher" class="voucher-img" />
