@@ -88,7 +88,7 @@
         <i class="fas fa-envelope"></i>
         <div>
           <h4>Email</h4>
-          <p>soporte@sifrah.com</p>
+          <p>soporte@classmoringa.com</p>
         </div>
       </div>
       <div class="info-item">
