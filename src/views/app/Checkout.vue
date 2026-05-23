@@ -157,10 +157,10 @@
                     </select>
                   </div>
 
-                  <div v-if="selectedOffice && pickupMapUrl" class="dispatch-map-ref">
+                  <div v-if="selectedOffice && pickupGoogleMapsUrl" class="dispatch-map-ref">
                     <label class="dispatch-field__label">Ubicación en mapa</label>
-                    <a :href="pickupMapUrl" target="_blank" rel="noopener noreferrer" class="dispatch-map-link">
-                      {{ pickupMapUrl }}
+                    <a :href="pickupGoogleMapsUrl" target="_blank" rel="noopener noreferrer" class="dispatch-map-link">
+                      {{ pickupGoogleMapsUrl }}
                     </a>
                   </div>
 
@@ -326,15 +326,15 @@
                         <span class="delivery-label">Horario:</span>
                         <span class="delivery-value">{{ selectedOffice.horario || 'Coordinar por WhatsApp para recojo' }}</span>
                       </div>
-                      <div class="delivery-info-item map-section" v-if="pickupGoogleMapsUrl">
-                        <div class="map-location-label">Ubicación en Mapa:</div>
+                      <div v-if="pickupGoogleMapsUrl" class="delivery-info-item dispatch-map-ref">
+                        <span class="dispatch-field__label">Ubicación en mapa</span>
                         <a
                           :href="pickupGoogleMapsUrl"
                           target="_blank"
                           rel="noopener noreferrer"
-                          class="map-link"
+                          class="dispatch-map-link"
                         >
-                          Ver en Google Maps
+                          {{ pickupGoogleMapsUrl }}
                         </a>
                       </div>
                     </div>
@@ -794,25 +794,14 @@ export default {
       return this.offices.find(office => office.id == this.selectedPickupPoint);
     },
 
-    pickupMapUrl() {
-      const office = this.selectedOffice;
-      if (!office) return '';
-      if (office.googleMapsUrl) return office.googleMapsUrl;
-      const address = office.address;
-      if (
-        address &&
-        address !== 'Dirección no disponible' &&
-        address !== 'hola'
-      ) {
-        return `https://www.openstreetmap.org/search?query=${encodeURIComponent(address)}`;
-      }
-      return '';
-    },
-
     pickupGoogleMapsUrl() {
       const office = this.selectedOffice;
       if (!office) return '';
       if (office.googleMapsUrl) return office.googleMapsUrl;
+      const coords = this.getMapCoordinates(office);
+      if (coords) {
+        return `https://maps.google.com/?q=${coords.lat},${coords.lng}`;
+      }
       const address = office.address;
       if (
         address &&
