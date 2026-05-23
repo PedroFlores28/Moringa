@@ -322,34 +322,20 @@
                           <i class="fab fa-whatsapp whatsapp-icon" v-if="selectedOffice.phone && selectedOffice.phone !== 'No disponible'"></i>
                         </span>
                       </div>
-                      <div class="delivery-info-item" v-if="selectedOffice.horario && selectedOffice.id !== 'central'">
+                      <div class="delivery-info-item">
                         <span class="delivery-label">Horario:</span>
-                        <span class="delivery-value">{{ selectedOffice.horario }}</span>
+                        <span class="delivery-value">{{ selectedOffice.horario || 'Coordinar por WhatsApp para recojo' }}</span>
                       </div>
-                      <!-- Mapa pequeño para la oficina seleccionada -->
-                      <div class="delivery-info-item map-section" v-if="selectedOffice">
+                      <div class="delivery-info-item map-section" v-if="pickupGoogleMapsUrl">
                         <div class="map-location-label">Ubicación en Mapa:</div>
-                        <div class="small-map-container">
-                          <div id="small-map" style="height: 200px; border-radius: 8px; margin-top: 10px;"></div>
-                          <div class="map-links">
-                            <a 
-                              v-if="selectedOffice.googleMapsUrl" 
-                              :href="selectedOffice.googleMapsUrl" 
-                              target="_blank" 
-                              class="map-link"
-                            >
-                              Ver en Google Maps
-                            </a>
-                            <a 
-                              v-else-if="selectedOffice.address && selectedOffice.address !== 'Dirección no disponible' && selectedOffice.address !== 'hola'"
-                              :href="`https://www.openstreetmap.org/search?query=${encodeURIComponent(selectedOffice.address)}`"
-                              target="_blank" 
-                              class="map-link"
-                            >
-                              Ver en OpenStreetMap
-                            </a>
-                          </div>
-                        </div>
+                        <a
+                          :href="pickupGoogleMapsUrl"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="map-link"
+                        >
+                          Ver en Google Maps
+                        </a>
                       </div>
                     </div>
                     
@@ -671,7 +657,6 @@ export default {
       
       // Instancia del mapa de Leaflet
       map: null,
-      smallMap: null, // Agregar instancia del mapa pequeño
       
       // Intervalo para actualización automática
       officesUpdateInterval: null,
@@ -820,6 +805,21 @@ export default {
         address !== 'hola'
       ) {
         return `https://www.openstreetmap.org/search?query=${encodeURIComponent(address)}`;
+      }
+      return '';
+    },
+
+    pickupGoogleMapsUrl() {
+      const office = this.selectedOffice;
+      if (!office) return '';
+      if (office.googleMapsUrl) return office.googleMapsUrl;
+      const address = office.address;
+      if (
+        address &&
+        address !== 'Dirección no disponible' &&
+        address !== 'hola'
+      ) {
+        return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
       }
       return '';
     },
@@ -1430,84 +1430,6 @@ export default {
       }
     },
     
-    // Método para inicializar el mapa pequeño en la card de datos de despacho
-    initSmallMap(office) {
-      
-      // Verificar que Leaflet está disponible
-      if (typeof L === 'undefined') {
-        console.error('Leaflet no está disponible. Verifica que se haya cargado la librería.');
-        return;
-      }
-      
-      const coords = this.getMapCoordinates(office);
-      
-      if (!coords) {
-        console.warn('No se pudieron obtener coordenadas para la oficina:', office.name);
-        return;
-      }
-      
-      // Verificar que el elemento del mapa pequeño existe
-      const mapElement = document.getElementById('small-map');
-      if (!mapElement) {
-        console.warn('Elemento del mapa pequeño no encontrado');
-        return;
-      }
-      
-      // Limpiar el mapa pequeño si ya existe
-      if (this.smallMap) {
-        this.smallMap.remove();
-        this.smallMap = null;
-      }
-      
-      try {
-        
-        // Crear mapa pequeño de Leaflet
-        this.smallMap = L.map('small-map', {
-          zoomControl: false, // Desactivar controles para mapa pequeño
-          scrollWheelZoom: false, // Desactivar zoom con scroll
-          doubleClickZoom: false,
-          boxZoom: false,
-          keyboard: false,
-          dragging: true, // Permitir arrastrar
-          touchZoom: true
-        }).setView([coords.lat, coords.lng], 16); // Zoom un poco más cerca
-        
-        // Agregar capa de tiles
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-          maxZoom: 19
-        }).addTo(this.smallMap);
-        
-        // Agregar marcador personalizado más pequeño
-        const smallCustomIcon = L.divIcon({
-          className: 'custom-marker-small',
-          html: '<div style="background-color: #1b5e3a; width: 24px; height: 24px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;"><i class="fas fa-map-marker-alt" style="color: white; font-size: 12px;"></i></div>',
-          iconSize: [24, 24],
-          iconAnchor: [12, 12]
-        });
-        
-        L.marker([coords.lat, coords.lng], { icon: smallCustomIcon })
-          .addTo(this.smallMap)
-          .bindPopup(`
-            <div style="text-align: center; padding: 8px;">
-              <h4 style="margin: 0 0 6px 0; color: #ff8c00; font-weight: 700; font-size: 13px;">${office.name}</h4>
-              <p style="margin: 0; color: #666; font-size: 12px;">${office.address}</p>
-              ${office.phone && office.phone !== 'No disponible' ? `<p style="margin: 4px 0 0 0; color: #333; font-size: 11px;"><i class="fas fa-phone"></i> ${office.phone}</p>` : ''}
-            </div>
-          `);
-        
-        // Ajustar el tamaño del mapa después de cargar
-        setTimeout(() => {
-          if (this.smallMap) {
-            this.smallMap.invalidateSize();
-          }
-        }, 200);
-        
-      } catch (error) {
-        console.error('Error al inicializar el mapa pequeño:', error);
-      }
-    },
-    
     onVoucherFileChange(event) {
       const file = event.target.files[0];
       if (file) {
@@ -1823,12 +1745,6 @@ export default {
             this.$nextTick(() => {
               setTimeout(() => {
                 this.initMap(office);
-                // También inicializar el mapa pequeño si estamos en el paso 3
-                if (this.currentStep === 3) {
-                  setTimeout(() => {
-                    this.initSmallMap(office);
-                  }, 300);
-                }
               }, 100);
             });
           }
@@ -1844,14 +1760,6 @@ export default {
           this.scrollToTop();
         });
         
-        // Si llegamos al paso 3 y hay una oficina seleccionada, inicializar el mapa pequeño
-        if (newStep === 3 && this.selectedOffice) {
-          this.$nextTick(() => {
-            setTimeout(() => {
-              this.initSmallMap(this.selectedOffice);
-            }, 200);
-          });
-        }
       }
     },
 
@@ -1951,11 +1859,6 @@ export default {
       this.map = null;
     }
     
-    // Limpiar el mapa pequeño cuando el componente se destruye
-    if (this.smallMap) {
-      this.smallMap.remove();
-      this.smallMap = null;
-    }
   }
 }
 </script>

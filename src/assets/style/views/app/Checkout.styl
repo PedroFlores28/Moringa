@@ -414,15 +414,6 @@ body
         color #1b5e3a
         font-weight 700
     
-    &:nth-child(2) // Puntos
-      font-size 1.1rem
-      span:first-child
-        color #333
-        font-weight 700
-      span:last-child
-        color #1b5e3a
-        font-weight 700
-    
     &.total
       font-weight 700
       font-size 1.1rem
@@ -490,10 +481,6 @@ body
         font-size 1.3rem
 
 .summary-details .concept-value
-  font-weight 600
-  color #ff9800
-
-.summary-details .points-value
   font-weight 600
   color #ff9800
 
@@ -2172,9 +2159,7 @@ $dispatch-gold-deep = #b8942e
           font-size 1.1rem
           
         .cart-item-points
-          color #1b5e3a
-          font-weight 600
-          font-size 1rem
+          display none !important
       
       .cart-item-controls
         display flex
@@ -3610,7 +3595,7 @@ $dispatch-gold-deep = #b8942e
   background transparent !important
   border none !important
 
-// Estilos para la sección del mapa en datos de despacho
+// Estilos para la sección del mapa en datos de despacho (solo enlace)
 .map-section
   .map-location-label
     color #1b5e3a
@@ -3618,3 +3603,14 @@ $dispatch-gold-deep = #b8942e
     font-weight 600
     margin-bottom 8px
     text-transform none
+
+  .map-link
+    display inline-block
+    margin-top 4px
+    color #1b5e3a
+    font-weight 500
+    font-size 0.9rem
+    text-decoration none
+
+    &:hover
+      text-decoration underline
