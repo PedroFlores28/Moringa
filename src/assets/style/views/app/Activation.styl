@@ -1476,7 +1476,8 @@
 }
 
 /* Sistema de banners: izquierda grande + derecha (centro apilado + banner derecho alto) */
-$banners-row-height = clamp(200px, 18vw, 280px)
+/* Solo desktop; móvil usa alturas propias en @media (max-width: 767px) */
+$banners-row-height = clamp(150px, 12vw, 200px)
 
 .banners-grid-wrapper {
   display: grid;
