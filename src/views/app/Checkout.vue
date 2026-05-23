@@ -142,22 +142,7 @@
                 <p class="dispatch-panel__intro">Elije tu método de despacho preferido.</p>
                 <div class="dispatch-panel__divider"></div>
 
-                <div class="dispatch-panel__methods">
-                  <button
-                    @click="selectDeliveryMethod('pickup')"
-                    :class="['dispatch-method-btn', { active: deliveryMethod === 'pickup' }]"
-                  >
-                    Retira tu Compra
-                  </button>
-                  <button
-                    @click="selectDeliveryMethod('delivery')"
-                    :class="['dispatch-method-btn', { active: deliveryMethod === 'delivery' }]"
-                  >
-                    Delivery
-                  </button>
-                </div>
-
-                <div v-if="deliveryMethod === 'pickup'" class="dispatch-pickup">
+                <div class="dispatch-pickup">
                   <div class="dispatch-field">
                     <label class="dispatch-field__label">Referencia a:</label>
                     <select
@@ -190,102 +175,14 @@
                         <span class="dispatch-detail-row__label">Teléfono:</span>
                         <span class="dispatch-detail-row__value">{{ selectedOffice.phone || 'No disponible' }}</span>
                       </div>
-                      <div v-if="selectedOffice.horario" class="dispatch-detail-row">
+                      <div class="dispatch-detail-row">
                         <span class="dispatch-detail-row__label">Horario:</span>
-                        <span class="dispatch-detail-row__value">{{ selectedOffice.horario }}</span>
+                        <span class="dispatch-detail-row__value">{{ selectedOffice.horario || 'Coordinar por WhatsApp para recojo' }}</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <!-- Formulario de Delivery -->
-                <div v-if="deliveryMethod === 'delivery'" class="delivery-form dispatch-delivery-form">
-                  <div class="form-section">
-                    <h4>Información del Receptor</h4>
-                    
-                    <div class="form-row">
-                      <div class="form-group">
-                        <label>Nombre Receptor</label>
-                        <div class="input-with-icon">
-                          <input v-model="deliveryData.recipientName" type="text" placeholder="Nombre Completo" @input="onlyLetters($event, 'deliveryData.recipientName')" required />
-                          <i class="fas fa-user"></i>
-                        </div>
-                      </div>
-                      
-                      <div class="form-group">
-                        <label>Documento</label>
-                        <div class="input-with-icon">
-                          <input v-model="deliveryData.document" type="text" placeholder="Nro. de Documento" @input="onlyNumbersDocument($event, 'deliveryData.document')" maxlength="8" required />
-                          <i class="fas fa-list"></i>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div class="form-group">
-                      <label>Celular Receptor</label>
-                      <div class="input-with-icon">
-                        <input v-model="deliveryData.recipientPhone" type="tel" placeholder="Celular Receptor" @input="onlyNumbersPhone($event, 'deliveryData.recipientPhone')" maxlength="9" required />
-                        <i class="fas fa-phone"></i>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="form-section">
-                    <h4>Ubicación de Entrega</h4>
-                    
-                    <div class="form-row">
-                                              <div class="form-group department-field">
-                          <label>Departamento</label>
-                          <select v-model="deliveryData.department" class="form-select" @change="onDepartmentChange">
-                            <option value="">Selecciona</option>
-                            <option v-for="dept in availableDepartments" :key="dept.value" :value="dept.value">
-                              {{ dept.name }}
-                            </option>
-                          </select>
-                        </div>
-                        
-                        <div class="form-group province-field">
-                          <label>Provincia</label>
-                          <select v-model="deliveryData.province" class="form-select" @change="onProvinceChange">
-                            <option value="">Selecciona</option>
-                            <option v-for="province in availableProvinces" :key="province.value" :value="province.value">
-                              {{ province.name }}
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-                      
-                      <div class="form-group">
-                        <label>Distrito</label>
-                        <select v-model="deliveryData.district" class="form-select district-select" @change="onDistrictChange">
-                          <option value="">Selecciona</option>
-                          <option v-for="district in availableDistricts" :key="district.value" :value="district.value">
-                            {{ district.name }}
-                          </option>
-                        </select>
-                      </div>
-                    </div>
-                    
-                    <!-- Campo de Agencia (solo para envíos fuera de Lima) -->
-                    <div v-if="showAgencyField" class="form-section agency-section">
-                      <h4>Agencia de Transporte</h4>
-                      <div class="form-group">
-                        <label>Agencia</label>
-                        <select v-model="deliveryData.agency" class="form-select agency-select">
-                          <option value="">Seleccione el PDE</option>
-                          <option v-for="agency in availableAgencies" :key="agency._id" :value="agency.agency_code">
-                            {{ agency.agency_name }}
-                          </option>
-                        </select>
-                      </div>
-                    </div>
-                    
-
-                    
-                    <div v-if="showAgencyField" class="delivery-note">
-                      <p>💡 El costo de envío varía según la agencia y destino. Consulta directamente con la agencia seleccionada.</p>
-                    </div>
-                </div>
                 
               </div>
 
@@ -857,22 +754,7 @@ export default {
     
     canProceedToNextStep() {
       if (this.currentStep === 1) {
-        if (this.deliveryMethod === 'delivery') {
-          const basicInfo = this.deliveryData.recipientName && 
-                           this.deliveryData.document && 
-                           this.deliveryData.document.length === 8 &&
-                           this.deliveryData.recipientPhone &&
-                           this.deliveryData.department &&
-                           this.deliveryData.province &&
-                           this.deliveryData.district;
-          
-          if (this.showAgencyField) {
-            return basicInfo && this.deliveryData.agency;
-          }
-          
-          return basicInfo;
-        }
-        return this.deliveryMethod && this.selectedPickupPoint;
+        return !!this.selectedPickupPoint;
       }
       if (this.currentStep === 2) {
         // Para boleta solo requiere documento con exactamente 8 números
