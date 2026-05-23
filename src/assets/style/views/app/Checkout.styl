@@ -43,7 +43,7 @@ body
     border-radius 4px
     transition all 0.8s cubic-bezier(0.4, 0, 0.2, 1)
     width calc((100% - 90px) * (var(--current-step, 1) / 3))
-    box-shadow 0 2px 12px rgba(255,140,0,0.25)
+    box-shadow 0 2px 12px rgba(197, 160, 89, 0.25)
 
 .top-progress-bar .progress-step
   display flex
@@ -83,7 +83,7 @@ body
       background #1b5e3a
       color white
       border-color #1b5e3a33
-      box-shadow #1b5e3a33
+      box-shadow 0 2px 12px rgba(197, 160, 89, 0.35)
       transform scale(1.05)
     
     .step-label
@@ -590,6 +590,163 @@ body
 
 .checkout-step
   min-height 400px
+
+$dispatch-green = #1b5e3a
+$dispatch-green-dark = #1b4332
+$dispatch-gold = #c5a059
+$dispatch-gold-deep = #b8942e
+
+.dispatch-panel
+  background white
+  border-radius 12px
+  box-shadow 0 4px 20px rgba(0, 0, 0, 0.08)
+  padding 28px 32px 32px
+  margin-bottom 24px
+
+  &__intro
+    margin 0 0 16px
+    color $dispatch-green-dark
+    font-size 1.05rem
+    font-weight 700
+
+  &__divider
+    height 2px
+    background linear-gradient(90deg, $dispatch-green 0%, $dispatch-gold 100%)
+    margin-bottom 28px
+
+  &__methods
+    display flex
+    gap 12px
+    margin-bottom 28px
+
+.dispatch-method-btn
+  flex 1
+  padding 14px 18px
+  border 1px solid #ddd
+  border-radius 8px
+  background white
+  color #333
+  font-weight 600
+  font-size 0.95rem
+  cursor pointer
+  transition all 0.2s ease
+
+  &:hover
+    border-color $dispatch-gold
+
+  &.active
+    background $dispatch-green
+    border-color $dispatch-green
+    color white
+    box-shadow 0 2px 10px rgba(27, 94, 58, 0.25)
+
+.dispatch-pickup
+  display flex
+  flex-direction column
+  gap 24px
+
+.dispatch-field
+  display flex
+  flex-direction column
+  gap 10px
+
+  &__label
+    color $dispatch-green-dark
+    font-weight 700
+    font-size 1rem
+
+  &__select
+    width 100%
+    padding 12px 14px
+    border 1px solid #ddd
+    border-radius 8px
+    font-size 1rem
+    background white
+    color #333
+    box-sizing border-box
+
+    &:focus
+      outline none
+      border-color $dispatch-gold
+
+.dispatch-map-ref
+  display flex
+  flex-direction column
+  gap 10px
+
+.dispatch-map-link
+  color $dispatch-gold-deep
+  font-size 0.95rem
+  word-break break-all
+  text-decoration underline
+
+  &:hover
+    color $dispatch-green
+
+.dispatch-office-card
+  &__title
+    margin 0 0 14px
+    color $dispatch-green-dark
+    font-size 1.05rem
+    font-weight 700
+
+  &__details
+    border 1px solid rgba(197, 160, 89, 0.35)
+    border-radius 10px
+    background #fafafa
+    padding 8px 0
+
+.dispatch-detail-row
+  display flex
+  justify-content space-between
+  align-items flex-start
+  gap 16px
+  padding 14px 18px
+  border-left 3px solid $dispatch-gold
+  margin 0 12px 8px
+
+  &:last-child
+    margin-bottom 0
+
+  &__label
+    color $dispatch-green-dark
+    font-weight 700
+    font-size 0.95rem
+    min-width 90px
+
+  &__value
+    color #333
+    font-size 0.95rem
+    text-align right
+    line-height 1.4
+
+.dispatch-delivery-form
+  margin-top 8px
+  padding 0
+  box-shadow none
+  background transparent
+
+  &::before,
+  &::after
+    display none
+
+.dispatch-continue-btn
+  background $dispatch-green !important
+  border-radius 10px
+  padding 16px 36px
+  font-size 1.05rem
+  box-shadow 0 2px 10px rgba(27, 94, 58, 0.2)
+
+  &:hover:not(:disabled)
+    background $dispatch-green-dark !important
+    box-shadow 0 4px 14px rgba(197, 160, 89, 0.3)
+
+.step-actions
+  display flex
+  justify-content flex-start
+
+.cart-item-points
+  display none !important
 
 .delivery-options
   background white
@@ -1844,6 +2001,19 @@ body
 @media (max-width: 768px)
   .checkout-page
     padding 15px
+
+  .dispatch-panel
+    padding 20px 18px 24px
+
+  .dispatch-panel__methods
+    flex-direction column
+
+  .dispatch-detail-row
+    flex-direction column
+    gap 6px
+
+    &__value
+      text-align left
   
   .checkout-header
     h1

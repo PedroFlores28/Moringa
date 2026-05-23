@@ -136,37 +136,70 @@
               </div>
             </div>
 
-            <!-- Paso 1: Opciones de Despacho -->
+            <!-- Paso 1: Despacho -->
             <div v-if="currentStep === 1" class="checkout-step">
-              <!-- Opciones de Despacho -->
-              <div class="delivery-options">
-                <div class="delivery-header">
-                  <h3>Opciones de Despacho</h3>
+              <div class="dispatch-panel">
+                <p class="dispatch-panel__intro">Elije tu método de despacho preferido.</p>
+                <div class="dispatch-panel__divider"></div>
+
+                <div class="dispatch-panel__methods">
+                  <button
+                    @click="selectDeliveryMethod('pickup')"
+                    :class="['dispatch-method-btn', { active: deliveryMethod === 'pickup' }]"
+                  >
+                    Retira tu Compra
+                  </button>
+                  <button
+                    @click="selectDeliveryMethod('delivery')"
+                    :class="['dispatch-method-btn', { active: deliveryMethod === 'delivery' }]"
+                  >
+                    Delivery
+                  </button>
                 </div>
-                
-                <div class="delivery-content">
-                  <div class="delivery-description">
-                    <p>Elije tu método de despacho preferido.</p>
+
+                <div v-if="deliveryMethod === 'pickup'" class="dispatch-pickup">
+                  <div class="dispatch-field">
+                    <label class="dispatch-field__label">Referencia a:</label>
+                    <select
+                      v-model="selectedPickupPoint"
+                      class="dispatch-field__select"
+                      @change="onPickupPointChange"
+                    >
+                      <option value="">Selecciona un punto de entrega</option>
+                      <option v-for="office in offices" :key="office.id" :value="office.id">
+                        {{ office.name }}
+                      </option>
+                    </select>
                   </div>
-                  
-                  <div class="delivery-methods">
-                    <button 
-                      @click="selectDeliveryMethod('pickup')" 
-                      :class="['delivery-method', { active: deliveryMethod === 'pickup' }]"
-                    >
-                      Retira tu Compra
-                    </button>
-                    <button 
-                      @click="selectDeliveryMethod('delivery')" 
-                      :class="['delivery-method', { active: deliveryMethod === 'delivery' }]"
-                    >
-                      Delivery
-                    </button>
+
+                  <div v-if="selectedOffice && pickupMapUrl" class="dispatch-map-ref">
+                    <label class="dispatch-field__label">Ubicación en mapa</label>
+                    <a :href="pickupMapUrl" target="_blank" rel="noopener noreferrer" class="dispatch-map-link">
+                      {{ pickupMapUrl }}
+                    </a>
+                  </div>
+
+                  <div v-if="selectedOffice" class="dispatch-office-card">
+                    <h4 class="dispatch-office-card__title">{{ selectedOffice.name }}</h4>
+                    <div class="dispatch-office-card__details">
+                      <div class="dispatch-detail-row">
+                        <span class="dispatch-detail-row__label">Dirección:</span>
+                        <span class="dispatch-detail-row__value">{{ selectedOffice.address || 'No disponible' }}</span>
+                      </div>
+                      <div class="dispatch-detail-row">
+                        <span class="dispatch-detail-row__label">Teléfono:</span>
+                        <span class="dispatch-detail-row__value">{{ selectedOffice.phone || 'No disponible' }}</span>
+                      </div>
+                      <div v-if="selectedOffice.horario" class="dispatch-detail-row">
+                        <span class="dispatch-detail-row__label">Horario:</span>
+                        <span class="dispatch-detail-row__value">{{ selectedOffice.horario }}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                
+
                 <!-- Formulario de Delivery -->
-                <div v-if="deliveryMethod === 'delivery'" class="delivery-form">
+                <div v-if="deliveryMethod === 'delivery'" class="delivery-form dispatch-delivery-form">
                   <div class="form-section">
                     <h4>Información del Receptor</h4>
                     
@@ -254,81 +287,6 @@
                     </div>
                 </div>
                 
-                <!-- Formulario de Pickup -->
-                <div v-if="deliveryMethod === 'pickup'" class="pickup-form">
-                  <div class="pickup-section">
-                    <h4>Seleccione el PDE</h4>
-                    <select v-model="selectedPickupPoint" class="pickup-select" @change="onPickupPointChange">
-                      <option value="">Selecciona un punto de entrega</option>
-                      <option v-for="office in offices" :key="office.id" :value="office.id">
-                        {{ office.name }}
-                        <span v-if="office.googleMapsUrl" class="maps-indicator" title="Tiene Google Maps">
-                          <i class="fas fa-map-marker-alt"></i>
-                        </span>
-                      </option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Ubicación en mapa y información -->
-              <div v-if="selectedPickupPoint && deliveryMethod === 'pickup'" class="map-and-location-container">
-                <div class="section-header">
-                  <h3>Ubicación en mapa</h3>
-                </div>
-                
-                <div class="map-location-vertical">
-                  <!-- Mapa en la parte superior -->
-                  <div class="map-section">
-                    <div class="map-container">
-                      <div id="map" style="height: 300px; border-radius: 12px;"></div>
-                      <div class="map-info">
-                        <div class="map-location-label">Ubicación en Mapa:</div>
-                        <a 
-                          v-if="selectedOffice && selectedOffice.googleMapsUrl" 
-                          :href="selectedOffice.googleMapsUrl" 
-                          target="_blank" 
-                          class="map-link"
-                        >
-                          Ver en Google Maps
-                        </a>
-                        <a 
-                          v-else-if="selectedOffice && selectedOffice.address && selectedOffice.address !== 'Dirección no disponible' && selectedOffice.address !== 'hola'"
-                          :href="`https://www.openstreetmap.org/search?query=${encodeURIComponent(selectedOffice.address)}`"
-                          target="_blank" 
-                          class="map-link"
-                        >
-                          Ver en OpenStreetMap
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <!-- Información de la oficina matriz debajo del mapa -->
-                  <div class="office-info-section">
-                    <div class="office-header">
-                      <h4>{{ selectedOffice ? selectedOffice.name : 'Oficina' }}</h4>
-                    </div>
-                    
-                    <div class="office-details">
-                      <div class="office-item">
-                        <span class="office-label">Dirección:</span>
-                        <span class="office-value">{{ selectedOffice ? selectedOffice.address : 'No disponible' }}</span>
-                      </div>
-                      
-                      <div class="office-item">
-                        <span class="office-label">Teléfono:</span>
-                        <span class="office-value">{{ selectedOffice ? selectedOffice.phone : 'No disponible' }}</span>
-                      </div>
-
-                      <div class="office-item" v-if="selectedOffice.horario && selectedOffice.id !== 'central'">
-                        <span class="office-label">Horario:</span>
-                        <span class="office-value">{{ selectedOffice.horario }}</span>
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div>
               </div>
 
               <!-- Botón continuar -->
@@ -336,7 +294,7 @@
                 <button 
                   @click="nextStep" 
                   :disabled="!canProceedToNextStep"
-                  class="continue-btn"
+                  class="continue-btn dispatch-continue-btn"
                 >
                   Continuar >>
                 </button>
@@ -967,6 +925,21 @@ export default {
     selectedOffice() {
       if (!this.selectedPickupPoint) return null;
       return this.offices.find(office => office.id == this.selectedPickupPoint);
+    },
+
+    pickupMapUrl() {
+      const office = this.selectedOffice;
+      if (!office) return '';
+      if (office.googleMapsUrl) return office.googleMapsUrl;
+      const address = office.address;
+      if (
+        address &&
+        address !== 'Dirección no disponible' &&
+        address !== 'hola'
+      ) {
+        return `https://www.openstreetmap.org/search?query=${encodeURIComponent(address)}`;
+      }
+      return '';
     },
     
     // Obtener el DNI del usuario desde el store
