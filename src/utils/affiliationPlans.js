@@ -50,7 +50,7 @@ export function isAffiliatedMember(options) {
   if (isTruthyAffiliated(opts.affiliated)) return true;
 
   var planId = normalizeId(opts.plan);
-  if (planId && planId !== "none") return true;
+  if (planId && planId !== "none" && planId !== "default") return true;
 
   if (opts.affiliation && opts.affiliation.status === "approved") return true;
 
