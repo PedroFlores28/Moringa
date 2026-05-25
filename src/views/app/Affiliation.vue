@@ -787,7 +787,8 @@ export default {
     availablePlans() {
       var hasPlan =
         this.plan &&
-        String(this.plan).trim().toLowerCase() !== "none";
+        String(this.plan).trim().toLowerCase() !== "none" &&
+        String(this.plan).trim().toLowerCase() !== "default";
       var affiliatedFlag =
         this.memberAffiliated ||
         this.affiliated ||
