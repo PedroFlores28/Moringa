@@ -24,7 +24,7 @@
               <path d="M25 30 L50 55 L75 30 M25 70 L50 45 L75 70" stroke="#c5a059" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             </svg>
           </div>
-          <h1 class="boleta-brand">HARMONY</h1>
+          <h1 class="boleta-brand">{{ orderData.brand || 'CLASS MORINGA' }}</h1>
           <h2 class="boleta-title">COMPROBANTE DE COMPRA</h2>
           <p class="boleta-subtitle">No válido como comprobante fiscal</p>
         </div>
@@ -121,25 +121,29 @@
             >
               <span class="boleta-col-product">{{ item.name }}</span>
               <span class="boleta-col-qty">{{ item.qty }}</span>
-              <span class="boleta-col-price">S/ {{ formatAmount(item.unitPrice) }}</span>
-              <span class="boleta-col-total">S/ {{ formatAmount(item.total) }}</span>
+              <span class="boleta-col-price">{{ orderData.currency || 'Bs.' }} {{ formatAmount(item.unitPrice) }}</span>
+              <span class="boleta-col-total">{{ orderData.currency || 'Bs.' }} {{ formatAmount(item.total) }}</span>
             </div>
           </div>
 
           <!-- Totales -->
           <div class="boleta-totals">
-            <div class="boleta-total-row">
+            <div v-if="(orderData.currency || 'Bs.') === 'S/'" class="boleta-total-row">
               <span class="boleta-total-label">Subtotal sin IGV:</span>
               <span class="boleta-total-value">S/ {{ formatAmount(subtotalSinIGV) }}</span>
             </div>
-            <div class="boleta-total-row">
+            <div v-if="(orderData.currency || 'Bs.') === 'S/'" class="boleta-total-row">
               <span class="boleta-total-label">IGV (18%):</span>
               <span class="boleta-total-value">S/ {{ formatAmount(igv) }}</span>
+            </div>
+            <div v-else class="boleta-total-row">
+              <span class="boleta-total-label">Subtotal:</span>
+              <span class="boleta-total-value">{{ orderData.currency || 'Bs.' }} {{ formatAmount(orderData.total) }}</span>
             </div>
           </div>
           <div class="boleta-grand-total">
             <span class="boleta-grand-label">TOTAL:</span>
-            <span class="boleta-grand-value">S/ {{ formatAmount(orderData.total) }}</span>
+            <span class="boleta-grand-value">{{ orderData.currency || 'Bs.' }} {{ formatAmount(orderData.total) }}</span>
           </div>
         </div>
 
@@ -156,7 +160,7 @@
           </div>
           <div class="boleta-payment-right">
             <span class="boleta-payment-meta">TOTAL PAGADO</span>
-            <span class="boleta-payment-amount">S/ {{ formatAmount(orderData.total) }}</span>
+            <span class="boleta-payment-amount">{{ orderData.currency || 'Bs.' }} {{ formatAmount(orderData.total) }}</span>
           </div>
         </div>
 
@@ -362,12 +366,13 @@ export default {
       }
     },
     shareWhatsApp() {
+      const currency = this.orderData.currency || 'Bs.'
       const text = encodeURIComponent(
         `🛒 *COMPROBANTE DE COMPRA*\n` +
         `📋 Comprobante N°: ${this.orderData.id}\n` +
         `📅 Fecha: ${this.formattedDate} ${this.formattedTime}\n` +
         `👤 Cliente: ${this.clientData.fullName}\n` +
-        `💰 Total: S/ ${this.formatAmount(this.orderData.total)}\n` +
+        `💰 Total: ${currency} ${this.formatAmount(this.orderData.total)}\n` +
         `💳 Método de pago: ${this.paymentMethodLabel}\n` +
         `\n¡Gracias por tu compra! Tu bienestar es nuestra prioridad. 💚`
       )
