@@ -657,9 +657,12 @@
 import api from "@/api";
 import lib from "@/lib";
 
-const ROOT = (process.env.VUE_APP_ROOT && !process.env.VUE_APP_ROOT.includes('localhost'))
-  ? process.env.VUE_APP_ROOT
-  : (typeof window !== 'undefined' && window.location && window.location.origin ? window.location.origin : 'http://localhost:8080');
+const ROOT =
+  typeof window !== "undefined" &&
+  window.location &&
+  window.location.origin
+    ? window.location.origin
+    : process.env.VUE_APP_ROOT || "";
 console.log({ ROOT });
 
 export default {
