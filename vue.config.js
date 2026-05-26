@@ -1,7 +1,8 @@
 module.exports = {
   productionSourceMap: false,
   transpileDependencies: [
-    '@sentry'
+    '@sentry',
+    'fast-png'
   ],
   devServer: {
     proxy: {
