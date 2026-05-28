@@ -8,7 +8,7 @@
       
       <div v-else class="activations-bg">
         <h2 class="activations-title" v-if="!showMasterTrophy">
-          Historial de Activaciones
+          Historial
         </h2>
         <section>
           <div></div>
