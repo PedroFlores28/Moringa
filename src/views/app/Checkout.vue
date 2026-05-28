@@ -1164,41 +1164,8 @@ export default {
         throw new Error('API de oficinas no disponible');
       } catch (error) {
         console.error('Error al cargar oficinas:', error);
-        // En caso de error, usar datos reales de ejemplo basados en los datos que proporcionaste
-        this.offices = [
-          {
-            id: "central",
-            name: "OFICINA MATRIZ",
-            phone: "central", // Usando el email como teléfono temporalmente
-            address: "Calle Loma Real 262",
-            googleMapsUrl: "https://maps.google.com/?q=-12.0464,-77.0428",
-            accounts: "Banco BCP - Cuenta de Ahorros - N° 194 90823860 070"
-          },
-          {
-            id: "001",
-            name: "Ate Vitarte",
-            phone: "santaanita", // Usando el email como teléfono temporalmente
-            address: "Ate Vitarte, Lima",
-            googleMapsUrl: "https://maps.google.com/?q=-12.0432,-76.8987",
-            accounts: "Información de cuentas no disponible"
-          },
-          {
-            id: "002",
-            name: "Cajabamba",
-            phone: "cajabamba", // Usando el email como teléfono temporalmente
-            address: "Cajabamba, Cajamarca",
-            googleMapsUrl: "https://maps.google.com/?q=-7.6208,-78.0486",
-            accounts: "Información de cuentas no disponible"
-          },
-          {
-            id: "1756225703768",
-            name: "cajamarca",
-            phone: "9701", // Usando el email como teléfono temporalmente
-            address: "Cajamarca, Cajamarca",
-            googleMapsUrl: "https://maps.google.com/?q=-7.1631,-78.5126",
-            accounts: "Información de cuentas no disponible"
-          }
-        ];
+        // Evitar datos mock inconsistentes: solo mostrar lo que venga del admin/backend.
+        this.offices = [];
       }
     },
     
