@@ -163,7 +163,7 @@ export default {
   flex-shrink 0
 
 .btn-ver
-  background #e91d76
+  background #1b5e3a
   color white
   border none
   padding 8px 24px
@@ -176,7 +176,7 @@ export default {
   transition background 0.2s
   
   &:hover
-    background #c61563
+    background #144a2d
 
 @media (max-width: 768px)
   .materials-grid
