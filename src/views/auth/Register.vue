@@ -23,7 +23,7 @@
           <input
             id="dni"
             class="input-register-new"
-            placeholder="Documento de identidad"
+            placeholder="Cédula de identidad"
             oninput="this.value=this.value.replace(/(?![0-9])./gmi,'')"
             v-model="dni"
             :class="{ error: error.dni }"
@@ -152,50 +152,33 @@
           <input
             id="birthDate"
             class="input-register-new date-input"
-            type="date"
+            type="text"
             placeholder="dd/mm/aaaa"
-            v-model="birthDate"
+            :value="birthDate"
+            @input="formatDateInput"
             :class="{ error: error.birthDate }"
             @keydown="reset('birthDate')"
+            maxlength="10"
           />
-          <i class="fas fa-calendar-alt overflow-icon calendar-icon" @click="openDatePicker"></i>
+          <i class="fas fa-calendar-alt overflow-icon"></i>
         </div>
       </div>
 
-      <!-- Depto y Provincia en fila -->
-      <div class="form-row">
-        <div class="form-field">
-          <div class="input-container">
-            <select
-              id="department"
-              class="input-register-new select-field"
-              v-model="department"
-              :class="{ error: error.department }"
-              @change="onDepartmentChange"
-            >
-              <option value="" disabled>Depto.</option>
-              <option v-for="dept in departments" :key="dept.value" :value="dept.value">
-                {{ dept.name }}
-              </option>
-            </select>
-          </div>
-        </div>
-        <div class="form-field">
-          <div class="input-container">
-            <select
-              id="province"
-              class="input-register-new select-field"
-              v-model="province"
-              :class="{ error: error.province }"
-              @change="onProvinceChange"
-              :disabled="!department"
-            >
-              <option value="" disabled>Provincia</option>
-              <option v-for="prov in availableProvinces" :key="prov.value" :value="prov.value">
-                {{ prov.name }}
-              </option>
-            </select>
-          </div>
+      <!-- Depto -->
+      <div class="form-field">
+        <div class="input-container">
+          <select
+            id="department"
+            class="input-register-new select-field"
+            v-model="department"
+            :class="{ error: error.department }"
+            @change="onDepartmentChange"
+          >
+            <option value="" disabled>Depto.</option>
+            <option v-for="dept in departments" :key="dept.value" :value="dept.value">
+              {{ dept.name }}
+            </option>
+          </select>
         </div>
       </div>
 
@@ -288,7 +271,7 @@ export default {
       name: null,
       lastName: null,
       // username: null,
-      birthDate: null,
+      birthDate: "",
       email: null,
       phone: null,
       password: "",
@@ -296,283 +279,21 @@ export default {
       acceptTerms: false,
       showPassword: false,
       department: "",
-      province: "",
       code: null,
       check: false,
       
       // Datos de ubicación
       departments: [
-        { value: 'amazonas', name: 'Amazonas' },
-        { value: 'ancash', name: 'Áncash' },
-        { value: 'apurimac', name: 'Apurímac' },
-        { value: 'arequipa', name: 'Arequipa' },
-        { value: 'ayacucho', name: 'Ayacucho' },
-        { value: 'cajamarca', name: 'Cajamarca' },
-        { value: 'callao', name: 'Callao' },
-        { value: 'cusco', name: 'Cusco' },
-        { value: 'huancavelica', name: 'Huancavelica' },
-        { value: 'huanuco', name: 'Huánuco' },
-        { value: 'ica', name: 'Ica' },
-        { value: 'junin', name: 'Junín' },
-        { value: 'la-libertad', name: 'La Libertad' },
-        { value: 'lambayeque', name: 'Lambayeque' },
-        { value: 'lima', name: 'Lima' },
-        { value: 'loreto', name: 'Loreto' },
-        { value: 'madre-de-dios', name: 'Madre de Dios' },
-        { value: 'moquegua', name: 'Moquegua' },
-        { value: 'pasco', name: 'Pasco' },
-        { value: 'piura', name: 'Piura' },
-        { value: 'puno', name: 'Puno' },
-        { value: 'san-martin', name: 'San Martín' },
-        { value: 'tacna', name: 'Tacna' },
-        { value: 'tumbes', name: 'Tumbes' },
-        { value: 'ucayali', name: 'Ucayali' }
+        { value: 'la-paz', name: 'La Paz' },
+        { value: 'santa-cruz', name: 'Santa Cruz' },
+        { value: 'cochabamba', name: 'Cochabamba' },
+        { value: 'oruro', name: 'Oruro' },
+        { value: 'potosi', name: 'Potosí' },
+        { value: 'chuquisaca', name: 'Chuquisaca' },
+        { value: 'tarija', name: 'Tarija' },
+        { value: 'beni', name: 'Beni' },
+        { value: 'pando', name: 'Pando' }
       ],
-      
-      // Datos estáticos de provincias por departamento
-      provincesData: {
-        'amazonas': [
-          { value: 'bagua', name: 'Bagua' },
-          { value: 'bongara', name: 'Bongará' },
-          { value: 'chachapoyas', name: 'Chachapoyas' },
-          { value: 'condorcanqui', name: 'Condorcanqui' },
-          { value: 'luya', name: 'Luya' },
-          { value: 'rodriguez-de-mendoza', name: 'Rodríguez de Mendoza' },
-          { value: 'utcubamba', name: 'Utcubamba' }
-        ],
-        'lima': [
-          { value: 'lima', name: 'Lima' },
-          { value: 'barranca', name: 'Barranca' },
-          { value: 'cajatambo', name: 'Cajatambo' },
-          { value: 'canta', name: 'Canta' },
-          { value: 'cañete', name: 'Cañete' },
-          { value: 'huaral', name: 'Huaral' },
-          { value: 'huarochiri', name: 'Huarochirí' },
-          { value: 'huaura', name: 'Huaura' },
-          { value: 'oyon', name: 'Oyón' },
-          { value: 'yauyos', name: 'Yauyos' }
-        ],
-        'arequipa': [
-          { value: 'arequipa', name: 'Arequipa' },
-          { value: 'camana', name: 'Camaná' },
-          { value: 'caraveli', name: 'Caravelí' },
-          { value: 'castilla', name: 'Castilla' },
-          { value: 'caylloma', name: 'Caylloma' },
-          { value: 'condesuyos', name: 'Condesuyos' },
-          { value: 'islay', name: 'Islay' },
-          { value: 'la-union', name: 'La Unión' }
-        ],
-        'cusco': [
-          { value: 'cusco', name: 'Cusco' },
-          { value: 'aconcagua', name: 'Acomayo' },
-          { value: 'anta', name: 'Anta' },
-          { value: 'calca', name: 'Calca' },
-          { value: 'canas', name: 'Canas' },
-          { value: 'canchis', name: 'Canchis' },
-          { value: 'chumbivilcas', name: 'Chumbivilcas' },
-          { value: 'espinar', name: 'Espinar' },
-          { value: 'la-convencion', name: 'La Convención' },
-          { value: 'paruro', name: 'Paruro' },
-          { value: 'paucartambo', name: 'Paucartambo' },
-          { value: 'quispicanchi', name: 'Quispicanchi' },
-          { value: 'urubamba', name: 'Urubamba' }
-        ],
-        'callao': [
-          { value: 'callao', name: 'Callao' }
-        ],
-        'piura': [
-          { value: 'piura', name: 'Piura' },
-          { value: 'ayabaca', name: 'Ayabaca' },
-          { value: 'huancabamba', name: 'Huancabamba' },
-          { value: 'morropon', name: 'Morropón' },
-          { value: 'paita', name: 'Paita' },
-          { value: 'sullana', name: 'Sullana' },
-          { value: 'talara', name: 'Talara' },
-          { value: 'sechura', name: 'Sechura' }
-        ],
-        'la-libertad': [
-          { value: 'trujillo', name: 'Trujillo' },
-          { value: 'asuncion', name: 'Ascope' },
-          { value: 'bolivar', name: 'Bolívar' },
-          { value: 'chepen', name: 'Chepén' },
-          { value: 'gran-chimu', name: 'Gran Chimú' },
-          { value: 'julcan', name: 'Julcán' },
-          { value: 'otuzco', name: 'Otuzco' },
-          { value: 'pacasmayo', name: 'Pacasmayo' },
-          { value: 'pataz', name: 'Pataz' },
-          { value: 'sanchez-carrion', name: 'Sánchez Carrión' },
-          { value: 'santiago-de-chuco', name: 'Santiago de Chuco' },
-          { value: 'viru', name: 'Virú' }
-        ],
-        'lambayeque': [
-          { value: 'chiclayo', name: 'Chiclayo' },
-          { value: 'ferreñafe', name: 'Ferreñafe' },
-          { value: 'lambayeque', name: 'Lambayeque' }
-        ],
-        'ancash': [
-          { value: 'huaraz', name: 'Huaraz' },
-          { value: 'aija', name: 'Aija' },
-          { value: 'antonio-raimondi', name: 'Antonio Raimondi' },
-          { value: 'asuncion', name: 'Asunción' },
-          { value: 'bolognesi', name: 'Bolognesi' },
-          { value: 'carhuaz', name: 'Carhuaz' },
-          { value: 'carlos-fermin-fitzcarrald', name: 'Carlos Fermín Fitzcarrald' },
-          { value: 'casma', name: 'Casma' },
-          { value: 'corongo', name: 'Corongo' },
-          { value: 'huari', name: 'Huari' },
-          { value: 'huarmey', name: 'Huarmey' },
-          { value: 'huaylas', name: 'Huaylas' },
-          { value: 'mariscal-luzuriaga', name: 'Mariscal Luzuriaga' },
-          { value: 'ocros', name: 'Ocros' },
-          { value: 'pallasca', name: 'Pallasca' },
-          { value: 'pomabamba', name: 'Pomabamba' },
-          { value: 'recuay', name: 'Recuay' },
-          { value: 'santa', name: 'Santa' },
-          { value: 'sihuas', name: 'Sihuas' },
-          { value: 'yungay', name: 'Yungay' }
-        ],
-        'junin': [
-          { value: 'huancayo', name: 'Huancayo' },
-          { value: 'concepcion', name: 'Concepción' },
-          { value: 'chanchamayo', name: 'Chanchamayo' },
-          { value: 'jauja', name: 'Jauja' },
-          { value: 'junin', name: 'Junín' },
-          { value: 'satipo', name: 'Satipo' },
-          { value: 'tarma', name: 'Tarma' },
-          { value: 'yauli', name: 'Yauli' },
-          { value: 'chupaca', name: 'Chupaca' }
-        ],
-        'ica': [
-          { value: 'ica', name: 'Ica' },
-          { value: 'chincha', name: 'Chincha' },
-          { value: 'nazca', name: 'Nazca' },
-          { value: 'palpa', name: 'Palpa' },
-          { value: 'pisco', name: 'Pisco' }
-        ],
-        'ayacucho': [
-          { value: 'huamanga', name: 'Huamanga' },
-          { value: 'cangallo', name: 'Cangallo' },
-          { value: 'huanca-sancos', name: 'Huanca Sancos' },
-          { value: 'huanta', name: 'Huanta' },
-          { value: 'la-mar', name: 'La Mar' },
-          { value: 'lucanas', name: 'Lucanas' },
-          { value: 'parinacochas', name: 'Parinacochas' },
-          { value: 'paucar-del-sara-sara', name: 'Paucar del Sara Sara' },
-          { value: 'sucre', name: 'Sucre' },
-          { value: 'victor-fajardo', name: 'Víctor Fajardo' },
-          { value: 'vileas-huaman', name: 'Vilcas Huamán' }
-        ],
-        'cajamarca': [
-          { value: 'cajamarca', name: 'Cajamarca' },
-          { value: 'cajabamba', name: 'Cajabamba' },
-          { value: 'celendin', name: 'Celendín' },
-          { value: 'chota', name: 'Chota' },
-          { value: 'contumaza', name: 'Contumazá' },
-          { value: 'cutervo', name: 'Cutervo' },
-          { value: 'hualgayoc', name: 'Hualgayoc' },
-          { value: 'jaen', name: 'Jaén' },
-          { value: 'san-ignacio', name: 'San Ignacio' },
-          { value: 'san-marcos', name: 'San Marcos' },
-          { value: 'san-miguel', name: 'San Miguel' },
-          { value: 'san-pablo', name: 'San Pablo' },
-          { value: 'santa-cruz', name: 'Santa Cruz' }
-        ],
-        'huancavelica': [
-          { value: 'huancavelica', name: 'Huancavelica' },
-          { value: 'acobamba', name: 'Acobamba' },
-          { value: 'angaraes', name: 'Angaraes' },
-          { value: 'castrovirreyna', name: 'Castrovirreyna' },
-          { value: 'churcampa', name: 'Churcampa' },
-          { value: 'huaytara', name: 'Huaytará' },
-          { value: 'tayacaja', name: 'Tayacaja' }
-        ],
-        'huanuco': [
-          { value: 'huanuco', name: 'Huánuco' },
-          { value: 'ambo', name: 'Ambo' },
-          { value: 'dos-de-mayo', name: 'Dos de Mayo' },
-          { value: 'huacaybamba', name: 'Huacaybamba' },
-          { value: 'huamalies', name: 'Huamalíes' },
-          { value: 'leoncio-prado', name: 'Leoncio Prado' },
-          { value: 'marañon', name: 'Marañón' },
-          { value: 'pachitea', name: 'Pachitea' },
-          { value: 'puerto-inca', name: 'Puerto Inca' },
-          { value: 'lauricocha', name: 'Lauricocha' },
-          { value: 'yarowilca', name: 'Yarowilca' }
-        ],
-        'loreto': [
-          { value: 'maynas', name: 'Maynas' },
-          { value: 'alto-amazonas', name: 'Alto Amazonas' },
-          { value: 'loreto', name: 'Loreto' },
-          { value: 'mariscal-ramon-castilla', name: 'Mariscal Ramón Castilla' },
-          { value: 'putumayo', name: 'Putumayo' },
-          { value: 'requena', name: 'Requena' },
-          { value: 'ucayali', name: 'Ucayali' },
-          { value: 'datem-del-marañon', name: 'Datem del Marañón' }
-        ],
-        'madre-de-dios': [
-          { value: 'tambopata', name: 'Tambopata' },
-          { value: 'manu', name: 'Manu' },
-          { value: 'tahuamanu', name: 'Tahuamanu' }
-        ],
-        'moquegua': [
-          { value: 'moquegua', name: 'Moquegua' },
-          { value: 'general-sanchez-cerro', name: 'General Sánchez Cerro' },
-          { value: 'ilo', name: 'Ilo' }
-        ],
-        'pasco': [
-          { value: 'pasco', name: 'Pasco' },
-          { value: 'daniel-alcides-carrion', name: 'Daniel Alcides Carrión' },
-          { value: 'oxapampa', name: 'Oxapampa' }
-        ],
-        'puno': [
-          { value: 'puno', name: 'Puno' },
-          { value: 'azangaro', name: 'Azángaro' },
-          { value: 'carabaya', name: 'Carabaya' },
-          { value: 'chucuito', name: 'Chucuito' },
-          { value: 'el-collao', name: 'El Collao' },
-          { value: 'huancane', name: 'Huancané' },
-          { value: 'lampa', name: 'Lampa' },
-          { value: 'melgar', name: 'Melgar' },
-          { value: 'moho', name: 'Moho' },
-          { value: 'san-antonio-de-putina', name: 'San Antonio de Putina' },
-          { value: 'san-roman', name: 'San Román' },
-          { value: 'sandia', name: 'Sandia' },
-          { value: 'yunguyo', name: 'Yunguyo' }
-        ],
-        'san-martin': [
-          { value: 'moyobamba', name: 'Moyobamba' },
-          { value: 'bellavista', name: 'Bellavista' },
-          { value: 'el-dorado', name: 'El Dorado' },
-          { value: 'huallaga', name: 'Huallaga' },
-          { value: 'lamas', name: 'Lamas' },
-          { value: 'mariscal-caceres', name: 'Mariscal Cáceres' },
-          { value: 'picota', name: 'Picota' },
-          { value: 'rioja', name: 'Rioja' },
-          { value: 'san-martin', name: 'San Martín' },
-          { value: 'tocache', name: 'Tocache' }
-        ],
-        'tacna': [
-          { value: 'tacna', name: 'Tacna' },
-          { value: 'candarave', name: 'Candarave' },
-          { value: 'jorge-basadre', name: 'Jorge Basadre' },
-          { value: 'tarata', name: 'Tarata' }
-        ],
-        'tumbes': [
-          { value: 'tumbes', name: 'Tumbes' },
-          { value: 'contralmirante-villar', name: 'Contralmirante Villar' },
-          { value: 'zarumilla', name: 'Zarumilla' }
-        ],
-        'ucayali': [
-          { value: 'coronel-portillo', name: 'Coronel Portillo' },
-          { value: 'atalaya', name: 'Atalaya' },
-          { value: 'padre-abad', name: 'Padre Abad' },
-          { value: 'purus', name: 'Purus' }
-        ],
-        'apurimac': [
-          { value: 'abancay', name: 'Abancay' }
-        ]
-      },
-      availableProvinces: [],
       
       error: {
         country: false,
@@ -583,7 +304,6 @@ export default {
         email: false,
         phone: false,
         department: false,
-        province: false,
         password: false,
         sponsorCode: false,
       },
@@ -666,7 +386,7 @@ export default {
   },
   methods: {
     async submit() {
-      const { dni, name, lastName, password, phone, sponsorCode, email, birthDate, acceptTerms, department, province } = this;
+      const { dni, name, lastName, password, phone, sponsorCode, email, birthDate, acceptTerms, department } = this;
 
       if (!dni) {
         this.error.dni = true;
@@ -701,6 +421,45 @@ export default {
         this.alert = "La fecha de nacimiento se requiere";
         return;
       }
+
+      // Validar formato dd/mm/aaaa y fecha válida
+      const dateRegex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+      if (!dateRegex.test(birthDate)) {
+        this.error.birthDate = true;
+        this.alert = "La fecha de nacimiento debe tener el formato dd/mm/aaaa";
+        return;
+      }
+
+      const [, dayStr, monthStr, yearStr] = birthDate.match(dateRegex);
+      const day = parseInt(dayStr, 10);
+      const month = parseInt(monthStr, 10);
+      const year = parseInt(yearStr, 10);
+
+      if (month < 1 || month > 12) {
+        this.error.birthDate = true;
+        this.alert = "El mes de la fecha de nacimiento no es válido";
+        return;
+      }
+
+      if (day < 1 || day > 31) {
+        this.error.birthDate = true;
+        this.alert = "El día de la fecha de nacimiento no es válido";
+        return;
+      }
+
+      const maxDays = [31, (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+      if (day > maxDays[month - 1]) {
+        this.error.birthDate = true;
+        this.alert = "El día ingresado no es válido para ese mes";
+        return;
+      }
+
+      const currentYear = new Date().getFullYear();
+      if (year < 1900 || year > currentYear) {
+        this.error.birthDate = true;
+        this.alert = "El año de la fecha de nacimiento no es válido";
+        return;
+      }
       if (!password) {
         this.error.password = true;
         this.alert = "La contraseña es requerida";
@@ -721,11 +480,6 @@ export default {
         this.alert = "Debe seleccionar un departamento";
         return;
       }
-      if (!province) {
-        this.error.province = true;
-        this.alert = "Debe seleccionar una provincia";
-        return;
-      }
       if (!acceptTerms) {
         this.alert = "Debes aceptar los términos.";
         return;
@@ -744,7 +498,6 @@ export default {
           phone,
           code: sponsorCode,
           department,
-          province,
         });
 
         this.sending = false;
@@ -786,57 +539,34 @@ export default {
       if (name == "password") this.error.password = false;
       if (name == "sponsorCode") this.error.sponsorCode = false;
       if (name == "department") this.error.department = false;
-      if (name == "province") this.error.province = false;
     },
 
     async onDepartmentChange() {
       this.reset('department');
-      
-      // Limpiar provincias cuando cambia el departamento
-      this.province = "";
-      this.availableProvinces = [];
-      
-      if (!this.department) return;
-      
-      // Primero intentar con datos estáticos
-      if (this.provincesData[this.department]) {
-        this.availableProvinces = this.provincesData[this.department];
-        return;
-      }
-      
-      // Si no hay datos estáticos, intentar con la API
-      try {
-        const response = await fetch(`/api/app/delivery?type=provinces&department=${this.department}`);
-        const data = await response.json();
-        
-        if (data.provinces && data.provinces.length > 0) {
-          this.availableProvinces = data.provinces;
-        } else {
-          // Si la API no tiene datos, mostrar mensaje
-          console.warn(`No hay datos de provincias para ${this.department}`);
-          this.availableProvinces = [];
-        }
-      } catch (error) {
-        console.error('Error cargando provincias desde API:', error);
-        this.availableProvinces = [];
-      }
-    },
-
-    async onProvinceChange() {
-      this.reset('province');
-      
-      if (!this.province || !this.department) return;
     },
 
     togglePassword() {
       this.showPassword = !this.showPassword;
     },
 
-    openDatePicker() {
-      const dateInput = document.getElementById('birthDate');
-      if (dateInput) {
-        dateInput.showPicker();
+    formatDateInput(event) {
+      let value = event.target.value.replace(/\D/g, ''); // Solo números
+      if (value.length > 8) value = value.substring(0, 8);
+      
+      let formatted = '';
+      if (value.length > 0) {
+        formatted += value.substring(0, 2);
       }
+      if (value.length > 2) {
+        formatted += '/' + value.substring(2, 4);
+      }
+      if (value.length > 4) {
+        formatted += '/' + value.substring(4, 8);
+      }
+      
+      event.target.value = formatted;
+      this.birthDate = formatted;
+      this.reset('birthDate');
     },
   },
 };

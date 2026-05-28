@@ -67,8 +67,15 @@
                     <td>
                       <div class="product-chips">
                         <span
+                          v-if="activation.type === 'affiliation' && activation.plan && activation.plan.name"
+                          class="product-chip"
+                          style="background: #fff3e0; color: #b78103; border: 1px solid #ffe0b2;"
+                        >
+                          {{ activation.plan.name }}
+                        </span>
+                        <span
                           v-for="product in activation.products"
-                          v-if="product.total != 0"
+                          v-if="product && product.total != 0"
                           class="product-chip"
                           :key="product.name"
                         >
@@ -131,8 +138,15 @@
                       <td>
                         <div class="product-chips">
                           <span
+                            v-if="activation.type === 'affiliation' && activation.plan && activation.plan.name"
+                            class="product-chip"
+                            style="background: #fff3e0; color: #b78103; border: 1px solid #ffe0b2;"
+                          >
+                            {{ activation.plan.name }}
+                          </span>
+                          <span
                             v-for="product in activation.products"
-                            v-if="product.total != 0"
+                            v-if="product && product.total != 0"
                             class="product-chip"
                             :key="product.name"
                           >
@@ -314,30 +328,62 @@ export default {
     },
   },
   async created() {
-    // GET data
-    const { data } = await api.Activations.GET(this.session);
+    try {
+      // GET data
+      const [activationsRes, affiliationsRes] = await Promise.all([
+        api.Activations.GET(this.session),
+        api.Afiliation.GET(this.session)
+      ]);
 
-    this.loading = false;
+      const data = activationsRes.data;
+      const affiliationsData = affiliationsRes.data || {};
 
-    // error
-    if (data.error && data.msg == "invalid session")
-      this.$router.push("/login");
-    if (data.error && data.msg == "unverified user")
-      this.$router.push("/verify");
+      this.loading = false;
 
-    // success
-    this.$store.commit("SET_NAME", data.name);
-    this.$store.commit("SET_LAST_NAME", data.lastName);
-    this.$store.commit("SET_AFFILIATED", data.affiliated);
-    this.$store.commit("SET_ACTIVATED", data.activated);
-    this.$store.commit("SET__ACTIVATED", data._activated);
-    this.$store.commit("SET_PLAN", data.plan);
-    this.$store.commit("SET_COUNTRY", data.country);
-    this.$store.commit("SET_PHOTO", data.photo);
-    this.$store.commit("SET_TREE", data.tree);
+      // error
+      if (data.error && data.msg == "invalid session")
+        this.$router.push("/login");
+      if (data.error && data.msg == "unverified user")
+        this.$router.push("/verify");
 
-    this.activations = data.activations.reverse();
-    // this.arr         = data.arr
+      // success
+      this.$store.commit("SET_NAME", data.name);
+      this.$store.commit("SET_LAST_NAME", data.lastName);
+      this.$store.commit("SET_AFFILIATED", data.affiliated);
+      this.$store.commit("SET_ACTIVATED", data.activated);
+      this.$store.commit("SET__ACTIVATED", data._activated);
+      this.$store.commit("SET_PLAN", data.plan);
+      this.$store.commit("SET_COUNTRY", data.country);
+      this.$store.commit("SET_PHOTO", data.photo);
+      this.$store.commit("SET_TREE", data.tree);
+
+      const activationsList = data.activations || [];
+      const affiliationsList = affiliationsData.affiliations || [];
+      
+      // Si la última afiliación está pendiente de validar, también la mostramos en el historial
+      if (affiliationsData.affiliation && !affiliationsList.some(a => a.id === affiliationsData.affiliation.id)) {
+        affiliationsList.push(affiliationsData.affiliation);
+      }
+
+      const normalizedAffiliations = affiliationsList.map(aff => {
+        return {
+          ...aff,
+          price: aff.price || aff.amount || (aff.plan ? aff.plan.amount : 0),
+          type: 'affiliation'
+        }
+      });
+
+      const history = [...activationsList, ...normalizedAffiliations].sort((a, b) => {
+        const dateA = new Date(a.date || a.createdAt || 0).getTime();
+        const dateB = new Date(b.date || b.createdAt || 0).getTime();
+        return dateB - dateA;
+      });
+
+      this.activations = history;
+    } catch (e) {
+      console.error(e);
+      this.loading = false;
+    }
   },
 };
 </script>

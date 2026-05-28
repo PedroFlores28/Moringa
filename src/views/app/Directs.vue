@@ -66,12 +66,6 @@
       <div class="tabs-section">
         <div class="tabs">
           <button
-            @click="activeTab = 'frontales'"
-            :class="['tab', { active: activeTab === 'frontales' }]"
-          >
-            Frontales
-          </button>
-          <button
             @click="activeTab = 'directos'"
             :class="['tab', { active: activeTab === 'directos' }]"
           >
@@ -218,7 +212,7 @@ export default {
       // Nuevos campos para el diseño
       searchTerm: '',
       selectedState: '',
-      activeTab: 'frontales',
+      activeTab: 'directos',
     };
   },
   computed: {
