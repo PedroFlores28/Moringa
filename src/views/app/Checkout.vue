@@ -61,7 +61,7 @@
               <!-- Resumen de la orden -->
               <div class="order-summary">
                 <!-- En el paso 3 (pago), mostrar el diseño de transacción -->
-                <div v-if="currentStep === 3" class="transaction-summary">
+                <div v-if="currentStep === paymentStep" class="transaction-summary">
                   <div class="transaction-row">
                     <div class="transaction-item">
                       <span class="label">Concepto:</span>
@@ -109,7 +109,7 @@
               </div>
 
               <!-- Botón para volver a la tienda (solo en pasos 1 y 2) -->
-              <div v-if="currentStep !== 3" class="return-to-store">
+              <div v-if="currentStep !== paymentStep" class="return-to-store">
                 <p>¿Olvidaste algún producto?</p>
                 <button @click="returnToStore" class="return-btn">
                   Volver a la tienda
@@ -120,18 +120,14 @@
             <!-- Columna derecha - Proceso de checkout -->
             <div class="checkout-process">
 
-            <!-- Barra de progreso (visible solo en pasos 1 y 2) -->
-            <div v-if="currentStep !== 3" class="top-progress-bar" :style="{ '--current-step': currentStep }">
+            <!-- Barra de progreso: Despacho → Pago -->
+            <div v-if="currentStep !== paymentStep" class="top-progress-bar" :style="{ '--current-step': currentStep, '--checkout-total-steps': totalCheckoutSteps }">
               <div class="progress-step" :class="{ active: currentStep >= 1 }">
                 <div class="step-number">1</div>
                 <div class="step-label">Despacho</div>
               </div>
-              <div class="progress-step" :class="{ active: currentStep >= 2 }">
+              <div class="progress-step" :class="{ active: currentStep >= paymentStep }">
                 <div class="step-number">2</div>
-                <div class="step-label">Facturación</div>
-              </div>
-              <div class="progress-step" :class="{ active: currentStep >= 3 }">
-                <div class="step-number">3</div>
                 <div class="step-label">Pago</div>
               </div>
             </div>
@@ -198,105 +194,8 @@
               </div>
             </div>
 
-            <!-- Paso 2: Facturación -->
-            <div v-if="currentStep === 2" class="checkout-step">
-              <div class="proof-section">
-                <div class="proof-header">
-                  <h3>Facturación</h3>
-                </div>
-                <div class="proof-description">
-                  <p>Elije entre boleta y factura.</p>
-                </div>
-                
-                <div class="proof-form">
-                  <!-- Selección de tipo de comprobante -->
-                  <div class="proof-type-selection">
-                    <div class="proof-option">
-                      <input 
-                        type="radio" 
-                        id="boleta" 
-                        name="proofType" 
-                        value="boleta"
-                        v-model="proofData.type"
-                      />
-                      <label for="boleta" class="proof-label">
-                        <span>Boleta</span>
-                      </label>
-                    </div>
-                    
-                    <div class="proof-option">
-                      <input 
-                        type="radio" 
-                        id="factura" 
-                        name="proofType" 
-                        value="factura"
-                        v-model="proofData.type"
-                      />
-                      <label for="factura" class="proof-label">
-                        <span>Factura</span>
-                      </label>
-                    </div>
-                  </div>
-                  
-                  <!-- Campo de documento (solo para boleta) -->
-                  <div v-if="proofData.type === 'boleta'" class="boleta-fields">
-                    <div class="form-group">
-                      <label>Documento</label>
-                      <div class="input-with-icon">
-                        <input v-model="proofData.document" type="text" placeholder="Nro. de Documento" @input="onlyNumbersDocument($event, 'proofData.document')" maxlength="8" required />
-                        <i class="fas fa-list"></i>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <!-- Campos para factura -->
-                  <div v-if="proofData.type === 'factura'" class="factura-fields">
-                    <div class="form-row">
-                      <div class="form-group">
-                        <label>Nro. RUC</label>
-                        <div class="input-with-icon">
-                          <input v-model="proofData.ruc" type="text" placeholder="Número de RUC" @input="onlyNumbersRUC($event, 'proofData.ruc')" maxlength="11" required />
-                          <i class="fas fa-user"></i>
-                        </div>
-                      </div>
-                      
-                      <div class="form-group">
-                        <label>Razón Social</label>
-                        <div class="input-with-icon">
-                          <input v-model="proofData.razonSocial" type="text" placeholder="Razón Social" required />
-                          <i class="fas fa-users"></i>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div class="form-group">
-                      <label>Dirección Fiscal</label>
-                      <div class="input-with-icon">
-                        <input v-model="proofData.direccionFiscal" type="text" placeholder="Dirección Fiscal" required />
-                        <i class="fas fa-map-marker-alt"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Botones de navegación -->
-              <div class="step-actions">
-                <button 
-                  @click="nextStep" 
-                  :disabled="!canProceedToProofStep"
-                  class="continue-btn"
-                >
-                  Continuar >>
-                </button>
-                <button @click="previousStep" class="back-btn">
-                  << Regresar
-                </button>
-              </div>
-            </div>
-
-            <!-- Paso 3: Pago -->
-            <div v-if="currentStep === 3" class="checkout-step">
+            <!-- Paso 2: Pago -->
+            <div v-if="currentStep === paymentStep" class="checkout-step">
               <div class="three-cards-container">
                 <!-- Card 1: Datos de Despacho -->
                 <div class="delivery-data-card">
@@ -367,35 +266,7 @@
                   </div>
                 </div>
 
-                <!-- Card 2: Datos del Comprobante -->
-                <div class="voucher-data-card">
-                  <div class="voucher-data-header">
-                    <h3>Datos del Comprobante</h3>
-                  </div>
-                  
-                  <div class="voucher-data-content">
-                    <div class="voucher-row-three">
-                      <div class="voucher-info-item third-width">
-                        <span class="voucher-label">Tipo Documento:</span>
-                        <span class="voucher-value">{{ proofData.type === 'factura' ? 'Factura' : 'Boleta' }}</span>
-                      </div>
-                      <div class="voucher-info-item third-width">
-                        <span class="voucher-label">Serie:</span>
-                        <span class="voucher-value">---</span>
-                      </div>
-                      <div class="voucher-info-item third-width">
-                        <span class="voucher-label">Correlativo:</span>
-                        <span class="voucher-value">---</span>
-                      </div>
-                    </div>
-                    <div class="voucher-info-item">
-                      <span class="voucher-label">{{ proofData.type === 'factura' ? 'Nro. RUC:' : 'Nro. Documento:' }}</span>
-                      <span class="voucher-value">{{ proofData.type === 'factura' ? (proofData.ruc || '---') : (proofData.document || '---') }}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Card 3: Método de Pago y Resumen -->
+                <!-- Card 2: Método de Pago y Resumen -->
                 <div class="payment-card">
                   <div class="payment-card-header">
                     <h3>Método de Pago</h3>
@@ -736,23 +607,17 @@ export default {
       }
     },
     
+    totalCheckoutSteps() {
+      return 2;
+    },
+
+    paymentStep() {
+      return 2;
+    },
+
     canProceedToNextStep() {
       if (this.currentStep === 1) {
         return !!this.selectedPickupPoint;
-      }
-      if (this.currentStep === 2) {
-        // Para boleta solo requiere documento con exactamente 8 números
-        if (this.proofData.type === 'boleta') {
-          return this.proofData.document && this.proofData.document.length === 8;
-        }
-        // Para factura requiere RUC con exactamente 11 números, Razón Social y Dirección Fiscal
-        if (this.proofData.type === 'factura') {
-          return this.proofData.ruc && 
-                 this.proofData.ruc.length === 11 &&
-                 this.proofData.razonSocial && 
-                 this.proofData.direccionFiscal;
-        }
-        return false;
       }
       return true;
     },
@@ -764,21 +629,6 @@ export default {
     },
     
 
-    
-    canProceedToProofStep() {
-      // Para boleta solo requiere documento con exactamente 8 números
-      if (this.proofData.type === 'boleta') {
-        return this.proofData.document && this.proofData.document.length === 8;
-      }
-      // Para factura requiere RUC con exactamente 11 números, Razón Social y Dirección Fiscal
-      if (this.proofData.type === 'factura') {
-        return this.proofData.ruc && 
-               this.proofData.ruc.length === 11 &&
-               this.proofData.razonSocial && 
-               this.proofData.direccionFiscal;
-      }
-      return false;
-    },
     
     canProcessOrder() {
       return this.cartItems.length > 0 && (!this.needsExternalPayment || this.pay_method);
@@ -1081,14 +931,23 @@ export default {
       document.body.scrollTop = 0;
     },
     
-    nextStep() {
-      if (this.canProceedToNextStep && this.currentStep < 3) {
-        this.currentStep++;
-        // Scroll hacia arriba cuando cambia de paso
-        this.$nextTick(() => {
-          this.scrollToTop();
-        });
+    ensureDefaultProofData() {
+      this.proofData.type = 'boleta';
+      const rawDni = String(this.userDNI || this.$store.state.dni || '').replace(/\D/g, '');
+      if (rawDni.length >= 8) {
+        this.proofData.document = rawDni.slice(0, 8);
       }
+    },
+
+    nextStep() {
+      if (!this.canProceedToNextStep || this.currentStep >= this.paymentStep) return;
+      if (this.currentStep === 1) {
+        this.ensureDefaultProofData();
+      }
+      this.currentStep++;
+      this.$nextTick(() => {
+        this.scrollToTop();
+      });
     },
     
     previousStep() {
@@ -1362,6 +1221,7 @@ export default {
       this.confirmedOrderTotal = null;
       this.confirmedCartPoints = null;
       this.sending = true;
+      this.ensureDefaultProofData();
 
       try {
         const session = this.$store.state.session;
@@ -1488,11 +1348,7 @@ export default {
           this.sending = false;
           return;
         }
-        if (payload.proofType === 'factura' && (!payload.proofRUC || payload.proofRUC.length !== 11 || !payload.proofRazonSocial || !payload.proofDireccionFiscal)) {
-          this.activationError = 'Para factura, completa RUC (11 dígitos), Razón Social y Dirección Fiscal.';
-          this.sending = false;
-          return;
-        }
+        // Facturación está deshabilitada en este checkout (solo Despacho → Pago).
 
         // Validar método de pago si el saldo no cubre el total
         if (needsExternalPayment) {

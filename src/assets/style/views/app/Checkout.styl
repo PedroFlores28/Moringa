@@ -42,7 +42,7 @@ body
     z-index 1
     border-radius 4px
     transition all 0.8s cubic-bezier(0.4, 0, 0.2, 1)
-    width calc((100% - 90px) * (var(--current-step, 1) / 3))
+    width calc((100% - 90px) * (var(--current-step, 1) / var(--checkout-total-steps, 2)))
     box-shadow 0 2px 12px rgba(197, 160, 89, 0.25)
 
 .top-progress-bar .progress-step
@@ -1959,7 +1959,7 @@ $dispatch-gold-deep = #b8942e
     
     &::after
       left 35px
-      width calc((100% - 70px) * (var(--current-step, 1) / 3))
+    width calc((100% - 70px) * (var(--current-step, 1) / var(--checkout-total-steps, 2)))
     
     .progress-step
       .step-number
@@ -2024,7 +2024,7 @@ $dispatch-gold-deep = #b8942e
     
     &::after
       left 25px
-      width calc((100% - 50px) * (var(--current-step, 1) / 3))
+    width calc((100% - 50px) * (var(--current-step, 1) / var(--checkout-total-steps, 2)))
     
     .progress-step
       .step-number
@@ -2446,7 +2446,7 @@ $dispatch-gold-deep = #b8942e
     
     &::after
       left 20px
-      width calc((100% - 40px) * (var(--current-step, 1) / 3))
+    width calc((100% - 40px) * (var(--current-step, 1) / var(--checkout-total-steps, 2)))
       max-width calc(100% - 40px)
     
     .progress-step
