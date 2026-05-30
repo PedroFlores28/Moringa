@@ -188,7 +188,7 @@ export default {
 
         const dashData = dashResponse.data;
         if (dashData && !dashData.error) {
-          this.sifrahBalance = Number(dashData.sifrahBalance) || 0;
+          // Saldo ClassMoringa removed
         } else if (dashData && dashData.msg === "invalid session") {
           this.$router.push("/login");
           return;

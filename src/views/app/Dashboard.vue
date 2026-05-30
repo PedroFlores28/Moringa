@@ -580,7 +580,6 @@ export default {
       provisionalRank: "",
       travelBonusText: null,
 
-      sifrahBalance: 0,
       op: 1,
       op2: 0,
       op3: 0,
@@ -984,7 +983,6 @@ export default {
     this.outs = data.outs ? data.outs.toFixed(2) : "0.00";
     const balNum = Number(data.balance) || 0;
     const vbalNum = Number(data._balance) || 0;
-    this.sifrahBalance = Number(data.sifrahBalance) || 0;
     this.balance = balNum.toFixed(2);
     this._balance = vbalNum.toFixed(2);
     this.totalEarned =
