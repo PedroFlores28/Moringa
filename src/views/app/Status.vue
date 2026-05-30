@@ -134,8 +134,10 @@ export default {
       if (val == 'imperial-diamond') return 'Diamante Imperial'
     },
     plan(val) {
-      if (val == 'basic') return 'EMPRENDEDOR'
-      if (val == 'standard') return 'EMPRENDEDOR'
+      if (val == 'basic') return 'CLASS'
+      if (val == 'standard') return 'VIP'
+      if (val == 'class') return 'CLASS'
+      if (val == 'master') return 'VIP'
       if (val == 'business') return 'EMPRESARIAL'
       if (val == 'business-vip') return 'EMPRESARIAL VIP'
     },

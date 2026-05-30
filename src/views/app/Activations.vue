@@ -202,6 +202,7 @@
 import App from "@/views/layouts/App";
 import api from "@/api";
 import Spinner from "@/components/Spinner.vue";
+import { resolvePlanDisplayName } from "@/utils/planNames";
 
 export default {
   components: {
@@ -360,6 +361,9 @@ export default {
         ...record,
         recordType: isMigration ? "migration" : "affiliation",
         price,
+        plan: record.plan
+          ? { ...record.plan, name: resolvePlanDisplayName(record.plan) }
+          : record.plan,
       };
     },
     buildHistoryRecords(activationsList, affiliationsList) {

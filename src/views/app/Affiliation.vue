@@ -130,7 +130,7 @@
                 <h2 class="master-trophy-title">¡Felicidades!</h2>
                 <p class="master-trophy-msg">
                   Has alcanzado el nivel
-                  <span class="master-trophy-master">EMPRESARIO</span>
+                  <span class="master-trophy-master">{{ vipPlanDisplayName }}</span>
                 </p>
                 <button
                   class="main-action-btn master-trophy-btn"
@@ -708,6 +708,7 @@ import {
   filterAffiliationPlansForUser,
   isEmpresarioTier,
 } from "@/utils/affiliationPlans";
+import { normalizePlanList, resolvePlanDisplayName } from "@/utils/planNames";
 
 const INVOICE_ROOT = process.env.VUE_APP_INVOICE_ROOT;
 
@@ -795,12 +796,18 @@ export default {
         hasPlan ||
         (this.affiliations && this.affiliations.length > 0);
 
-      return filterAffiliationPlansForUser(this.plans || [], {
-        plan: this.plan || this.$store.state.plan,
-        affiliated: affiliatedFlag,
-        affiliation: this.affiliation,
-        approvedAffiliations: this.affiliations || [],
-      });
+      return normalizePlanList(
+        filterAffiliationPlansForUser(this.plans || [], {
+          plan: this.plan || this.$store.state.plan,
+          affiliated: affiliatedFlag,
+          affiliation: this.affiliation,
+          approvedAffiliations: this.affiliations || [],
+        })
+      );
+    },
+    vipPlanDisplayName() {
+      const vipPlan = (this.plans || []).find((p) => p.id === "master");
+      return resolvePlanDisplayName(vipPlan || { id: "master" });
     },
 
     categories() {

@@ -2,7 +2,7 @@
   <Auth> <br>
 
     <router-link to="/login"    class="button large">INGRESAR A OFICINA</router-link>
-    <router-link to="/register" class="button large">REGISTRAR DISTRIBUIDOR</router-link>
+    <router-link to="/register" class="button large">REGISTRARSE</router-link>
     <!-- <router-link to="/welcome"  class="button large">ACESSO</router-link>
     <router-link to="/welcome"  class="button large">APP</router-link> -->
 

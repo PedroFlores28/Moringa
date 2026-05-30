@@ -523,6 +523,7 @@ import Spinner from "@/components/Spinner.vue";
 import SkeletonLoader from "@/components/SkeletonLoader.vue";
 import NivelDiamondSvg from "@/components/dashboard/NivelDiamondSvg.vue";
 import AffiliationStatusCard from "@/components/AffiliationStatusCard.vue";
+import { resolvePlanDisplayName, isVipPlan } from "@/utils/planNames";
 
 const THEME_FOREST_DARK = "#0e2318";
 const THEME_FOREST = "#1b4332";
@@ -612,14 +613,9 @@ export default {
     },
     formattedPlan() {
       const p = this.$store.state.plan || this.plan;
-      if (!p || p === 'none') return "Ninguno";
-      const v = p.toLowerCase();
-      if (v == "early") return "Cliente preferente";
-      if (v == "basic") return "Ejecutivo";
-      if (v == "standard") return "Distribuidor";
-      if (v == "business") return "Empresarial";
-      if (v == "master") return "Empresario";
-      return p.charAt(0).toUpperCase() + p.slice(1).toLowerCase();
+      if (!p || p === "none") return "Ninguno";
+      if (this.userPlan) return resolvePlanDisplayName(this.userPlan);
+      return resolvePlanDisplayName({ id: p });
     },
     userPlan() {
       if (!this.plans) return null;
@@ -634,25 +630,24 @@ export default {
       const name = String((matched && matched.name) || raw).toLowerCase();
       const amount = matched ? Number(matched.amount) : NaN;
 
-      const isEmpresario =
+      const isVip =
+        isVipPlan({ id: raw, name, amount }) ||
         norm === "master" ||
-        norm === "empresario" ||
-        /empresario/.test(name) ||
-        amount === 500;
+        norm === "standard" ||
+        norm === "empresario";
 
-      if (isEmpresario) return "empresario";
+      if (isVip) return "empresario";
 
       const isClass =
         norm === "class" ||
         norm === "basic" ||
-        norm === "standard" ||
         norm === "business" ||
-        /class/.test(name) ||
+        /class|ejecutivo/.test(name) ||
         amount === 480;
 
       if (isClass) return "class";
 
-      // Afiliado con plan desconocido: solo existen CLASS y EMPRESARIO → CLASS por defecto
+      // Afiliado con plan desconocido: solo existen CLASS y VIP → CLASS por defecto
       return "class";
     },
     affiliationCard() {
@@ -672,8 +667,8 @@ export default {
       if (this.affiliationPackageKind === "empresario") {
         return {
           variant: "empresario",
-          title: "Paquete EMPRESARIO",
-          titleHighlight: "EMPRESARIO",
+          title: "Paquete VIP",
+          titleHighlight: "VIP",
           message: "Impulsa tu negocio y crece con tu equipo",
           to: "/affiliation",
         };
@@ -764,9 +759,6 @@ export default {
     },
     levelStats() {
       const personal = Number(this.personalProductCount) || 0;
-      let personalLabel = "0";
-      if (personal === 1) personalLabel = "1 compra personal";
-      else if (personal > 1) personalLabel = personal + " compras personales";
       const active = !!this.monthlyActive;
 
       return [
@@ -783,7 +775,7 @@ export default {
         },
         {
           label: "Compras personales",
-          value: personalLabel,
+          value: String(personal),
           icon: "fas fa-box-open",
         },
         {
