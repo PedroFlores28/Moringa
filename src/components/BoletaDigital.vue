@@ -6,9 +6,9 @@
         <i class="fas" :class="generating ? 'fa-spinner fa-spin' : 'fa-file-pdf'"></i>
         {{ generating ? 'Generando...' : 'Descargar PDF' }}
       </button>
-      <button class="boleta-btn boleta-btn--whatsapp" @click="shareWhatsApp">
+      <button class="boleta-btn boleta-btn--whatsapp" @click="shareWhatsApp" :disabled="generating || sharing">
         <i class="fab fa-whatsapp"></i>
-        Compartir WhatsApp
+        {{ sharing ? 'Preparando...' : 'Compartir WhatsApp' }}
       </button>
     </div>
 
@@ -231,6 +231,7 @@ export default {
   data() {
     return {
       generating: false,
+      sharing: false,
       scale: 0.5,
       scaledHeight: 0
     }
@@ -322,20 +323,18 @@ export default {
       const n = parseFloat(val) || 0
       return n.toFixed(2)
     },
-    async downloadPDF() {
-      this.generating = true
+    async captureBoletaCanvas() {
+      const html2canvas = (await import('html2canvas')).default
+      const el = this.$refs.boletaCard
+      const scaleWrap = this.$refs.scaleWrap
+      const prevTransform = el.style.transform
+      const prevParentHeight = scaleWrap ? scaleWrap.style.height : undefined
+
+      el.style.transform = 'none'
+      if (scaleWrap) scaleWrap.style.height = 'auto'
+
       try {
-        const html2canvas = (await import('html2canvas')).default
-        const jsPDF = (await import('jspdf')).default
-
-        const el = this.$refs.boletaCard
-        const prevTransform = el.style.transform
-        const scaleWrap = this.$refs.scaleWrap
-        const prevParentHeight = scaleWrap ? scaleWrap.style.height : undefined
-        el.style.transform = 'none'
-        if (scaleWrap) scaleWrap.style.height = 'auto'
-
-        const canvas = await html2canvas(el, {
+        return await html2canvas(el, {
           scale: 2,
           useCORS: true,
           backgroundColor: '#ffffff',
@@ -343,21 +342,55 @@ export default {
           scrollX: 0,
           scrollY: 0
         })
-
+      } finally {
         el.style.transform = prevTransform
         if (scaleWrap && prevParentHeight !== undefined) {
           scaleWrap.style.height = prevParentHeight
         }
         this.scheduleScaleUpdate()
-
-        const imgData = canvas.toDataURL('image/png')
-        const pdf = new jsPDF({
-          orientation: 'portrait',
-          unit: 'px',
-          format: [1080, canvas.height / 2]
-        })
-        pdf.addImage(imgData, 'PNG', 0, 0, 1080, canvas.height / 2)
-        pdf.save(`comprobante-${this.orderData.id || 'compra'}.pdf`)
+      }
+    },
+    async buildPdfBlob(canvas) {
+      const jsPDF = (await import('jspdf')).default
+      const imgData = canvas.toDataURL('image/png')
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'px',
+        format: [1080, canvas.height / 2]
+      })
+      pdf.addImage(imgData, 'PNG', 0, 0, 1080, canvas.height / 2)
+      const filename = `comprobante-${this.orderData.id || 'compra'}.pdf`
+      const blob = pdf.output('blob')
+      return { blob, filename }
+    },
+    downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = filename
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(url)
+    },
+    canvasToPngBlob(canvas) {
+      return new Promise((resolve) => {
+        canvas.toBlob((blob) => resolve(blob), 'image/png', 0.95)
+      })
+    },
+    async shareFileViaNativeShare(file, text) {
+      if (!navigator.share) return false
+      const payload = { files: [file], title: 'Comprobante de compra', text }
+      if (navigator.canShare && !navigator.canShare(payload)) return false
+      await navigator.share(payload)
+      return true
+    },
+    async downloadPDF() {
+      this.generating = true
+      try {
+        const canvas = await this.captureBoletaCanvas()
+        const { blob, filename } = await this.buildPdfBlob(canvas)
+        this.downloadBlob(blob, filename)
       } catch (e) {
         console.error('Error al generar PDF:', e)
         alert('Error al generar el PDF. Por favor intenta nuevamente.')
@@ -365,18 +398,45 @@ export default {
         this.generating = false
       }
     },
-    shareWhatsApp() {
-      const currency = this.orderData.currency || 'Bs.'
-      const text = encodeURIComponent(
-        `🛒 *COMPROBANTE DE COMPRA*\n` +
-        `📋 Comprobante N°: ${this.orderData.id}\n` +
-        `📅 Fecha: ${this.formattedDate} ${this.formattedTime}\n` +
-        `👤 Cliente: ${this.clientData.fullName}\n` +
-        `💰 Total: ${currency} ${this.formatAmount(this.orderData.total)}\n` +
-        `💳 Método de pago: ${this.paymentMethodLabel}\n` +
-        `\n¡Gracias por tu compra! Tu bienestar es nuestra prioridad. 💚`
-      )
-      window.open(`https://wa.me/?text=${text}`, '_blank')
+    async shareWhatsApp() {
+      this.sharing = true
+      try {
+        const canvas = await this.captureBoletaCanvas()
+        const id = this.orderData.id || 'compra'
+        const shareText = `Comprobante de compra N° ${id} - ${this.clientData.fullName}`
+
+        const { blob: pdfBlob, filename: pdfName } = await this.buildPdfBlob(canvas)
+        const pdfFile = new File([pdfBlob], pdfName, { type: 'application/pdf' })
+
+        if (await this.shareFileViaNativeShare(pdfFile, shareText)) {
+          return
+        }
+
+        const pngBlob = await this.canvasToPngBlob(canvas)
+        if (pngBlob) {
+          const pngFile = new File([pngBlob], `comprobante-${id}.png`, { type: 'image/png' })
+          if (await this.shareFileViaNativeShare(pngFile, shareText)) {
+            return
+          }
+          this.downloadBlob(pngBlob, `comprobante-${id}.png`)
+        } else {
+          this.downloadBlob(pdfBlob, pdfName)
+        }
+
+        const text = encodeURIComponent(
+          `Te comparto mi comprobante de compra.\n` +
+          `Comprobante N°: ${id}\n` +
+          `Cliente: ${this.clientData.fullName}\n\n` +
+          `Se descargó la imagen/PDF en tu dispositivo. Adjunta el archivo con el clip 📎 en WhatsApp.`
+        )
+        window.open(`https://wa.me/?text=${text}`, '_blank')
+      } catch (e) {
+        if (e && e.name === 'AbortError') return
+        console.error('Error al compartir por WhatsApp:', e)
+        alert('No se pudo compartir el comprobante. Intenta descargar el PDF e enviarlo manualmente.')
+      } finally {
+        this.sharing = false
+      }
     }
   }
 }

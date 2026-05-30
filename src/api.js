@@ -66,6 +66,7 @@ class API {
     this.Books = new Books();
     this.Agenda = new Agenda();
     this.SavingsBonus = new SavingsBonus();
+    this.Boleta = new Boleta();
   }
 
   register(data) {
@@ -353,6 +354,12 @@ class SavingsBonus {
   }
 }
 
+class Boleta {
+  GET(session, { id, type }) {
+    return axios.get(`/app/boleta?session=${session}&id=${id}&type=${type}`);
+  }
+}
+
 export default new API({
   Profile,
   Password,
@@ -375,6 +382,7 @@ export default new API({
   Materials,
   Audios,
   Books,
-  Agenda,
-  SavingsBonus,
+    Agenda,
+    SavingsBonus,
+    Boleta,
 });

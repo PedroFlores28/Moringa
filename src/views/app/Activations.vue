@@ -116,7 +116,7 @@
                     </td>
                     <td>
                       <a
-                        :href="`${INVOICE_ROOT}?id=${record.id}`"
+                        :href="comprobanteUrl(record)"
                         target="_blank"
                         class="invoice-link-btn"
                         v-if="record.status == 'approved'"
@@ -178,7 +178,7 @@
                       </td>
                       <td>
                         <a
-                          :href="`${INVOICE_ROOT}?id=${record.id}`"
+                          :href="comprobanteUrl(record)"
                           target="_blank"
                           class="invoice-link-btn"
                           v-if="record.status == 'approved'"
@@ -203,8 +203,6 @@ import App from "@/views/layouts/App";
 import api from "@/api";
 import Spinner from "@/components/Spinner.vue";
 
-const INVOICE_ROOT = process.env.VUE_APP_INVOICE_ROOT;
-
 export default {
   components: {
     App,
@@ -214,7 +212,6 @@ export default {
     return {
       historyRecords: null,
       loading: true,
-      INVOICE_ROOT,
       /** '' = todos (vista agrupada por mes); 'YYYY-MM' = solo ese período */
       periodFilter: "",
     };
@@ -295,6 +292,13 @@ export default {
       if (recordType === "migration") return "Migración";
       if (recordType === "activation") return "Activación";
       return "Compra";
+    },
+    comprobanteUrl(record) {
+      const type = this.isAffiliationRecord(record) ? "affiliation" : "activation";
+      return this.$router.resolve({
+        path: "/comprobante",
+        query: { id: record.id, type },
+      }).href;
     },
     periodKeyFromDate(val) {
       if (!val) return "";

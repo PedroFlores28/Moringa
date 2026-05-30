@@ -46,6 +46,7 @@ import UniversidadSifrah from './views/app/UniversidadSifrah.vue'
 import SavingsBonus from './views/app/SavingsBonus.vue'
 import MyRedemptions from './views/app/MyRedemptions.vue'
 import BonusHistory from './views/app/BonusHistory.vue'
+import Comprobante from './views/app/Comprobante.vue'
 
 
 Vue.use(Router)
@@ -145,6 +146,11 @@ const routes = [
   {
     path: '/activations',
     component: Activations,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/comprobante',
+    component: Comprobante,
     meta: { requiresAuth: true }
   },
   {

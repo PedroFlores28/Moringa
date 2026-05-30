@@ -685,7 +685,7 @@
               class="invoice-history-block"
             >
               <a
-                :href="`${INVOICE_ROOT}?id=${affiliation.id}`"
+                :href="comprobanteUrl(affiliation.id)"
                 target="_blank"
                 class="invoice-link"
               >
@@ -1080,6 +1080,12 @@ export default {
   },
   
   methods: {
+    comprobanteUrl(id) {
+      return this.$router.resolve({
+        path: "/comprobante",
+        query: { id, type: "affiliation" },
+      }).href;
+    },
     applyAvailablePlansSelection() {
       const visible = this.availablePlans;
       if (visible.length > 0) {
