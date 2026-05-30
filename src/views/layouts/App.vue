@@ -214,7 +214,7 @@
           <router-link to="/affiliation" @click.native="closeAllMenus">
             <i class="fas fa-user-plus"></i> Afiliación
           </router-link>
-          <router-link to="/activations" @click.native="closeAllMenus" v-if="affiliated">
+          <router-link to="/activations" @click.native="closeAllMenus">
             <i class="fas fa-history"></i> Historial
           </router-link>
         </div>
@@ -486,7 +486,7 @@
               <i class="fas fa-user-plus"></i>
               <span>Afiliación</span>
             </router-link>
-            <router-link to="/activations" v-if="affiliated" @click.native="handleNavigationClickAndClose" class="mobile-submenu-item">
+            <router-link to="/activations" @click.native="handleNavigationClickAndClose" class="mobile-submenu-item">
               <i class="fas fa-history"></i>
               <span>Historial</span>
             </router-link>

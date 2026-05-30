@@ -130,12 +130,12 @@
   background #fff
   border-radius 16px
   box-shadow 0 2px 12px rgba(0,0,0,0.07)
-  min-width 900px
+  min-width 980px
   overflow hidden
 
   tr.period-group-header td
     background linear-gradient(90deg, #1b433218, #1b5e3a12)
-    color #7b1fa2
+    color #0e2318
     font-weight 700
     font-size 1.05rem
     letter-spacing 0.02em
@@ -207,9 +207,30 @@
   display inline-flex
   align-items center
   margin-bottom 2px
+  &.product-chip--plan
+    background #fff3e0
+    color #b78103
+    border 1px solid #ffe0b2
   .product-chip-total
     color #1b5e3a
     margin-left 4px
+
+.history-type-badge
+  display inline-block
+  padding 4px 12px
+  border-radius 14px
+  font-size 13px
+  font-weight 600
+  white-space nowrap
+  &.affiliation
+    background #e3f2fd
+    color #1565c0
+  &.migration
+    background #fff3e0
+    color #e65100
+  &.activation
+    background #e8f5e9
+    color #2e7d32
 
 .status-badge
   display inline-flex
